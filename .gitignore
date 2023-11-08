@@ -1,0 +1,6 @@
+*.iml
+.idea
+.cxx
+.build
+.cache
+/cmake-build-debug
