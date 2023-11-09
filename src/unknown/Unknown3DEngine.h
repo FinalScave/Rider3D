@@ -21,6 +21,8 @@ UNKNOWN_NS_BEGIN
         //void SetVertices(uint32_t num_vertices, ScreenPoint* vertices);
 
         uint16_t Render();
+
+        RenderConfig GetRenderConfig();
     private:
         SMART_PTR<UnknownRenderer> renderer_;
 

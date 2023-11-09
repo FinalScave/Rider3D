@@ -25,7 +25,7 @@ UNKNOWN_NS_BEGIN
 
         void SetVertices(uint16_t vertices_count, Vertex* vertices);
 
-        uint16_t Size();
+        uint16_t Size() const;
     };
 
     class DefaultVertexLayout {

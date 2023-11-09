@@ -17,7 +17,7 @@ UNKNOWN_NS_BEGIN
         }
     }
 
-    uint16_t Vertices::Size() {
+    uint16_t Vertices::Size() const {
         return vertex_list.size();
     }
 

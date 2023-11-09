@@ -14,7 +14,10 @@
 
 UNKNOWN_NS_BEGIN
 
+    class Unknown3DEngine;
+
     class UnknownRenderer {
+        friend Unknown3DEngine;
     public:
         UnknownRenderer(const RenderConfig &config);
 

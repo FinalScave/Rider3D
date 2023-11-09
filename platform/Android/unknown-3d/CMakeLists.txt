@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 3.10)
 # project name
 project(unknown3d)
 
-# bx definition
-add_definitions(-DBX_CONFIG_DEBUG=0)
+# macro
+add_definitions(-DENABLE_LOG)
 
 # initial config
 set(LINK_LIB)
@@ -35,7 +35,7 @@ file(GLOB_RECURSE CORE_SOURCE_FILES
         ${SRC_DIR}/unknown/render/context/*.*
         ${SRC_DIR}/unknown/data/*.*
         )
-# Android special
+# Platform special
 if (ANDROID)
     find_library(android-lib android)
     find_library(log-lib log)
@@ -44,6 +44,10 @@ if (ANDROID)
     file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/android/*.*)
 elseif (IOS)
     file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/iOS/*.*)
+elseif (WINDOWS)
+    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/windows/*.*)
+elseif (MACOS)
+    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/macOS/*.*)
 endif ()
 
 # add library

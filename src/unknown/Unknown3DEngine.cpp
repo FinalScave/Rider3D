@@ -18,6 +18,10 @@ UNKNOWN_NS_BEGIN
         return renderer_->Render();
     }
 
+    RenderConfig Unknown3DEngine::GetRenderConfig() {
+        return renderer_->render_config_;
+    }
+
 UNKNOWN_NS_END
 
 // unknown

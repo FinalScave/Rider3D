@@ -14,6 +14,9 @@
 #define SMART_PTR std::shared_ptr
 #define MAKE_SMART_PTR std::make_shared
 
+#define DELETE_PTR(ptr) \
+    delete ptr;         \
+
 #define DELETE_ARRAY(array) \
 if (array != nullptr) {     \
     delete[] array;         \

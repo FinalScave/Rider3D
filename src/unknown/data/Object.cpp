@@ -43,6 +43,7 @@ UNKNOWN_NS_BEGIN
 
     void ObjectContainer::RemoveChildAt(uint8_t index) {
         if (index > child_list.size() - 1) {
+            LOGW("index can not greater than %ud", UINT8_MAX - 1);
             return;
         }
         const std::vector<Object, std::allocator<Object>>::const_iterator &end = child_list.cend();
@@ -58,7 +59,7 @@ UNKNOWN_NS_BEGIN
     }
 
     uint8_t ObjectContainer::Size() {
-        return 0;
+        return child_list.size();
     }
 
     void Sphere::Build() {
