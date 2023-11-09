@@ -14,4 +14,15 @@
 #define SMART_PTR std::shared_ptr
 #define MAKE_SMART_PTR std::make_shared
 
+#define DELETE_ARRAY(array) \
+if (array != nullptr) {     \
+    delete[] array;         \
+}
+
+#define DESTROY_MEMBER_BGFX_HANDLE(handle) \
+if (bgfx::isValid(handle)) {       \
+    bgfx::destroy(handle);                 \
+    handle = BGFX_INVALID_HANDLE;          \
+}
+
 #endif //UNKNOWN3D_DEFINE_H

@@ -7,14 +7,28 @@
 
 #include <stdint.h>
 #include "Define.h"
+#include "config/RenderConfig.h"
+#include "data/Supposition.h"
+#include "data/Vertex.h"
+#include "context/RenderContext.h"
 
 UNKNOWN_NS_BEGIN
 
     class UnknownRenderer {
     public:
-        /// 离屏渲染，并返回纹理ID
-        /// \return 纹理ID
+        UnknownRenderer(const RenderConfig &config);
+
+        ~UnknownRenderer();
+
+        /// OffScreen render, return the texture id after rendering
+        /// \return Texture ID
         uint16_t Render();
+
+    private:
+        /// Configuration for rendering
+        RenderConfig render_config_;
+        /// Context for rendering
+        SMART_PTR<RenderContext> render_context_;
     };
 
 UNKNOWN_NS_END
