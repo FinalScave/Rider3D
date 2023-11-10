@@ -47,7 +47,7 @@ namespace Json {
    /** \brief Writes a Value in <a HREF="http://www.json.org">JSON</a> format in a human friendly way.
     *
     * The rules for line break and indent are as follow:
-    * - Object value:
+    * - Object3D value:
     *     - if empty then print {} without indent and line break
     *     - if not empty the print '{', line break & indent, print one value per line
     *       and then unindent and line break and print '}'.
@@ -103,7 +103,7 @@ namespace Json {
         to a stream rather than to a string.
     *
     * The rules for line break and indent are as follow:
-    * - Object value:
+    * - Object3D value:
     *     - if empty then print {} without indent and line break
     *     - if not empty the print '{', line break & indent, print one value per line
     *       and then unindent and line break and print '}'.

@@ -14,7 +14,7 @@
 #  include <cpptl/forwards.h>
 # endif
 
-/** \brief JSON (JavaScript Object Notation).
+/** \brief JSON (JavaScript Object3D Notation).
  */
 namespace Json {
 

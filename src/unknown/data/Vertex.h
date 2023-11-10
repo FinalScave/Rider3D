@@ -13,19 +13,23 @@
 UNKNOWN_NS_BEGIN
 
     struct Vertex {
-        NdcPoint position;
-        TextureUVPoint uv;
-        Color color;
+        ~Vertex();
+
+        NdcPoint* position;
+        TextureUVPoint* uv;
+        Color* color;
     };
 
     struct Vertices {
-        std::vector<Vertex> vertex_list;
+        ~Vertices();
 
-        void AddVertex(Vertex& vertex);
+        void AddVertex(Vertex* vertex);
 
-        void SetVertices(uint16_t vertices_count, Vertex* vertices);
+        void SetVertices(uint16_t vertices_count, Vertex** vertices);
 
         uint16_t Size() const;
+
+        std::vector<Vertex*> vertex_list;
     };
 
     class DefaultVertexLayout {

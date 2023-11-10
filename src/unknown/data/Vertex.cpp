@@ -6,11 +6,27 @@
 
 UNKNOWN_NS_BEGIN
 
-    void Vertices::AddVertex(Vertex &vertex) {
+    Vertex::~Vertex() {
+        DELETE_PTR(position);
+        DELETE_PTR(uv);
+        DELETE_PTR(color);
+    }
+
+    Vertices::~Vertices() {
+        for (auto vertex: vertex_list) {
+            DELETE_PTR(vertex);
+        }
+        vertex_list.clear();
+    }
+
+    void Vertices::AddVertex(Vertex *vertex) {
         vertex_list.push_back(vertex);
     }
 
-    void Vertices::SetVertices(uint16_t vertices_count, Vertex *vertices) {
+    void Vertices::SetVertices(uint16_t vertices_count, Vertex **vertices) {
+        for (auto vertex: vertex_list) {
+            DELETE_PTR(vertex);
+        }
         vertex_list.clear();
         for (uint16_t i = 0; i < vertices_count; ++i) {
             vertex_list.push_back(vertices[i]);
@@ -22,6 +38,7 @@ UNKNOWN_NS_BEGIN
     }
 
     bgfx::VertexLayout DefaultVertexLayout::default_vertex_layout_;
+
     void DefaultVertexLayout::Init() {
         default_vertex_layout_
                 .begin()
@@ -37,6 +54,7 @@ UNKNOWN_NS_BEGIN
 
     bgfx::VertexBufferHandle DefaultBgfxHandles::default_vertex_buffer_handle_;
     bgfx::IndexBufferHandle DefaultBgfxHandles::default_index_buffer_handle_;
+
     void DefaultBgfxHandles::Init() {
         default_vertex_buffer_handle_ = bgfx::createVertexBuffer(
                 bgfx::makeRef(kDefaultVertices, sizeof(Vertex) * kDefaultVertexCount),
