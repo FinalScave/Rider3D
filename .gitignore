@@ -3,6 +3,6 @@
 .idea
 .vscode
 .cxx
-.build
 .cache
 /cmake-build-debug
+/build
