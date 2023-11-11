@@ -36,7 +36,7 @@ file(GLOB_RECURSE CORE_SOURCE_FILES
         ${SRC_DIR}/unknown/render/*.*
         ${SRC_DIR}/unknown/render/config/*.*
         ${SRC_DIR}/unknown/render/context/*.*
-        ${SRC_DIR}/unknown/data/*.*
+        ${SRC_DIR}/unknown/object/*.*
         )
 if(ENABLE_LOG)
     file(GLOB_RECURSE LOGGER_FILES ${3DPARTY_DIR}/logger/*.*)
@@ -62,9 +62,11 @@ if (BUILD_PC_DEMO AND NOT ANDROID AND NOT IOS)
     set(DEMO_NAME Unknown3DDemo)
 
     if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+        add_definitions(-DMACOS)
         set(MACOS ON)
         set(BUILD_DEMO_MACOS ON)
     elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+        add_definitions(-DWINDOWS -D_POSIX -D_POSIX_THREAD_SAFE_FUNCTIONS)
         set(WINDOWS ON)
         set(BUILD_DEMO_WINDOWS ON)
     endif ()
@@ -133,6 +135,7 @@ elseif (WINDOWS)
     windows_add_3dparty_static_lib(bgfx bimg_decode)
     windows_add_3dparty_static_lib(bgfx bx)
     set(LINK_LIB ${LINK_LIB} bgfx bimg bimg_decode bimg_encode bx)
+    set(CMAKE_EXE_LINKER_FLAGS "-static")
 elseif (MACOS)
     mac_add_3dparty_static_lib(bgfx bgfx)
     mac_add_3dparty_static_lib(bgfx bimg)
@@ -158,10 +161,14 @@ target_link_libraries(${CMAKE_PROJECT_NAME} ${LINK_LIB})
 if (BUILD_DEMO_WINDOWS)
     message(STATUS "Build Windows demo enabled")
     include_directories(${CMAKE_SOURCE_DIR}/platform/Windows/lib/glfw/include)
-    # file(GLOB_RECURSE DEMO_FILES ${SRC_DIR}/platform/Windows/demo/*.*)
     add_executable(${DEMO_NAME} WIN32 ${CMAKE_SOURCE_DIR}/platform/Windows/demo/main.cpp)
+    set(UNKNOWN3D_LIB ${CMAKE_SOURCE_DIR}/build/Windows/lib${CMAKE_PROJECT_NAME}.dll)
+    # In Clion IDE environment, the build dir is `cmake-build-debug`
+    if (IDE_CLION)
+        set(UNKNOWN3D_LIB ${CMAKE_SOURCE_DIR}/cmake-build-debug/Windows/lib${CMAKE_PROJECT_NAME}.dll)
+    endif ()
     target_link_libraries(${DEMO_NAME} 
-        ${CMAKE_SOURCE_DIR}/build/lib${CMAKE_PROJECT_NAME}.dll
+        ${UNKNOWN3D_LIB}
         ${CMAKE_SOURCE_DIR}/platform/Windows/lib/glfw/x64/libglfw3.a
         )
 elseif(BUILD_DEMO_MACOS)

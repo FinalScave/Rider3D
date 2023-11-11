@@ -35,9 +35,13 @@ void HandleSignal() {
   signal(SIGHUP, SIG_IGN);
   signal(SIGQUIT, SIG_IGN);
   signal(SIGPIPE, SIG_IGN);
+#ifdef WINDOWS
+  //do nothing
+#else
   signal(SIGTTOU, SIG_IGN);
   signal(SIGTTIN, SIG_IGN);
   signal(SIGCHLD, SIG_IGN);
+#endif
   signal(SIGTERM, SIG_IGN);
 
   signal(SIGBUS, handler);   // 10: Bus error (bad memory access)
@@ -97,7 +101,11 @@ std::string Logger::GenLogPrefix() {
   struct timeval now;
   ::gettimeofday(&now, nullptr);
   struct tm tm_now;
+#ifdef WINDOWS
+  ::localtime_r((const time_t *) &now.tv_sec, &tm_now);
+#else
   ::localtime_r(&now.tv_sec, &tm_now);
+#endif
   char time_str[100];
   snprintf(time_str, sizeof(time_str), "[%04d-%02d-%02d %02d:%02d:%02d.%06ld][%d:%lx]", tm_now.tm_year + 1900,
            tm_now.tm_mon + 1, tm_now.tm_mday, tm_now.tm_hour, tm_now.tm_min, tm_now.tm_sec, now.tv_usec, t_pid,

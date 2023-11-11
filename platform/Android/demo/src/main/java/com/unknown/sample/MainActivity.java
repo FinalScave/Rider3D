@@ -10,7 +10,7 @@ import java.util.Calendar;
 
 public class MainActivity extends Unknown3DActivity {
 
-    private final static short FPS = 90;
+    private final static short FPS = 60;
     private long startTime;
 
     @Override

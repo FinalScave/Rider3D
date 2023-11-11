@@ -3,4 +3,4 @@ cd build
 mkdir Windows
 cd Windows
 cmake ../../ -G "MinGW Makefiles" -DCMAKE_CXX_FLAGS="-frtti -fexceptions -w" -DCMAKE_BUILD_TYPE=Release
-mingw32-make
+cmake --build .

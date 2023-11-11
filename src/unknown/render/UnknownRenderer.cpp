@@ -11,7 +11,7 @@ UNKNOWN_NS_BEGIN
         this->render_config_ = config;
         // initialize bgfx
         bgfx::Init init;
-        init.type = bgfx::RendererType::Enum::OpenGLES;
+        init.type = bgfx::RendererType::Enum::Count;
         init.vendorId = BGFX_PCI_ID_NONE;
         bgfx::Resolution resolution;
         resolution.width = config.width;
