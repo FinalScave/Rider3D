@@ -12,6 +12,8 @@ import com.unknown.render.SurfaceRenderLooper;
 
 public class Unknown3DSurfaceView extends SurfaceView {
     private SurfaceRenderLooper renderLooper;
+    private SurfaceRenderLooper.Callback callback;
+    private short fps = SurfaceRenderLooper.DEFAULT_FPS;
 
     public Unknown3DSurfaceView(Context context) {
         this(context, null);
@@ -40,6 +42,10 @@ public class Unknown3DSurfaceView extends SurfaceView {
                     int height = getHeight();
                     renderLooper = new SurfaceRenderLooper();
                     renderLooper.init(surface, width, height);
+                    if (callback != null) {
+                        renderLooper.setCallback(callback);
+                    }
+                    renderLooper.setFps(fps);
                 }
             }
 
@@ -58,10 +64,16 @@ public class Unknown3DSurfaceView extends SurfaceView {
     }
 
     public void setFps(short fps) {
-        renderLooper.setFps(fps);
+        this.fps = fps;
+        if (renderLooper != null) {
+            renderLooper.setFps(fps);
+        }
     }
 
     public void setCallback(SurfaceRenderLooper.Callback callback) {
-        renderLooper.setCallback(callback);
+        this.callback = callback;
+        if (renderLooper != null) {
+            renderLooper.setCallback(callback);
+        }
     }
 }

@@ -13,7 +13,7 @@ public final class SurfaceRenderLooper {
     private final static byte INIT = 0;
     private final static byte RENDER = 1;
     private final static byte DESTROY = 2;
-    private final static byte DEFAULT_FPS = 70;
+    public final static byte DEFAULT_FPS = 70;
 
     private Unknown3DEngine engine;
     private final Handler handler;
@@ -23,6 +23,7 @@ public final class SurfaceRenderLooper {
     private Callback callback;
 
     public SurfaceRenderLooper() {
+        renderThread.start();
         this.handler = new Handler(renderThread.getLooper(), this::handleMessage);
     }
 

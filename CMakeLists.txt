@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.10)
 project(unknown3d)
 
 # macro
-# add_definitions(-DENABLE_LOG)
-option(ENABLE_LOG "Enable logging" OFF)
+add_definitions(-DENABLE_LOG)
+option(ENABLE_LOG "Enable logging" ON)
 option(BUILD_PC_DEMO "Build demo for windows or mac to test" ON)
 
 # initial config

@@ -11,7 +11,7 @@ UNKNOWN_NS_BEGIN
         this->render_config_ = config;
         // initialize bgfx
         bgfx::Init init;
-        init.type = bgfx::RendererType::Count;
+        init.type = bgfx::RendererType::Enum::OpenGLES;
         init.vendorId = BGFX_PCI_ID_NONE;
         bgfx::Resolution resolution;
         resolution.width = config.width;
@@ -28,10 +28,14 @@ UNKNOWN_NS_BEGIN
         }
         init.platformData = platform_data;
         bgfx::init(init);
-        bgfx::reset(config.width, config.height, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR);
+        bgfx::reset(config.width, config.height, BGFX_RESET_VSYNC, init.resolution.format);
+        bgfx::setDebug(BGFX_DEBUG_TEXT);
         // initialize something defaults
         DefaultVertexLayout::Init();
         DefaultBgfxHandles::Init();
+
+        // initialize context
+        this->render_context_ = MAKE_SMART_PTR<RenderContext>();
     }
 
     UnknownRenderer::~UnknownRenderer() {
@@ -41,6 +45,12 @@ UNKNOWN_NS_BEGIN
     }
 
     uint16_t UnknownRenderer::Render() {
+        bgfx::dbgTextClear();
+        bgfx::dbgTextPrintf(60, 60, 0x0f,
+                            "\x1b[9;mU\x1b[10;mn\x1b[11;mk\x1b[12;mn\x1b[13;mo\x1b[14;mw\x1b[15;mn\x1b[16;m3\x1b[1;mD\x1b[0m");
+        bgfx::setViewRect(render_context_->main_view_id_, 0, 0, render_config_.width, render_config_.height);
+        bgfx::setViewClear(render_context_->main_view_id_, BGFX_CLEAR_COLOR|BGFX_CLEAR_DEPTH, 0x2196f3ff);
+        bgfx::touch(render_context_->main_view_id_);
         bgfx::frame();
         return render_context_->main_view_id_;
     }

@@ -22,13 +22,15 @@
 2. 运行
 
 ## Xcode
-1. 安装cocoapods和cmake
+1. 安装 cocoapods 和 cmake
 2. 进入 platform/iOS 目录，执行 pod install
 2. 打开 Unknown3DWprkspace.xcworkspace，Build And Run
 
 ## VSCode
-1. 打开该工程，安装C/C++ Extension Pack(包含CMake)
-2. 运行
+1. 如果是Windows系统，安装 [MinGW64](https://zenlayer.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/sjlj/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0.7z) 和 CMake；
+   如果是MacOS系统，安装 Xcode 和 cmake
+2. 打开该工程，安装C/C++ Extension Pack(包含CMake)
+3. 执行 build-windows.sh
 
 ## Clion
 1. 直接打开该工程即可
