@@ -56,6 +56,12 @@ function (android_add_3dparty_static_lib dir name)
             PROPERTIES IMPORTED_LOCATION
             ${3DPARTY_DIR}/${dir}/android/${CMAKE_ANDROID_ARCH_ABI}/lib${name}.a)
 endfunction()
+function (ios_add_3dparty_static_lib dir name)
+    add_library(${name} STATIC IMPORTED)
+    set_target_properties(${name}
+            PROPERTIES IMPORTED_LOCATION
+            ${3DPARTY_DIR}/${dir}/iOS/${CMAKE_ANDROID_ARCH_ABI}/lib${name}.a)
+endfunction()
 # add library
 if (ANDROID)
     android_add_3dparty_static_lib(bgfx bgfx)
