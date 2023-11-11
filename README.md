@@ -7,7 +7,8 @@
     └── MacOS MacOS平台SDK工程
     └── Windows Windows平台SDK工程
 ├── shaders 存放bgfx shader文件
-└── src C++源代码目录
+├── src C++源代码目录
+└── tools 相关工具存放目录
 ```
 
 # 开发环境
@@ -25,9 +26,9 @@
 2. 进入 platform/iOS 目录，执行 pod install
 2. 打开 Unknown3DWprkspace.xcworkspace，Build And Run
 
+## VSCode
+1. 打开该工程，安装C/C++ Extension Pack(包含CMake)
+2. 运行
+
 ## Clion
 1. 直接打开该工程即可
-
-## VSCode
-1. 打开该工程，安装C/C++ Extension Pack
-2. 运行

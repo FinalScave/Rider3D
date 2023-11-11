@@ -89,6 +89,12 @@ function(windows_add_3dparty_static_lib dir name)
             PROPERTIES IMPORTED_LOCATION
             ${3DPARTY_DIR}/${dir}/windows/x64/lib${name}.a)
 endfunction()
+function(mac_add_3dparty_static_lib dir name)
+    add_library(${name} STATIC IMPORTED)
+    set_target_properties(${name}
+            PROPERTIES IMPORTED_LOCATION
+            ${3DPARTY_DIR}/${dir}/macOS/arm64/lib${name}.a)
+endfunction()
 
 # add library
 if (ANDROID)
@@ -97,16 +103,29 @@ if (ANDROID)
     android_add_3dparty_static_lib(bgfx bimg_encode)
     android_add_3dparty_static_lib(bgfx bimg_decode)
     android_add_3dparty_static_lib(bgfx bx)
-    find_library(android-lib android)
-    find_library(log-lib log)
-    set(LINK_LIB ${LINK_LIB} bgfx bimg bimg_decode bimg_encode bx android log jnigraphics libGLESv2.so libEGL.so)
+    find_library(ANDROID_LIB android)
+    find_library(LOG_LIB log)
+    find_library(JNI_GRAPHICS jnigraphics)
+    find_library(GLES libGLESv2.so)
+    find_library(EGL libEGL.so)
+    set(LINK_LIB ${LINK_LIB} ${ANDROID_LIB} ${LOG_LIB} ${JNI_GRAPHICS} ${GLES} ${EGL} 
+        bgfx bimg bimg_decode bimg_encode bx)
 elseif (IOS)
     ios_add_3dparty_static_lib(bgfx bgfx)
     ios_add_3dparty_static_lib(bgfx bimg)
     ios_add_3dparty_static_lib(bgfx bimg_encode)
     ios_add_3dparty_static_lib(bgfx bimg_decode)
     ios_add_3dparty_static_lib(bgfx bx)
-    set(LINK_LIB ${LINK_LIB} bgfx bimg bimg_decode bimg_encode bx)
+    find_library(FOUNDATION_FRAMEWORK Foundation)
+    find_library(CORE_FOUNDATION_FRAMEWORK CoreFoundation)
+    find_library(IOKIT_FRAMEWORK IOKit)
+    find_library(METAL_FRAMEWORK Metal)
+    find_library(QUARTZ_CORE_FRAMEWORK QuartzCore)
+    find_library(UIKIT_FRAMEWORK UIKit)
+    set(LINK_LIB ${LINK_LIB} 
+        ${FOUNDATION_FRAMEWORK} ${CORE_FOUNDATION_FRAMEWORK} ${IOKIT_FRAMEWORK} 
+        ${METAL_FRAMEWORK} ${QUARTZ_CORE_FRAMEWORK} ${UIKIT_FRAMEWORK}
+        bgfx bimg bimg_decode bimg_encode bx)
 elseif (WINDOWS)
     windows_add_3dparty_static_lib(bgfx bgfx)
     windows_add_3dparty_static_lib(bgfx bimg)
@@ -115,7 +134,22 @@ elseif (WINDOWS)
     windows_add_3dparty_static_lib(bgfx bx)
     set(LINK_LIB ${LINK_LIB} bgfx bimg bimg_decode bimg_encode bx)
 elseif (MACOS)
-
+    mac_add_3dparty_static_lib(bgfx bgfx)
+    mac_add_3dparty_static_lib(bgfx bimg)
+    mac_add_3dparty_static_lib(bgfx bimg_encode)
+    mac_add_3dparty_static_lib(bgfx bimg_decode)
+    mac_add_3dparty_static_lib(bgfx bx)
+    find_library(FOUNDATION_FRAMEWORK Foundation)
+    find_library(CORE_FOUNDATION_FRAMEWORK CoreFoundation)
+    find_library(IOKIT_FRAMEWORK IOKit)
+    find_library(METAL_FRAMEWORK Metal)
+    find_library(QUARTZ_CORE_FRAMEWORK QuartzCore)
+    find_library(APPKIT_FRAMEWORK AppKit)
+    find_library(SECURITY_FRAMEWORK Security)
+    set(LINK_LIB ${LINK_LIB} 
+        ${FOUNDATION_FRAMEWORK} ${CORE_FOUNDATION_FRAMEWORK} ${IOKIT_FRAMEWORK} 
+        ${METAL_FRAMEWORK} ${QUARTZ_CORE_FRAMEWORK} ${APPKIT_FRAMEWORK} ${SECURITY_FRAMEWORK}
+        bgfx bimg bimg_decode bimg_encode bx)
 endif ()
 
 target_link_libraries(${CMAKE_PROJECT_NAME} ${LINK_LIB})
@@ -132,4 +166,20 @@ if (BUILD_DEMO_WINDOWS)
         )
 elseif(BUILD_DEMO_MACOS)
     message(STATUS "Build MacOS demo enabled")
+    include_directories(${CMAKE_SOURCE_DIR}/platform/MacOS/lib/glfw/include)
+    add_executable(${DEMO_NAME} MACOSX_BUNDLE ${CMAKE_SOURCE_DIR}/platform/MacOS/demo/main.cpp)
+    find_library(FOUNDATION_FRAMEWORK Foundation)
+    find_library(CORE_GRAPHICS_FRAMEWORK CoreGraphics)
+    find_library(CORE_VIDEO_FRAMEWORK CoreVideo)
+    find_library(APPKIT_FRAMEWORK AppKit)
+    find_library(IOKIT_FRAMEWORK IOKit)
+    target_link_libraries(${DEMO_NAME} 
+        ${CMAKE_SOURCE_DIR}/build/MacOS/lib${CMAKE_PROJECT_NAME}.dylib
+        ${CMAKE_SOURCE_DIR}/platform/MacOS/lib/glfw/arm64/libglfw3.a
+        ${FOUNDATION_FRAMEWORK}
+        ${CORE_GRAPHICS_FRAMEWORK}
+        ${CORE_VIDEO_FRAMEWORK}
+        ${APPKIT_FRAMEWORK}
+        ${IOKIT_FRAMEWORK}
+        )
 endif ()

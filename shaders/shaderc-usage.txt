@@ -1,0 +1,1 @@
+shaderc -f xx.sc -o xx.bin --varyingdef varying.def.sc --platform linux --type vertex -O3
