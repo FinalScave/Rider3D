@@ -1,0 +1,46 @@
+workspace 'Unknown3DWorkspace.xcworkspace'
+
+project 'Demo/Demo.xcodeproj'
+
+ARM64_ONLY=true
+
+def compileArm64
+    system("sh build-unknown3d-static.sh arm64")
+end
+
+def compileAllArch
+    system("sh build-unknown3d-static.sh all")
+end
+
+# 构建适用于iOS的unknown3d静态库
+pre_install do |installer|
+    if $ARM64_ONLY == false
+        puts "Compile Unknown3D Static Lbrary For All Arch..."
+        compileAllArch
+    else
+        puts "Compile Unknown3D Static Lbrary For Arm64 Only..."
+        compileArm64
+    end
+end
+
+# Demo工程需要
+target 'Demo' do
+    platform :ios, '8.0'
+    project 'Demo/Demo.xcodeproj'
+end
+
+# SDK工程需要
+target 'Unknown3D' do
+    platform :ios, '8.0'
+    project 'Unknown3D/Unknown3D.xcodeproj'
+end
+
+# pod install完毕后更新工程属性
+post_install do |installer|
+    # 将构建好的unknown3静态库添加到工程 Linking Targets
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['IOS'] = 'ON'
+        end
+    end
+end

@@ -22,7 +22,8 @@
 
 ## Xcode
 1. 安装cocoapods和cmake
-2. 打开 platform/iOS 工程，Build And Run
+2. 进入 platform/iOS 目录，执行 pod install
+2. 打开 Unknown3DWprkspace.xcworkspace，Build And Run
 
 ## Clion
 1. 直接打开该工程即可
