@@ -7,12 +7,12 @@ public class Object3D extends NativeObject {
     private NdcPoint scale = new NdcPoint(0, 0, 0);
     private Vertices vertices = new Vertices();
 
-    public Object3D() {
-        this.nativePtr = nativeMakeObject3D();
+    public Object3D(String name) {
+        this.nativePtr = nativeMakeObject3D(name);
     }
 
     public void setRenderType(RenderType renderType) {
-
+        nativeSetRenderType(nativePtr, renderType.value);
     }
 
     public NdcPoint position() {
@@ -37,7 +37,7 @@ public class Object3D extends NativeObject {
         nativeDestroy(nativePtr);
     }
 
-    private static native long nativeMakeObject3D();
+    private static native long nativeMakeObject3D(String name);
     private static native void nativeSetRenderType(long ptr, int type);
     private static native void nativeDestroy(long ptr);
 }

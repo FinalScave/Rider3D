@@ -85,24 +85,24 @@ UNKNOWN_NS_BEGIN
 #else
     const static Vertex kDefaultVertices[kDefaultVertexCount] = {
             {
-                    {-1.0f, 1.0f, 0.0f},
-                    {1.0f, 1.0f},
-                    {0, 0, 0, 0}
+                    new NdcPoint {-1.0f, 1.0f, 0.0f},
+                    new TextureUVPoint {1.0f, 1.0f},
+                    new Color {0, 0, 0, 0}
             },
             {
-                    {1.0f, 1.0f, 0.0f},
-                    {0.0f, 1.0f},
-                    {0, 0, 0, 0}
+                    new NdcPoint {1.0f, 1.0f, 0.0f},
+                    new TextureUVPoint {0.0f, 1.0f},
+                    new Color {0, 0, 0, 0}
             },
             {
-                    {-1.0f, -1.0f, 0.0f},
-                    {0.0f, 0.0f},
-                    {0, 0, 0, 0}
+                    new NdcPoint {-1.0f, -1.0f, 0.0f},
+                    new TextureUVPoint {0.0f, 0.0f},
+                    new Color {0, 0, 0, 0}
             },
             {
-                    {1.0f, -1.0f, 0.0f},
-                    {1.0f, 0.0f},
-                    {0, 0, 0, 0}
+                    new NdcPoint {1.0f, -1.0f, 0.0f},
+                    new TextureUVPoint {1.0f, 0.0f},
+                    new Color {0, 0, 0, 0}
             }
     };
 #endif
