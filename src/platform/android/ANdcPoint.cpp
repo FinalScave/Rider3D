@@ -4,7 +4,7 @@
 // Created by Scave on 2023/11/10.
 //
 
-#include "data/Object3D.h"
+#include "object/Object3D.h"
 #include "JNativeConverter.h"
 
 extern "C" {

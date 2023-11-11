@@ -8,8 +8,8 @@
 #include <stdint.h>
 #include "Define.h"
 #include "config/RenderConfig.h"
-#include "data/Supposition.h"
-#include "data/Vertex.h"
+#include "object/Supposition.h"
+#include "object/Vertex.h"
 #include "context/RenderContext.h"
 
 UNKNOWN_NS_BEGIN

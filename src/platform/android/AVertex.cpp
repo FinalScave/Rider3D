@@ -1,5 +1,5 @@
 #include <jni.h>
-#include "data/Vertex.h"
+#include "object/Vertex.h"
 #include "JNativeConverter.h"
 
 //

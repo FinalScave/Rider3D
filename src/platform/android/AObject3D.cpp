@@ -4,13 +4,13 @@
 // Created by Scave on 2023/11/10.
 //
 
-#include "data/Object3D.h"
+#include "object/Object3D.h"
 #include "JNativeConverter.h"
 
 extern "C"
 JNIEXPORT jlong JNICALL
 Java_com_unknown_object_Object3D_nativeMakeObject3D(JNIEnv *env, jclass clazz) {
-    auto* object_3d = new NS_UNKNOWN::Object3D;
+    auto* object_3d = new NS_UNKNOWN::Object3D("unknown");
     return ToJavaObject(object_3d);
 }
 extern "C"

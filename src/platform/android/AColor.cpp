@@ -4,7 +4,7 @@
 // Created by Scave on 2023/11/10.
 //
 
-#include "data/Supposition.h"
+#include "object/Supposition.h"
 #include "JNativeConverter.h"
 
 extern "C"

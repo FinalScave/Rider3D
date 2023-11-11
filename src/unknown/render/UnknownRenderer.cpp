@@ -29,10 +29,15 @@ UNKNOWN_NS_BEGIN
         init.platformData = platform_data;
         bgfx::init(init);
         bgfx::reset(config.width, config.height, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR);
+        // initialize something defaults
+        DefaultVertexLayout::Init();
+        DefaultBgfxHandles::Init();
     }
 
     UnknownRenderer::~UnknownRenderer() {
         render_context_ = nullptr;
+        DefaultBgfxHandles::Destroy();
+        bgfx::shutdown();
     }
 
     uint16_t UnknownRenderer::Render() {
