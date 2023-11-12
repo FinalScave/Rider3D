@@ -30,7 +30,8 @@
 1. 如果是Windows系统，安装 [MinGW64](https://zenlayer.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/sjlj/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0.7z) 和 CMake；
    如果是MacOS系统，安装 Xcode 和 cmake
 2. 打开该工程，安装C/C++ Extension Pack(包含CMake)
-3. 使用CMake插件在IDE左侧添加的CMake选项运行或执行 build-(mac/windows).sh 都可
+3. 按 Ctrl + F5 运行
+   (如果无法运行，就使用CMake插件在IDE左侧添加的CMake选项运行)
 
 ## Clion
 1. 直接打开该工程即可

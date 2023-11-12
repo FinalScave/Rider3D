@@ -23,34 +23,48 @@ UNKNOWN_NS_BEGIN
     struct Object3D {
     public:
         explicit Object3D(std::string name);
+
         ~Object3D();
 
         RenderType render_type = TRISTRIP;
-        NdcPoint* position = nullptr;
-        NdcPoint* rotation = nullptr;
-        NdcPoint* scale = nullptr;
-        Vertices* vertices = nullptr;
+        NdcPoint *position = nullptr;
+        NdcPoint *rotation = nullptr;
+        NdcPoint *scale = nullptr;
+        Vertices *vertices = nullptr;
+        bool visible = true;
+        bool vertex_colors_enabled = true;
+        bool textures_enabled = true;
+        bool normals_enabled = true;
+        bool ignore_faces = false;
+        bool lighting_enabled = true;
+        float point_size = 3.f;
+        bool point_smoothing = true;
+        float line_width = 1.f;
+        bool line_smoothing = false;
 
         std::string GetName();
+
     private:
         std::string name;
+
     };
 
     struct Object3DContainer {
-        void AddChild(Object3D& object);
+        void AddChild(Object3D &object);
 
-        void AddChildAt(uint8_t index, Object3D& object);
+        void AddChildAt(uint8_t index, Object3D &object);
 
-        void RemoveChild(Object3D& object);
+        void RemoveChild(Object3D &object);
 
         void RemoveChildAt(uint8_t index);
 
         uint8_t Size();
+
     private:
         std::vector<Object3D> child_list;
     };
 
-    struct Box : Object3D  {
+    struct Box : Object3D {
         float width;
         float height;
         float depth;
