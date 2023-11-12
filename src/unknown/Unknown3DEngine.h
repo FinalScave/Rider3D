@@ -13,7 +13,7 @@ UNKNOWN_NS_BEGIN
 
     class Unknown3DEngine {
     public:
-        Unknown3DEngine(const RenderConfig &config);
+        explicit Unknown3DEngine(const RenderConfig &config);
         ~Unknown3DEngine();
 
         void SetScene(Scene* scene);

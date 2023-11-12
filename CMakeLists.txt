@@ -74,13 +74,7 @@ elseif (MACOS)
 endif ()
 
 # project shared lib
-add_library(${CMAKE_PROJECT_NAME} SHARED ${CORE_SOURCE_FILES} ${PLATFORM_FILES}
-        src/unknown/object/bgfx/BgfxTexture.cpp
-        src/unknown/object/bgfx/BgfxTexture.h
-        src/unknown/object/Texture.cpp
-        src/unknown/object/Texture.h
-        src/unknown/object/bgfx/BufferHandle.cpp
-        src/unknown/object/bgfx/BufferHandle.h)
+add_library(${CMAKE_PROJECT_NAME} SHARED ${CORE_SOURCE_FILES} ${PLATFORM_FILES})
 
 # add library functions
 function(android_add_3dparty_static_lib dir name)
