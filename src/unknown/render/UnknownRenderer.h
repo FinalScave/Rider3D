@@ -19,7 +19,7 @@ UNKNOWN_NS_BEGIN
     class UnknownRenderer {
         friend Unknown3DEngine;
     public:
-        UnknownRenderer(const RenderConfig &config);
+        explicit UnknownRenderer(const RenderConfig &config);
 
         ~UnknownRenderer();
 
