@@ -20,11 +20,15 @@ typedef std::string Name;
 #define MAKE_SMART_PTR std::make_shared
 
 #define DELETE_PTR(ptr) \
+if (ptr != nullptr) {   \
     delete ptr;         \
+    ptr = nullptr;      \
+}
 
 #define DELETE_ARRAY(array) \
 if (array != nullptr) {     \
     delete[] array;         \
+    array = nullptr;        \
 }
 
 #define DESTROY_MEMBER_BGFX_HANDLE(handle) \

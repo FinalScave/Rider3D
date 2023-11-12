@@ -10,6 +10,10 @@
 UNKNOWN_NS_BEGIN
 
     Object3D::Object3D(std::string name) : name(std::move(name)) {
+        this->position = new Vec3 {0, 0, 0};
+        this->rotation = new Vec3 {0, 0, 0};
+        this->scale = new Vec3 {0, 0, 0};
+        this->vertices = new Vertices;
     }
 
     Object3D::~Object3D() {
@@ -91,7 +95,7 @@ UNKNOWN_NS_BEGIN
         float h = height / 2.f;
         float d = depth / 2.f;
 
-        Color* color = new Color{0, 0, 0, 0xff};
+        Color* color = new Color{66, 77, 0xff, 0xff};
         // front
         Vertex* front_v1 = new Vertex {new Vec3 {-w, +h , +d}, new UV {0, 0}, color};
         Vertex* front_v2 = new Vertex {new Vec3 {+w, +h , +d}, new UV {1, 0}, color};

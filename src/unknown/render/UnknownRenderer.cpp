@@ -4,6 +4,7 @@
 
 #include "UnknownRenderer.h"
 #include "bgfx/bgfx.h"
+#include "bx/math.h"
 
 UNKNOWN_NS_BEGIN
 
@@ -11,7 +12,15 @@ UNKNOWN_NS_BEGIN
         this->render_config_ = config;
         // initialize bgfx
         bgfx::Init init;
+#if (defined(WINDOWS))
+        init.type = bgfx::RendererType::Enum::OpenGL;
+#elif (defined(ANDROID))
+        init.type = bgfx::RendererType::Enum::OpenGLES;
+#elif (defined(IOS) || defined(MACOS))
+        init.type = bgfx::RendererType::Enum::Metal;
+#else
         init.type = bgfx::RendererType::Enum::Count;
+#endif
         init.vendorId = BGFX_PCI_ID_NONE;
         bgfx::Resolution resolution;
         resolution.width = config.width;
@@ -29,7 +38,6 @@ UNKNOWN_NS_BEGIN
         init.platformData = platform_data;
         bgfx::init(init);
         bgfx::reset(config.width, config.height, BGFX_RESET_VSYNC, init.resolution.format);
-        //bgfx::setDebug(BGFX_DEBUG_TEXT);
         // initialize something defaults
         DefaultVertexLayout::Init();
         DefaultBgfxHandles::Init();
@@ -49,9 +57,11 @@ UNKNOWN_NS_BEGIN
     }
 
     uint16_t UnknownRenderer::Render() {
-        //this->RenderScene();
         bgfx::setViewRect(render_context_->main_view_id_, 0, 0, render_config_.width, render_config_.height);
         bgfx::setViewClear(render_context_->main_view_id_, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x000000ff);
+
+        this->RenderScene();
+        
         bgfx::frame();
         return render_context_->main_view_id_;
     }
@@ -74,13 +84,18 @@ UNKNOWN_NS_BEGIN
                 object.vertices->vertex_index_list
         );
         uint8_t view_id = id + 1;
-        bgfx::setViewRect(view_id, 0, 0, render_config_.width, render_config_.height);
+        //bgfx::setViewRect(view_id, 0, 0, render_config_.width, render_config_.height);
+        bgfx::setViewRect(view_id, 0, 0, 50, 50);
+        bgfx::setViewClear(view_id, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x0000ffff);
         bgfx::touch(view_id);
         bgfx::setVertexBuffer(0, handle.vertex_buffer_handle);
         bgfx::setIndexBuffer(handle.index_buffer_handle);
         bgfx::setViewFrameBuffer(0, BGFX_INVALID_HANDLE);
         bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_BLEND_ALPHA);
         bgfx::setUniform(render_context_->u_resolution_, render_context_->vec4_resolution_);
+        float mtx[16];
+        bx::mtxIdentity(mtx);
+        bgfx::setViewTransform(view_id, mtx, mtx);
         bgfx::submit(view_id, render_context_->common_program_);
     }
 

@@ -13,7 +13,7 @@ UNKNOWN_NS_BEGIN
     }
 
     Vertices::~Vertices() {
-        for (auto vertex: vertex_data_list) {
+        for (auto& vertex: vertex_data_list) {
             DELETE_PTR(vertex);
         }
         vertex_data_list.clear();

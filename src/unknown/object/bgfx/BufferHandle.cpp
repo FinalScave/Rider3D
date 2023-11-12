@@ -34,6 +34,7 @@ UNKNOWN_NS_BEGIN
             bgfx::DynamicIndexBufferHandle index_buffer = bgfx::createDynamicIndexBuffer(index_ref);
             BufferHandle handle = {vertex_buffer, index_buffer};
             PutBufferHandle(name, handle);
+    
             return name_buffer_handle_map_[name];
         } else {
             BufferHandle& exists = name_buffer_handle_map_[name];
