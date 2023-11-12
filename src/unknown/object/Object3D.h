@@ -22,7 +22,7 @@ UNKNOWN_NS_BEGIN
 
     struct Object3D {
     public:
-        Object3D(std::string name);
+        explicit Object3D(std::string name);
         ~Object3D();
 
         RenderType render_type = TRISTRIP;

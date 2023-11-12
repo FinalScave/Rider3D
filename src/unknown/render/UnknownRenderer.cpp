@@ -29,7 +29,7 @@ UNKNOWN_NS_BEGIN
         init.platformData = platform_data;
         bgfx::init(init);
         bgfx::reset(config.width, config.height, BGFX_RESET_VSYNC, init.resolution.format);
-        bgfx::setDebug(BGFX_DEBUG_TEXT);
+        //bgfx::setDebug(BGFX_DEBUG_TEXT);
         // initialize something defaults
         DefaultVertexLayout::Init();
         DefaultBgfxHandles::Init();

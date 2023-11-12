@@ -38,14 +38,12 @@ UNKNOWN_NS_BEGIN
         }
         const std::vector<Object3D, std::allocator<Object3D>>::const_iterator &end = child_list.cend();
         uint8_t i(0);
-        std::vector<Object3D, std::allocator<Object3D>>::const_iterator position = end;
         for (auto iterator = child_list.cbegin(); iterator != end; ++iterator) {
             if (index == i++) {
-                position = iterator;
+                child_list.insert(iterator, object);
                 break;
             }
         }
-        child_list.insert(position, object);
     }
 
     void Object3DContainer::RemoveChild(Object3D &object) {
@@ -65,14 +63,12 @@ UNKNOWN_NS_BEGIN
         }
         const std::vector<Object3D, std::allocator<Object3D>>::const_iterator &end = child_list.cend();
         uint8_t i(0);
-        std::vector<Object3D, std::allocator<Object3D>>::const_iterator position = end;
         for (auto iterator = child_list.cbegin(); iterator != end; ++iterator) {
             if (index == i++) {
-                position = iterator;
+                child_list.erase(iterator);
                 break;
             }
         }
-        child_list.erase(position);
     }
 
     uint8_t Object3DContainer::Size() {
