@@ -46,7 +46,7 @@ UNKNOWN_NS_BEGIN
 
     uint16_t UnknownRenderer::Render() {
         bgfx::dbgTextClear();
-        bgfx::dbgTextPrintf(60, 60, 0x0f,
+        bgfx::dbgTextPrintf(10, 10, 0x0f,
                             "\x1b[9;mU\x1b[10;mn\x1b[11;mk\x1b[12;mn\x1b[13;mo\x1b[14;mw\x1b[15;mn\x1b[16;m3\x1b[1;mD\x1b[0m");
         bgfx::setViewRect(render_context_->main_view_id_, 0, 0, render_config_.width, render_config_.height);
         bgfx::setViewClear(render_context_->main_view_id_, BGFX_CLEAR_COLOR|BGFX_CLEAR_DEPTH, 0x2196f3ff);

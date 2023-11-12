@@ -20,9 +20,9 @@ include_directories(${3DPARTY_DIR}/json-cpp)
 include_directories(${SRC_DIR})
 include_directories(${SRC_DIR}/util)
 include_directories(${SRC_DIR}/unknown)
-if(ENABLE_LOG)
+if (ENABLE_LOG)
     include_directories(${3DPARTY_DIR}/logger)
-endif()
+endif ()
 
 # core source files config
 file(GLOB_RECURSE CORE_SOURCE_FILES
@@ -37,25 +37,11 @@ file(GLOB_RECURSE CORE_SOURCE_FILES
         ${SRC_DIR}/unknown/render/config/*.*
         ${SRC_DIR}/unknown/render/context/*.*
         ${SRC_DIR}/unknown/object/*.*
-        )
-if(ENABLE_LOG)
+)
+if (ENABLE_LOG)
     file(GLOB_RECURSE LOGGER_FILES ${3DPARTY_DIR}/logger/*.*)
     set(CORE_SOURCE_FILES ${CORE_SOURCE_FILES} ${LOGGER_FILES})
-endif()
-
-# Platform special
-if (ANDROID)
-    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/android/*.*)
-elseif (IOS)
-    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/iOS/*.*)
-elseif (WINDOWS)
-    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/windows/*.*)
-elseif (MACOS)
-    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/macOS/*.*)
 endif ()
-
-# project shared lib
-add_library(${CMAKE_PROJECT_NAME} SHARED ${CORE_SOURCE_FILES} ${PLATFORM_FILES})
 
 # Determine whether to build a demo and which platform to build demo on
 if (BUILD_PC_DEMO AND NOT ANDROID AND NOT IOS)
@@ -71,6 +57,20 @@ if (BUILD_PC_DEMO AND NOT ANDROID AND NOT IOS)
         set(BUILD_DEMO_WINDOWS ON)
     endif ()
 endif ()
+
+# Platform special
+if (ANDROID)
+    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/android/*.*)
+elseif (IOS)
+    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/iOS/*.*)
+elseif (WINDOWS)
+    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/windows/*.*)
+elseif (MACOS)
+    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/macOS/*.*)
+endif ()
+
+# project shared lib
+add_library(${CMAKE_PROJECT_NAME} SHARED ${CORE_SOURCE_FILES} ${PLATFORM_FILES})
 
 # add library functions
 function(android_add_3dparty_static_lib dir name)
@@ -110,8 +110,9 @@ if (ANDROID)
     find_library(JNI_GRAPHICS jnigraphics)
     find_library(GLES libGLESv2.so)
     find_library(EGL libEGL.so)
-    set(LINK_LIB ${LINK_LIB} ${ANDROID_LIB} ${LOG_LIB} ${JNI_GRAPHICS} ${GLES} ${EGL} 
-        bgfx bimg bimg_decode bimg_encode bx)
+    set(LINK_LIB ${LINK_LIB} ${ANDROID_LIB} ${LOG_LIB} ${JNI_GRAPHICS} ${GLES} ${EGL}
+            bgfx bimg bimg_decode bimg_encode bx
+    )
 elseif (IOS)
     ios_add_3dparty_static_lib(bgfx bgfx)
     ios_add_3dparty_static_lib(bgfx bimg)
@@ -124,10 +125,11 @@ elseif (IOS)
     find_library(METAL_FRAMEWORK Metal)
     find_library(QUARTZ_CORE_FRAMEWORK QuartzCore)
     find_library(UIKIT_FRAMEWORK UIKit)
-    set(LINK_LIB ${LINK_LIB} 
-        ${FOUNDATION_FRAMEWORK} ${CORE_FOUNDATION_FRAMEWORK} ${IOKIT_FRAMEWORK} 
-        ${METAL_FRAMEWORK} ${QUARTZ_CORE_FRAMEWORK} ${UIKIT_FRAMEWORK}
-        bgfx bimg bimg_decode bimg_encode bx)
+    set(LINK_LIB ${LINK_LIB}
+            ${FOUNDATION_FRAMEWORK} ${CORE_FOUNDATION_FRAMEWORK} ${IOKIT_FRAMEWORK}
+            ${METAL_FRAMEWORK} ${QUARTZ_CORE_FRAMEWORK} ${UIKIT_FRAMEWORK}
+            bgfx bimg bimg_decode bimg_encode bx
+    )
 elseif (WINDOWS)
     windows_add_3dparty_static_lib(bgfx bgfx)
     windows_add_3dparty_static_lib(bgfx bimg)
@@ -149,10 +151,11 @@ elseif (MACOS)
     find_library(QUARTZ_CORE_FRAMEWORK QuartzCore)
     find_library(APPKIT_FRAMEWORK AppKit)
     find_library(SECURITY_FRAMEWORK Security)
-    set(LINK_LIB ${LINK_LIB} 
-        ${FOUNDATION_FRAMEWORK} ${CORE_FOUNDATION_FRAMEWORK} ${IOKIT_FRAMEWORK} 
-        ${METAL_FRAMEWORK} ${QUARTZ_CORE_FRAMEWORK} ${APPKIT_FRAMEWORK} ${SECURITY_FRAMEWORK}
-        bgfx bimg bimg_decode bimg_encode bx)
+    set(LINK_LIB ${LINK_LIB}
+            ${FOUNDATION_FRAMEWORK} ${CORE_FOUNDATION_FRAMEWORK} ${IOKIT_FRAMEWORK}
+            ${METAL_FRAMEWORK} ${QUARTZ_CORE_FRAMEWORK} ${APPKIT_FRAMEWORK} ${SECURITY_FRAMEWORK}
+            bgfx bimg bimg_decode bimg_encode bx
+    )
 endif ()
 
 target_link_libraries(${CMAKE_PROJECT_NAME} ${LINK_LIB})
@@ -161,32 +164,33 @@ target_link_libraries(${CMAKE_PROJECT_NAME} ${LINK_LIB})
 if (BUILD_DEMO_WINDOWS)
     message(STATUS "Build Windows demo enabled")
     include_directories(${CMAKE_SOURCE_DIR}/platform/Windows/lib/glfw/include)
-    add_executable(${DEMO_NAME} WIN32 ${CMAKE_SOURCE_DIR}/platform/Windows/demo/main.cpp)
-    set(UNKNOWN3D_LIB ${CMAKE_SOURCE_DIR}/build/Windows/lib${CMAKE_PROJECT_NAME}.dll)
-    # In Clion IDE environment, the build dir is `cmake-build-debug`
-    if (IDE_CLION)
-        set(UNKNOWN3D_LIB ${CMAKE_SOURCE_DIR}/cmake-build-debug/Windows/lib${CMAKE_PROJECT_NAME}.dll)
-    endif ()
-    target_link_libraries(${DEMO_NAME} 
-        ${UNKNOWN3D_LIB}
-        ${CMAKE_SOURCE_DIR}/platform/Windows/lib/glfw/x64/libglfw3.a
-        )
-elseif(BUILD_DEMO_MACOS)
+    add_executable(${DEMO_NAME} WIN32
+            ${CMAKE_SOURCE_DIR}/platform/Windows/demo/main.cpp
+            ${CORE_SOURCE_FILES} ${PLATFORM_FILES}
+    )
+    target_link_libraries(${DEMO_NAME}
+            ${LINK_LIB}
+            ${CMAKE_SOURCE_DIR}/platform/Windows/lib/glfw/x64/libglfw3.a
+    )
+elseif (BUILD_DEMO_MACOS)
     message(STATUS "Build MacOS demo enabled")
     include_directories(${CMAKE_SOURCE_DIR}/platform/MacOS/lib/glfw/include)
-    add_executable(${DEMO_NAME} MACOSX_BUNDLE ${CMAKE_SOURCE_DIR}/platform/MacOS/demo/main.cpp)
+    add_executable(${DEMO_NAME} MACOSX_BUNDLE
+            ${CMAKE_SOURCE_DIR}/platform/MacOS/demo/main.cpp
+            ${CORE_SOURCE_FILES} ${PLATFORM_FILES}
+    )
     find_library(FOUNDATION_FRAMEWORK Foundation)
     find_library(CORE_GRAPHICS_FRAMEWORK CoreGraphics)
     find_library(CORE_VIDEO_FRAMEWORK CoreVideo)
     find_library(APPKIT_FRAMEWORK AppKit)
     find_library(IOKIT_FRAMEWORK IOKit)
-    target_link_libraries(${DEMO_NAME} 
-        ${CMAKE_SOURCE_DIR}/build/MacOS/lib${CMAKE_PROJECT_NAME}.dylib
-        ${CMAKE_SOURCE_DIR}/platform/MacOS/lib/glfw/arm64/libglfw3.a
-        ${FOUNDATION_FRAMEWORK}
-        ${CORE_GRAPHICS_FRAMEWORK}
-        ${CORE_VIDEO_FRAMEWORK}
-        ${APPKIT_FRAMEWORK}
-        ${IOKIT_FRAMEWORK}
-        )
+    target_link_libraries(${DEMO_NAME}
+            ${LINK_LIB}
+            ${CMAKE_SOURCE_DIR}/platform/MacOS/lib/glfw/arm64/libglfw3.a
+            ${FOUNDATION_FRAMEWORK}
+            ${CORE_GRAPHICS_FRAMEWORK}
+            ${CORE_VIDEO_FRAMEWORK}
+            ${APPKIT_FRAMEWORK}
+            ${IOKIT_FRAMEWORK}
+    )
 endif ()
