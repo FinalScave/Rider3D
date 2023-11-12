@@ -7,7 +7,7 @@
 
 UNKNOWN_NS_BEGIN
 
-    UnknownRenderer::UnknownRenderer(const RenderConfig &config) {
+    UnknownRenderer::UnknownRenderer(const RenderConfig& config) {
         this->render_config_ = config;
         // initialize bgfx
         bgfx::Init init;
@@ -35,7 +35,7 @@ UNKNOWN_NS_BEGIN
         DefaultBgfxHandles::Init();
 
         // initialize context
-        this->render_context_ = MAKE_SMART_PTR<RenderContext>();
+        this->render_context_ = MAKE_SMART_PTR<RenderContext>(config);
     }
 
     UnknownRenderer::~UnknownRenderer() {
@@ -44,15 +44,44 @@ UNKNOWN_NS_BEGIN
         bgfx::shutdown();
     }
 
+    void UnknownRenderer::SetScene(const SMART_PTR<Scene>& scene) {
+        render_context_->scene_ = scene;
+    }
+
     uint16_t UnknownRenderer::Render() {
-        bgfx::dbgTextClear();
-        bgfx::dbgTextPrintf(10, 10, 0x0f,
-                            "\x1b[9;mU\x1b[10;mn\x1b[11;mk\x1b[12;mn\x1b[13;mo\x1b[14;mw\x1b[15;mn\x1b[16;m3\x1b[1;mD\x1b[0m");
+        //this->RenderScene();
         bgfx::setViewRect(render_context_->main_view_id_, 0, 0, render_config_.width, render_config_.height);
-        bgfx::setViewClear(render_context_->main_view_id_, BGFX_CLEAR_COLOR|BGFX_CLEAR_DEPTH, 0x2196f3ff);
-        bgfx::touch(render_context_->main_view_id_);
+        bgfx::setViewClear(render_context_->main_view_id_, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x000000ff);
         bgfx::frame();
         return render_context_->main_view_id_;
+    }
+
+    void UnknownRenderer::RenderScene() {
+        uint8_t size = render_context_->scene_->Size();
+        for (uint8_t i = 0; i < size; ++i) {
+            Object3D& object = render_context_->scene_->GetChildAt(i);
+            this->RenderObject(object, i);
+        }
+    }
+
+    void UnknownRenderer::RenderObject(Object3D& object, uint8_t id) {
+        if (!object.visible) {
+            return;
+        }
+        BufferHandle& handle = render_context_->CreateOrUpdateBuffer(
+                object.GetName(),
+                object.vertices->vertex_data_list,
+                object.vertices->vertex_index_list
+        );
+        uint8_t view_id = id + 1;
+        bgfx::setViewRect(view_id, 0, 0, render_config_.width, render_config_.height);
+        bgfx::touch(view_id);
+        bgfx::setVertexBuffer(0, handle.vertex_buffer_handle);
+        bgfx::setIndexBuffer(handle.index_buffer_handle);
+        bgfx::setViewFrameBuffer(0, BGFX_INVALID_HANDLE);
+        bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_BLEND_ALPHA);
+        bgfx::setUniform(render_context_->u_resolution_, render_context_->vec4_resolution_);
+        bgfx::submit(view_id, render_context_->common_program_);
     }
 
 UNKNOWN_NS_END

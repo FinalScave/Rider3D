@@ -46,7 +46,6 @@ UNKNOWN_NS_BEGIN
 
     private:
         std::string name;
-
     };
 
     struct Object3DContainer {
@@ -58,6 +57,8 @@ UNKNOWN_NS_BEGIN
 
         void RemoveChildAt(uint8_t index);
 
+        Object3D &GetChildAt(uint8_t index);
+
         uint8_t Size();
 
     private:
@@ -65,16 +66,23 @@ UNKNOWN_NS_BEGIN
     };
 
     struct Box : Object3D {
+        Box(const Name &name, float width, float height, float depth);
+
         float width;
         float height;
         float depth;
+    private:
+        void Build();
     };
 
     struct Sphere : Object3D {
+        Sphere(Name name, uint16_t row_count, uint16_t column_count, float radius);
+
         uint16_t row_count;
         uint16_t column_count;
         float radius;
 
+    private:
         void Build();
     };
 

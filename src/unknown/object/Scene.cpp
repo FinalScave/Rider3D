@@ -5,5 +5,10 @@
 #include "Scene.h"
 
 UNKNOWN_NS_BEGIN
+    Scene::Scene() : Object3DContainer() {
+
+    }
+
+    Scene::~Scene() = default;
 
 UNKNOWN_NS_END

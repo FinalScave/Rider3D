@@ -16,9 +16,7 @@ UNKNOWN_NS_BEGIN
         Unknown3DEngine(const RenderConfig &config);
         ~Unknown3DEngine();
 
-        //void AddVertices(uint32_t num_vertices, ScreenPoint* vertices);
-
-        //void SetVertices(uint32_t num_vertices, ScreenPoint* vertices);
+        void SetScene(Scene* scene);
 
         uint16_t Render();
 

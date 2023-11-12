@@ -14,6 +14,10 @@ UNKNOWN_NS_BEGIN
         this->renderer_ = nullptr;
     }
 
+    void Unknown3DEngine::SetScene(Scene* scene) {
+        renderer_->SetScene(SMART_PTR<Scene>(scene));
+    }
+
     uint16_t Unknown3DEngine::Render() {
         return renderer_->Render();
     }
@@ -21,6 +25,7 @@ UNKNOWN_NS_BEGIN
     RenderConfig Unknown3DEngine::GetRenderConfig() {
         return renderer_->render_config_;
     }
+
 
 UNKNOWN_NS_END
 

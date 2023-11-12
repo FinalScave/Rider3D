@@ -73,6 +73,10 @@ UNKNOWN_NS_BEGIN
         float a;
     };
 
+    typedef NS_UNKNOWN::NdcPoint Number3D;
+    typedef NS_UNKNOWN::NdcPoint Vec3;
+    typedef NS_UNKNOWN::TextureUVPoint UV;
+
 UNKNOWN_NS_END
 
 #endif //UNKNOWN3D_SUPPOSITION_H

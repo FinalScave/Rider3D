@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.10)
 project(unknown3d)
 
 # macro
+add_definitions(-DBX_CONFIG_DEBUG=ON)
 add_definitions(-DENABLE_LOG)
 option(ENABLE_LOG "Enable logging" ON)
 option(BUILD_PC_DEMO "Build demo for windows or mac to test" ON)
@@ -32,11 +33,14 @@ file(GLOB_RECURSE CORE_SOURCE_FILES
         ${3DPARTY_DIR}/bgfx/include/tinystl/*.*
         ${3DPARTY_DIR}/json-cpp/*.*
         ${SRC_DIR}/util/*.*
+        ${SRC_DIR}/util/bgfx/*.*
         ${SRC_DIR}/unknown/*.*
         ${SRC_DIR}/unknown/render/*.*
         ${SRC_DIR}/unknown/render/config/*.*
         ${SRC_DIR}/unknown/render/context/*.*
         ${SRC_DIR}/unknown/object/*.*
+        ${SRC_DIR}/unknown/object/bgfx/*.*
+        ${SRC_DIR}/unknown/shader/*.*
 )
 if (ENABLE_LOG)
     file(GLOB_RECURSE LOGGER_FILES ${3DPARTY_DIR}/logger/*.*)
@@ -70,7 +74,13 @@ elseif (MACOS)
 endif ()
 
 # project shared lib
-add_library(${CMAKE_PROJECT_NAME} SHARED ${CORE_SOURCE_FILES} ${PLATFORM_FILES})
+add_library(${CMAKE_PROJECT_NAME} SHARED ${CORE_SOURCE_FILES} ${PLATFORM_FILES}
+        src/unknown/object/bgfx/BgfxTexture.cpp
+        src/unknown/object/bgfx/BgfxTexture.h
+        src/unknown/object/Texture.cpp
+        src/unknown/object/Texture.h
+        src/unknown/object/bgfx/BufferHandle.cpp
+        src/unknown/object/bgfx/BufferHandle.h)
 
 # add library functions
 function(android_add_3dparty_static_lib dir name)

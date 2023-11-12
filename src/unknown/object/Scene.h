@@ -11,7 +11,22 @@
 
 UNKNOWN_NS_BEGIN
 
+    struct Camera {
+        Vec3 *position = nullptr;
+        Vec3 *target = nullptr;
+        Vec3 *up_axis = nullptr;
+    };
+
     class Scene : public Object3DContainer {
+    public:
+        Scene();
+
+        ~Scene();
+
+        Camera *camera_ = nullptr;
+        Color *background_color_ = nullptr;
+        bool lighting_enabled_;
+    private:
 
     };
 

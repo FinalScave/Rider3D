@@ -23,6 +23,8 @@ UNKNOWN_NS_BEGIN
 
         ~UnknownRenderer();
 
+        void SetScene(const SMART_PTR<Scene> &scene);
+
         /// OffScreen render, return the texture id after rendering
         /// \return Texture ID
         uint16_t Render();
@@ -32,6 +34,10 @@ UNKNOWN_NS_BEGIN
         RenderConfig render_config_;
         /// Context for rendering
         SMART_PTR<RenderContext> render_context_;
+
+        void RenderScene();
+
+        void RenderObject(Object3D &object, uint8_t id);
     };
 
 UNKNOWN_NS_END

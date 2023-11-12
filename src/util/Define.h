@@ -6,10 +6,15 @@
 #define UNKNOWN3D_DEFINE_H
 
 #include <memory>
+#include <string>
+#include <unordered_map>
 
 #define NS_UNKNOWN unknown
 #define UNKNOWN_NS_BEGIN namespace NS_UNKNOWN {
 #define UNKNOWN_NS_END }
+
+typedef std::string Name;
+#define HashMap std::unordered_map
 
 #define SMART_PTR std::shared_ptr
 #define MAKE_SMART_PTR std::make_shared

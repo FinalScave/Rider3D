@@ -7,7 +7,7 @@
 
 #include <vector>
 #include "Define.h"
-#include "bgfx/bgfx.h"
+#include "unknown/object/bgfx/BgfxTexture.h"
 #include "Supposition.h"
 
 UNKNOWN_NS_BEGIN
@@ -15,8 +15,8 @@ UNKNOWN_NS_BEGIN
     struct Vertex {
         ~Vertex();
 
-        NdcPoint* position;
-        TextureUVPoint* uv;
+        Vec3* position;
+        UV* uv;
         Color* color;
     };
 
@@ -25,11 +25,29 @@ UNKNOWN_NS_BEGIN
 
         void AddVertex(Vertex* vertex);
 
+        void AddIndex(uint32_t index);
+
+        void AddFace(Vertex* upper_left, Vertex* upper_right, Vertex* lower_right, Vertex* lower_left);
+
         void SetVertices(uint16_t vertices_count, Vertex** vertices);
 
-        uint16_t Size() const;
+        [[nodiscard("Get vertices size but no any usage")]] uint16_t VertexSize() const;
 
-        std::vector<Vertex*> vertex_list;
+        [[nodiscard("Get indices size but no any usage")]] uint32_t IndexSize() const;
+
+        std::vector<Vertex*> vertex_data_list;
+        std::vector<uint32_t> vertex_index_list;
+    };
+
+    class VerticesManager {
+    public:
+        VerticesManager();
+
+        ~VerticesManager();
+
+        HashMap<Name, int> map;
+    private:
+
     };
 
     class DefaultVertexLayout {
@@ -85,24 +103,24 @@ UNKNOWN_NS_BEGIN
 #else
     const static Vertex kDefaultVertices[kDefaultVertexCount] = {
             {
-                    new NdcPoint {-1.0f, 1.0f, 0.0f},
-                    new TextureUVPoint {1.0f, 1.0f},
-                    new Color {0, 0, 0, 0}
+                    new NdcPoint{-1.0f, 1.0f, 0.0f},
+                    new TextureUVPoint{1.0f, 1.0f},
+                    new Color{0, 0, 0, 0}
             },
             {
-                    new NdcPoint {1.0f, 1.0f, 0.0f},
-                    new TextureUVPoint {0.0f, 1.0f},
-                    new Color {0, 0, 0, 0}
+                    new NdcPoint{1.0f, 1.0f, 0.0f},
+                    new TextureUVPoint{0.0f, 1.0f},
+                    new Color{0, 0, 0, 0}
             },
             {
-                    new NdcPoint {-1.0f, -1.0f, 0.0f},
-                    new TextureUVPoint {0.0f, 0.0f},
-                    new Color {0, 0, 0, 0}
+                    new NdcPoint{-1.0f, -1.0f, 0.0f},
+                    new TextureUVPoint{0.0f, 0.0f},
+                    new Color{0, 0, 0, 0}
             },
             {
-                    new NdcPoint {1.0f, -1.0f, 0.0f},
-                    new TextureUVPoint {1.0f, 0.0f},
-                    new Color {0, 0, 0, 0}
+                    new NdcPoint{1.0f, -1.0f, 0.0f},
+                    new TextureUVPoint{1.0f, 0.0f},
+                    new Color{0, 0, 0, 0}
             }
     };
 #endif
