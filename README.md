@@ -19,12 +19,12 @@
   ndk.dir=[ndk安装路径]
   cmake.dir=[cmake安装路径]
 ```
-2. 运行
+3. 运行
 
 ## Xcode
 1. 安装 cocoapods 和 cmake
 2. 进入 platform/iOS 目录，执行 pod install
-2. 打开 Unknown3DWprkspace.xcworkspace，Build And Run
+3. 打开 Unknown3DWorkspace.xcworkspace，Build And Run
 
 ## VSCode
 1. 如果是Windows系统，安装 [MinGW64](https://zenlayer.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/sjlj/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0.7z) 和 [CMake](https://cmake.org/files/v3.10/cmake-3.10.2-win64-x64.msi)；

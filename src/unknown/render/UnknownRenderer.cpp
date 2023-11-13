@@ -5,6 +5,7 @@
 #include "UnknownRenderer.h"
 #include "bgfx/bgfx.h"
 #include "bx/math.h"
+#include "LogUtil.h"
 
 UNKNOWN_NS_BEGIN
 
@@ -61,7 +62,7 @@ UNKNOWN_NS_BEGIN
         bgfx::setViewClear(render_context_->main_view_id_, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x000000ff);
 
         this->RenderScene();
-        
+        LOGD("====Frame", "");
         bgfx::frame();
         return render_context_->main_view_id_;
     }
