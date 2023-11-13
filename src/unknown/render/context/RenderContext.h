@@ -19,10 +19,13 @@ UNKNOWN_NS_BEGIN
         friend UnknownRenderer;
     public:
         explicit RenderContext(const RenderConfig& config);
+
         ~RenderContext();
 
-        BufferHandle&
-        CreateOrUpdateBuffer(const Name& name, std::vector<Vertex*>& vertex_list, std::vector<uint32_t>& index_list);
+        BufferHandle& CreateOrUpdateBuffer(const Name& name,
+                                           bgfx::VertexLayout& vertex_layout,
+                                           std::vector<Vertex*>& vertex_list,
+                                           std::vector<uint32_t>& index_list);
 
         BufferHandle& GetBufferHandle(const Name& name);
 

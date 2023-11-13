@@ -39,9 +39,6 @@ UNKNOWN_NS_BEGIN
         init.platformData = platform_data;
         bgfx::init(init);
         bgfx::reset(config.width, config.height, BGFX_RESET_VSYNC, init.resolution.format);
-        // initialize something defaults
-        DefaultVertexLayout::Init();
-        DefaultBgfxHandles::Init();
 
         // initialize context
         this->render_context_ = MAKE_SMART_PTR<RenderContext>(config);
@@ -51,7 +48,6 @@ UNKNOWN_NS_BEGIN
 
     UnknownRenderer::~UnknownRenderer() {
         render_context_ = nullptr;
-        DefaultBgfxHandles::Destroy();
         bgfx::shutdown();
     }
 

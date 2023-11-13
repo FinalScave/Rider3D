@@ -16,9 +16,11 @@ UNKNOWN_NS_BEGIN
         handle_manager_ = nullptr;
     }
 
-    BufferHandle& RenderContext::CreateOrUpdateBuffer(const Name& name, std::vector<Vertex*>& vertex_list,
+    BufferHandle& RenderContext::CreateOrUpdateBuffer(const Name& name,
+                                                      bgfx::VertexLayout& vertex_layout,
+                                                      std::vector<Vertex*>& vertex_list,
                                                       std::vector<uint32_t>& index_list) {
-        return handle_manager_->CreateOrUpdate(name, vertex_list, index_list);
+        return handle_manager_->CreateOrUpdate(name, vertex_layout, vertex_list, index_list);
     }
 
     BufferHandle& RenderContext::GetBufferHandle(const Name& name) {

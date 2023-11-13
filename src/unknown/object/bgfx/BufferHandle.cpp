@@ -14,7 +14,9 @@ UNKNOWN_NS_BEGIN
         name_buffer_handle_map_[name] = handle;
     }
 
-    BufferHandle& BufferHandleManager::CreateOrUpdate(const Name& name, std::vector<Vertex*>& vertex_list,
+    BufferHandle& BufferHandleManager::CreateOrUpdate(const Name& name,
+                                                      bgfx::VertexLayout& vertex_layout,
+                                                      std::vector<Vertex*>& vertex_list,
                                                       std::vector<uint32_t>& index_list) {
         Vertex** vertex_arr = vertex_list.data();
         uint32_t* index_arr = index_list.data();
@@ -27,14 +29,12 @@ UNKNOWN_NS_BEGIN
                 sizeof(uint32_t) * index_list.size()
         );
         if (name_buffer_handle_map_.find(name) == name_buffer_handle_map_.end()) {
-            bgfx::DynamicVertexBufferHandle vertex_buffer = bgfx::createDynamicVertexBuffer(
-                    vertex_ref,
-                    DefaultVertexLayout::Get()
-            );
+            bgfx::DynamicVertexBufferHandle vertex_buffer =
+                    bgfx::createDynamicVertexBuffer(vertex_ref,vertex_layout);
             bgfx::DynamicIndexBufferHandle index_buffer = bgfx::createDynamicIndexBuffer(index_ref);
             BufferHandle handle = {vertex_buffer, index_buffer};
             PutBufferHandle(name, handle);
-    
+
             return name_buffer_handle_map_[name];
         } else {
             BufferHandle& exists = name_buffer_handle_map_[name];

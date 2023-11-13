@@ -15,7 +15,7 @@ UNKNOWN_NS_BEGIN
     /// 着色器程序抽象基础类
     class ShaderProgram {
     public:
-        ShaderProgram() = default;
+        ShaderProgram();
         ~ShaderProgram();
 
         /// 从二进制数据中载入着色器程序
@@ -23,17 +23,18 @@ UNKNOWN_NS_BEGIN
         /// \param vs_data_len 顶点着色器代码长度
         /// \param fs_data 片元着色器代码
         /// \param fs_data_len 片元着色器代码长度
-        virtual void Load(const unsigned char* vs_data,
+        void Load(const unsigned char* vs_data,
                           const unsigned int vs_data_len,
                           const unsigned char* fs_data,
-                          const unsigned int fs_data_len) = 0;
+                          const unsigned int fs_data_len);
 
         /// 从指定路径加载着色器程序
         /// \param res_path 着色器程序所处目录路径
         /// \param vs_name 顶点着色器文件名
         /// \param fs_name 片元着色器文件名
-        virtual void Load(const char* res_path, const char* vs_name, const char* fs_name) = 0;
+        void Load(const char* res_path, const char* vs_name, const char* fs_name);
 
+        bgfx::VertexLayout vertex_layout_;
         bgfx::ProgramHandle program_handle_ = BGFX_INVALID_HANDLE;
         bgfx::UniformHandle uniform_handles_[MAX_UNIFORM_COUNT] = {
                 BGFX_INVALID_HANDLE,
@@ -45,18 +46,12 @@ UNKNOWN_NS_BEGIN
 
     class SimpleShaderProgram : public ShaderProgram {
     public:
-        void Load(const unsigned char* vs_data, const unsigned int vs_data_len, const unsigned char* fs_data,
-                  const unsigned int fs_data_len) override;
-
-        void Load(const char *res_path, const char *vs_name, const char *fs_name) override;
+        SimpleShaderProgram();
     };
 
     class CommonShaderProgram : public ShaderProgram {
     public:
-        void Load(const unsigned char* vs_data, const unsigned int vs_data_len, const unsigned char* fs_data,
-                  const unsigned int fs_data_len) override;
-
-        void Load(const char *res_path, const char *vs_name, const char *fs_name) override;
+        CommonShaderProgram();
     };
 
 UNKNOWN_NS_END

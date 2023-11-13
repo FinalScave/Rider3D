@@ -50,31 +50,6 @@ UNKNOWN_NS_BEGIN
 
     };
 
-    class DefaultVertexLayout {
-    public:
-        static void Init();
-
-        static bgfx::VertexLayout Get();
-
-    private:
-        static bgfx::VertexLayout default_vertex_layout_;
-    };
-
-    class DefaultBgfxHandles {
-    public:
-        static void Init();
-
-        static void Destroy();
-
-        static bgfx::VertexBufferHandle GetVertexBufferHandle();
-
-        static bgfx::IndexBufferHandle GetIndexBufferHandle();
-
-    private:
-        static bgfx::VertexBufferHandle default_vertex_buffer_handle_;
-        static bgfx::IndexBufferHandle default_index_buffer_handle_;
-    };
-
     const static uint8_t kDefaultVertexCount = 4;
     const static uint8_t kDefaultIndexCount = 6;
 #if (defined(ANDROID) || defined(LINUX) || defined(HARMONY) || defined(WINDOWS))
@@ -82,22 +57,22 @@ UNKNOWN_NS_BEGIN
             {
                     new NdcPoint {-1.0f, 1.0f,  0.0f},
                     new TextureUVPoint {1.0f, 0.0f},
-                    new Color {0, 0, 0, 0}
+                    new Color {0xff, 0, 0, 0}
             },
             {
                     new NdcPoint {1.0f,  1.0f,  0.0f},
                     new TextureUVPoint {0.0f, 0.0f},
-                    new Color {0, 0, 0, 0}
+                    new Color {0xff, 0, 0, 0}
             },
             {
                     new NdcPoint {-1.0f, -1.0f, 0.0f},
                     new TextureUVPoint {0.0f, 1.0f},
-                    new Color {0, 0, 0, 0}
+                    new Color {0xff, 0, 0, 0}
             },
             {
                     new NdcPoint {1.0f,  -1.0f, 0.0f},
                     new TextureUVPoint {1.0f, 1.0f},
-                    new Color {0, 0, 0, 0}
+                    new Color {0xff, 0, 0, 0}
             }
     };
 #else
