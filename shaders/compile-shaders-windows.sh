@@ -16,6 +16,10 @@ function compile_fragment_glsl() {
 }
 
 #glsl
+# 编译最小shader
+compile_vertex_glsl simple/vs_simple.sc simple/varying.def.sc ../src/unknown/shader/vs_simple.h VS_SIMPLE
+compile_fragment_glsl simple/fs_simple.sc simple/varying.def.sc ../src/unknown/shader/fs_simple.h FS_SIMPLE
+
 # 编译通用shader
-compile_vertex_glsl common/vs_common.sc common/varying.def.sc ../src/unknown/shader/vs_common.h VS_COMMON
-compile_fragment_glsl common/fs_common.sc common/varying.def.sc ../src/unknown/shader/fs_common.h FS_COMMON
+# compile_vertex_glsl common/vs_common.sc common/varying.def.sc ../src/unknown/shader/vs_common.h VS_COMMON
+# compile_fragment_glsl common/fs_common.sc common/varying.def.sc ../src/unknown/shader/fs_common.h FS_COMMON

@@ -40,8 +40,8 @@ int main(int argc, char **argv)
     Unknown3DEngine* engine = new Unknown3DEngine(config);
     Scene* scene = new Scene();
     engine->SetScene(scene);
-    Box box = {"box1", 0.5, 0.5, 0.5};
-    scene->AddChild(box);
+    unknown::Rectangle rectangle = {"rect1", 0.5, 0.5};
+    scene->AddChild(rectangle);
     // render loop
     while (!glfwWindowShouldClose(window))
     {

@@ -13,9 +13,9 @@ UNKNOWN_NS_BEGIN
         this->render_config_ = config;
         // initialize bgfx
         bgfx::Init init;
-#if (defined(WINDOWS))
+#if (defined(WINDOWS) || defined(LINUX) )
         init.type = bgfx::RendererType::Enum::OpenGL;
-#elif (defined(ANDROID))
+#elif (defined(ANDROID) || defined(HARMONY))
         init.type = bgfx::RendererType::Enum::OpenGLES;
 #elif (defined(IOS) || defined(MACOS))
         init.type = bgfx::RendererType::Enum::Metal;
@@ -45,6 +45,8 @@ UNKNOWN_NS_BEGIN
 
         // initialize context
         this->render_context_ = MAKE_SMART_PTR<RenderContext>(config);
+        // initialize render strategies
+        this->simple_renderer_ = MAKE_SMART_PTR<SimpleRenderStrategy>(render_context_);
     }
 
     UnknownRenderer::~UnknownRenderer() {
@@ -62,7 +64,7 @@ UNKNOWN_NS_BEGIN
         bgfx::setViewClear(render_context_->main_view_id_, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x000000ff);
 
         this->RenderScene();
-        LOGD("====Frame", "");
+
         bgfx::frame();
         return render_context_->main_view_id_;
     }
@@ -71,7 +73,7 @@ UNKNOWN_NS_BEGIN
         uint8_t size = render_context_->scene_->Size();
         for (uint8_t i = 0; i < size; ++i) {
             Object3D& object = render_context_->scene_->GetChildAt(i);
-            this->RenderObject(object, i);
+            this->RenderObject(object, i + 1);
         }
     }
 
@@ -79,25 +81,8 @@ UNKNOWN_NS_BEGIN
         if (!object.visible) {
             return;
         }
-        BufferHandle& handle = render_context_->CreateOrUpdateBuffer(
-                object.GetName(),
-                object.vertices->vertex_data_list,
-                object.vertices->vertex_index_list
-        );
-        uint8_t view_id = id + 1;
-        //bgfx::setViewRect(view_id, 0, 0, render_config_.width, render_config_.height);
-        bgfx::setViewRect(view_id, 0, 0, 50, 50);
-        bgfx::setViewClear(view_id, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x0000ffff);
-        bgfx::touch(view_id);
-        bgfx::setVertexBuffer(0, handle.vertex_buffer_handle);
-        bgfx::setIndexBuffer(handle.index_buffer_handle);
-        bgfx::setViewFrameBuffer(0, BGFX_INVALID_HANDLE);
-        bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_BLEND_ALPHA);
-        bgfx::setUniform(render_context_->u_resolution_, render_context_->vec4_resolution_);
-        float mtx[16];
-        bx::mtxIdentity(mtx);
-        bgfx::setViewTransform(view_id, mtx, mtx);
-        bgfx::submit(view_id, render_context_->common_program_);
+        render_context_->curr_view_id_ = id;
+        simple_renderer_->RenderObject(object);
     }
 
 UNKNOWN_NS_END

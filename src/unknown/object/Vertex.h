@@ -77,7 +77,7 @@ UNKNOWN_NS_BEGIN
 
     const static uint8_t kDefaultVertexCount = 4;
     const static uint8_t kDefaultIndexCount = 6;
-#ifdef ANDROID
+#if (defined(ANDROID) || defined(LINUX) || defined(HARMONY) || defined(WINDOWS))
     const static Vertex kDefaultVertices[kDefaultVertexCount] = {
             {
                     new NdcPoint {-1.0f, 1.0f,  0.0f},

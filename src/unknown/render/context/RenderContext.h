@@ -27,14 +27,13 @@ UNKNOWN_NS_BEGIN
         BufferHandle& GetBufferHandle(const Name& name);
 
         void PutBufferHandle(const Name& name, const BufferHandle& handle);
+
+        RenderConfig render_config_;
+        uint16_t curr_view_id_;
     private:
         uint16_t main_view_id_;
         SMART_PTR<Scene> scene_;
         SMART_PTR<BufferHandleManager> handle_manager_;
-
-        bgfx::ProgramHandle common_program_ = BGFX_INVALID_HANDLE;
-        bgfx::UniformHandle u_resolution_ = BGFX_INVALID_HANDLE;
-        uint16_t* vec4_resolution_;
     };
 
 UNKNOWN_NS_END

@@ -1,6 +1,5 @@
-#include <cstdint>
 
-static const unsigned int VS_BIN_COUNT = 552;
+static const unsigned int VS_COMMON_LEN = 552;
 
 static const unsigned char VS_COMMON[] =
 {

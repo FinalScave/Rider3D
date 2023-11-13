@@ -27,10 +27,10 @@ UNKNOWN_NS_BEGIN
         ~Object3D();
 
         RenderType render_type = TRISTRIP;
-        NdcPoint *position = nullptr;
-        NdcPoint *rotation = nullptr;
-        NdcPoint *scale = nullptr;
-        Vertices *vertices = nullptr;
+        NdcPoint* position = nullptr;
+        NdcPoint* rotation = nullptr;
+        NdcPoint* scale = nullptr;
+        Vertices* vertices = nullptr;
         bool visible = true;
         bool vertex_colors_enabled = true;
         bool textures_enabled = true;
@@ -49,15 +49,15 @@ UNKNOWN_NS_BEGIN
     };
 
     struct Object3DContainer {
-        void AddChild(Object3D &object);
+        void AddChild(Object3D& object);
 
-        void AddChildAt(uint8_t index, Object3D &object);
+        void AddChildAt(uint8_t index, Object3D& object);
 
-        void RemoveChild(Object3D &object);
+        void RemoveChild(Object3D& object);
 
         void RemoveChildAt(uint8_t index);
 
-        Object3D &GetChildAt(uint8_t index);
+        Object3D& GetChildAt(uint8_t index);
 
         uint8_t Size();
 
@@ -65,8 +65,17 @@ UNKNOWN_NS_BEGIN
         std::vector<Object3D> child_list;
     };
 
+    struct Rectangle : Object3D {
+        Rectangle(const Name& name, float width, float height);
+
+        float width;
+        float height;
+    private:
+        void Build();
+    };
+
     struct Box : Object3D {
-        Box(const Name &name, float width, float height, float depth);
+        Box(const Name& name, float width, float height, float depth);
 
         float width;
         float height;

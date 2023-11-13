@@ -5,12 +5,12 @@
 #ifndef UNKNOWN3D_UNKNOWNRENDERER_H
 #define UNKNOWN3D_UNKNOWNRENDERER_H
 
-#include <stdint.h>
 #include "Define.h"
 #include "config/RenderConfig.h"
 #include "object/Supposition.h"
 #include "object/Vertex.h"
 #include "context/RenderContext.h"
+#include "strategy/SimpleRenderStrategy.h"
 
 UNKNOWN_NS_BEGIN
 
@@ -34,6 +34,7 @@ UNKNOWN_NS_BEGIN
         RenderConfig render_config_;
         /// Context for rendering
         SMART_PTR<RenderContext> render_context_;
+        SMART_PTR<SimpleRenderStrategy> simple_renderer_;
 
         void RenderScene();
 

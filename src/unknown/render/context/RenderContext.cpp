@@ -4,22 +4,16 @@
 
 #include "RenderContext.h"
 #include "bgfx/BgfxUtil.h"
-#include "shader/vs_common.h"
-#include "shader/fs_common.h"
 
 UNKNOWN_NS_BEGIN
 
-    RenderContext::RenderContext(const RenderConfig& config): main_view_id_(0) {
+    RenderContext::RenderContext(const RenderConfig& config) : curr_view_id_(0), main_view_id_(0) {
         this->handle_manager_ = MAKE_SMART_PTR<BufferHandleManager>();
-        this->common_program_ = loadProgramFromData(VS_COMMON, VS_BIN_COUNT, FS_COMMON, FS_BIN_COUNT);
-        this->u_resolution_ = bgfx::createUniform("u_resolution", bgfx::UniformType::Enum::Vec4);
-        this->vec4_resolution_ = new uint16_t[4]{config.width, config.height, 0, 0};
+        this->render_config_ = config;
     }
 
     RenderContext::~RenderContext() {
-        DESTROY_MEMBER_BGFX_HANDLE(common_program_);
-        DESTROY_MEMBER_BGFX_HANDLE(u_resolution_);
-        DELETE_ARRAY(vec4_resolution_);
+        handle_manager_ = nullptr;
     }
 
     BufferHandle& RenderContext::CreateOrUpdateBuffer(const Name& name, std::vector<Vertex*>& vertex_list,

@@ -1,6 +1,6 @@
 #include <cstdint>
 
-static const unsigned int FS_BIN_COUNT = 192;
+static const unsigned int FS_COMMON_LEN = 192;
 
 static const unsigned char FS_COMMON[] =
 {
