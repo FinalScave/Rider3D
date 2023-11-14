@@ -222,7 +222,9 @@ elseif (BUILD_DEMO_LINUX)
             ${CMAKE_SOURCE_DIR}/platform/Linux/demo/main.cpp
             ${CORE_SOURCE_FILES} ${PLATFORM_FILES}
     )
+    find_package(glfw3 REQUIRED)
+    include_directories(${GLFW_INCLUDE_DIRS})
     target_link_libraries(${DEMO_NAME}
-            ${LINK_LIB}
+            ${LINK_LIB} glfw
     )
 endif ()

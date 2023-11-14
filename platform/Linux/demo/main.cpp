@@ -31,7 +31,7 @@ int main(int argc, char **argv)
         return 1;
     glfwSetKeyCallback(window, glfw_keyCallback);
 
-    void* handle = glfwGetX11Window(window);
+    void* handle = (void *)glfwGetX11Window(window);
     int width, height;
     glfwGetWindowSize(window, &width, &height);
 
