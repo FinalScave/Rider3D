@@ -7,7 +7,7 @@ project(unknown3d)
 add_definitions(-DBX_CONFIG_DEBUG=ON)
 add_definitions(-DENABLE_LOG)
 option(ENABLE_LOG "Enable logging" ON)
-option(BUILD_PC_DEMO "Build demo for windows or mac to test" ON)
+option(BUILD_PC_DEMO "Build demo for Windows/Mac/Linux to test" ON)
 
 # initial config
 set(LINK_LIB)
@@ -75,8 +75,8 @@ elseif (WINDOWS)
     file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/windows/*.*)
 elseif (MACOS)
     file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/macOS/*.*)
-elseif (UNIX)
-    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/linux/x86*.*)
+elseif (LINUX)
+    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/linux/*.*)
 endif ()
 
 # project shared lib
@@ -107,7 +107,7 @@ function(mac_add_3dparty_static_lib dir name)
             PROPERTIES IMPORTED_LOCATION
             ${3DPARTY_DIR}/${dir}/macOS/arm64/lib${name}.a)
 endfunction()
-function(linux_x86_64_3dparty_static_lib dir name)
+function(linux_3dparty_static_lib dir name)
     add_library(${name} STATIC IMPORTED)
     set_target_properties(${name}
             PROPERTIES IMPORTED_LOCATION
@@ -172,12 +172,12 @@ elseif (MACOS)
             ${METAL_FRAMEWORK} ${QUARTZ_CORE_FRAMEWORK} ${APPKIT_FRAMEWORK} ${SECURITY_FRAMEWORK}
             bgfx bimg bimg_decode bimg_encode bx
     )
-elseif (UNIX)
-    linux_x86_64_add_3dparty_static_lib(bgfx bgfx)
-    linux_x86_64_add_3dparty_static_lib(bgfx bimg)
-    linux_x86_64_add_3dparty_static_lib(bgfx bimg_encode)
-    linux_x86_64_add_3dparty_static_lib(bgfx bimg_decode)
-    linux_x86_64_add_3dparty_static_lib(bgfx bx)
+elseif (LINUX)
+    linux_3dparty_static_lib(bgfx bgfx)
+    linux_3dparty_static_lib(bgfx bimg)
+    linux_3dparty_static_lib(bgfx bimg_encode)
+    linux_3dparty_static_lib(bgfx bimg_decode)
+    linux_3dparty_static_lib(bgfx bx)
     set(LINK_LIB ${LINK_LIB} bgfx bimg bimg_decode bimg_encode bx)
 endif ()
 
@@ -216,7 +216,13 @@ elseif (BUILD_DEMO_MACOS)
             ${APPKIT_FRAMEWORK}
             ${IOKIT_FRAMEWORK}
     )
-elseif (BUILD_DEMO_UNIX)
+elseif (BUILD_DEMO_LINUX)
     message(STATUS "Build Linux demo enabled")
-    include_directories(${CMAKE_SOURCE_DIR}/platform/linux/x86_64/lib/glfw/include)
+    add_executable(${DEMO_NAME}
+            ${CMAKE_SOURCE_DIR}/platform/Linux/demo/main.cpp
+            ${CORE_SOURCE_FILES} ${PLATFORM_FILES}
+    )
+    target_link_libraries(${DEMO_NAME}
+            ${LINK_LIB}
+    )
 endif ()
