@@ -59,6 +59,10 @@ if (BUILD_PC_DEMO AND NOT ANDROID AND NOT IOS)
         add_definitions(-DWINDOWS -D_POSIX -D_POSIX_THREAD_SAFE_FUNCTIONS)
         set(WINDOWS ON)
         set(BUILD_DEMO_WINDOWS ON)
+    elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+        add_definitions(-DLINUX)
+        set(LINUX ON)
+        set(BUILD_DEMO_LINUX ON)
     endif ()
 endif ()
 
@@ -71,6 +75,8 @@ elseif (WINDOWS)
     file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/windows/*.*)
 elseif (MACOS)
     file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/macOS/*.*)
+elseif (UNIX)
+    file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/linux/x86*.*)
 endif ()
 
 # project shared lib
@@ -101,6 +107,13 @@ function(mac_add_3dparty_static_lib dir name)
             PROPERTIES IMPORTED_LOCATION
             ${3DPARTY_DIR}/${dir}/macOS/arm64/lib${name}.a)
 endfunction()
+function(linux_x86_64_3dparty_static_lib dir name)
+    add_library(${name} STATIC IMPORTED)
+    set_target_properties(${name}
+            PROPERTIES IMPORTED_LOCATION
+            ${3DPARTY_DIR}/${dir}/linux/x86_64/lib${name}.a)
+endfunction(linux_x86)
+
 
 # add library
 if (ANDROID)
@@ -159,6 +172,13 @@ elseif (MACOS)
             ${METAL_FRAMEWORK} ${QUARTZ_CORE_FRAMEWORK} ${APPKIT_FRAMEWORK} ${SECURITY_FRAMEWORK}
             bgfx bimg bimg_decode bimg_encode bx
     )
+elseif (UNIX)
+    linux_x86_64_add_3dparty_static_lib(bgfx bgfx)
+    linux_x86_64_add_3dparty_static_lib(bgfx bimg)
+    linux_x86_64_add_3dparty_static_lib(bgfx bimg_encode)
+    linux_x86_64_add_3dparty_static_lib(bgfx bimg_decode)
+    linux_x86_64_add_3dparty_static_lib(bgfx bx)
+    set(LINK_LIB ${LINK_LIB} bgfx bimg bimg_decode bimg_encode bx)
 endif ()
 
 target_link_libraries(${CMAKE_PROJECT_NAME} ${LINK_LIB})
@@ -196,4 +216,7 @@ elseif (BUILD_DEMO_MACOS)
             ${APPKIT_FRAMEWORK}
             ${IOKIT_FRAMEWORK}
     )
+elseif (BUILD_DEMO_UNIX)
+    message(STATUS "Build Linux demo enabled")
+    include_directories(${CMAKE_SOURCE_DIR}/platform/linux/x86_64/lib/glfw/include)
 endif ()
