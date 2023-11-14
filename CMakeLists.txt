@@ -107,12 +107,12 @@ function(mac_add_3dparty_static_lib dir name)
             PROPERTIES IMPORTED_LOCATION
             ${3DPARTY_DIR}/${dir}/macOS/arm64/lib${name}.a)
 endfunction()
-function(linux_3dparty_static_lib dir name)
+function(linux_add_3dparty_static_lib dir name)
     add_library(${name} STATIC IMPORTED)
     set_target_properties(${name}
             PROPERTIES IMPORTED_LOCATION
             ${3DPARTY_DIR}/${dir}/linux/x86_64/lib${name}.a)
-endfunction(linux_x86)
+endfunction()
 
 
 # add library
@@ -173,11 +173,11 @@ elseif (MACOS)
             bgfx bimg bimg_decode bimg_encode bx
     )
 elseif (LINUX)
-    linux_3dparty_static_lib(bgfx bgfx)
-    linux_3dparty_static_lib(bgfx bimg)
-    linux_3dparty_static_lib(bgfx bimg_encode)
-    linux_3dparty_static_lib(bgfx bimg_decode)
-    linux_3dparty_static_lib(bgfx bx)
+    linux_add_3dparty_static_lib(bgfx bgfx)
+    linux_add_3dparty_static_lib(bgfx bimg)
+    linux_add_3dparty_static_lib(bgfx bimg_encode)
+    linux_add_3dparty_static_lib(bgfx bimg_decode)
+    linux_add_3dparty_static_lib(bgfx bx)
     set(LINK_LIB ${LINK_LIB} bgfx bimg bimg_decode bimg_encode bx)
 endif ()
 

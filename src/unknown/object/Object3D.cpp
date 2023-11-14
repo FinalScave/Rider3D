@@ -10,9 +10,9 @@
 UNKNOWN_NS_BEGIN
 
     Object3D::Object3D(std::string name) : name(std::move(name)) {
-        this->position = new Vec3{0, 0, 0};
-        this->rotation = new Vec3{0, 0, 0};
-        this->scale = new Vec3{0, 0, 0};
+        this->position = new Vec3 {0, 0, 0};
+        this->rotation = new Vec3 {0, 0, 0};
+        this->scale = new Vec3 {0, 0, 0};
         this->vertices = new Vertices;
     }
 
@@ -90,11 +90,11 @@ UNKNOWN_NS_BEGIN
     }
 
     void Rectangle::Build() {
-        Color* color = new Color{66, 77, 0xff, 0xff};
-        Vertex* v1 = new Vertex{new Vec3{0, 0, 0}, new UV{0, 0}, color};
-        Vertex* v2 = new Vertex{new Vec3{width, 0, 0}, new UV{1, 0}, color};
-        Vertex* v3 = new Vertex{new Vec3{width, height, 0}, new UV{1, 1}, color};
-        Vertex* v4 = new Vertex{new Vec3{0, height, 0}, new UV{0, 1}, color};
+        Color color = {0xff, 0xff, 0xff, 0xff};
+        Vertex v1 = {{0, 0, 0}, {0, 0}, color};
+        Vertex v2 = {{width, 0, 0}, {1, 0}, color};
+        Vertex v3 = {{width, height, 0}, {1, 1}, color};
+        Vertex v4 = {{0, height, 0}, {0, 1}, color};
         vertices->AddFace(v1, v2, v3, v4);
     }
 
@@ -110,42 +110,42 @@ UNKNOWN_NS_BEGIN
         float h = height / 2.f;
         float d = depth / 2.f;
 
-        Color* color = new Color{66, 77, 0xff, 0xff};
+        Color color = {36, 77, 0xff, 0xff};
         // front
-        Vertex* front_v1 = new Vertex{new Vec3{-w, +h, +d}, new UV{0, 0}, color};
-        Vertex* front_v2 = new Vertex{new Vec3{+w, +h, +d}, new UV{1, 0}, color};
-        Vertex* front_v3 = new Vertex{new Vec3{+w, -h, +d}, new UV{1, 1}, color};
-        Vertex* front_v4 = new Vertex{new Vec3{-w, -h, +d}, new UV{0, 1}, color};
+        Vertex front_v1 = {{-w, +h, +d}, {0, 0}, color};
+        Vertex front_v2 = {{+w, +h, +d}, {1, 0}, color};
+        Vertex front_v3 = {{+w, -h, +d}, {1, 1}, color};
+        Vertex front_v4 = {{-w, -h, +d}, {0, 1}, color};
         vertices->AddFace(front_v1, front_v2, front_v3, front_v4);
         // right
-        Vertex* right_v1 = new Vertex{new Vec3{+w, +h, +d}, new UV{0, 0}, color};
-        Vertex* right_v2 = new Vertex{new Vec3{+w, +h, -d}, new UV{1, 0}, color};
-        Vertex* right_v3 = new Vertex{new Vec3{+w, -h, -d}, new UV{1, 1}, color};
-        Vertex* right_v4 = new Vertex{new Vec3{+w, -h, +d}, new UV{0, 1}, color};
+        Vertex right_v1 = {{+w, +h, +d}, {0, 0}, color};
+        Vertex right_v2 = {{+w, +h, -d}, {1, 0}, color};
+        Vertex right_v3 = {{+w, -h, -d}, {1, 1}, color};
+        Vertex right_v4 = {{+w, -h, +d}, {0, 1}, color};
         vertices->AddFace(right_v1, right_v2, right_v3, right_v4);
         // back
-        Vertex* back_v1 = new Vertex{new Vec3{+w, +h, -d}, new UV{0, 0}, color};
-        Vertex* back_v2 = new Vertex{new Vec3{-w, +h, -d}, new UV{1, 0}, color};
-        Vertex* back_v3 = new Vertex{new Vec3{-w, -h, -d}, new UV{1, 1}, color};
-        Vertex* back_v4 = new Vertex{new Vec3{+w, -h, -d}, new UV{0, 1}, color};
+        Vertex back_v1 = {{+w, +h, -d}, {0, 0}, color};
+        Vertex back_v2 = {{-w, +h, -d}, {1, 0}, color};
+        Vertex back_v3 = {{-w, -h, -d}, {1, 1}, color};
+        Vertex back_v4 = {{+w, -h, -d}, {0, 1}, color};
         vertices->AddFace(back_v1, back_v2, back_v3, back_v4);
         // left
-        Vertex* left_v1 = new Vertex{new Vec3{-w, +h, -d}, new UV{0, 0}, color};
-        Vertex* left_v2 = new Vertex{new Vec3{-w, +h, +d}, new UV{1, 0}, color};
-        Vertex* left_v3 = new Vertex{new Vec3{-w, -h, +d}, new UV{1, 1}, color};
-        Vertex* left_v4 = new Vertex{new Vec3{-w, -h, -d}, new UV{0, 1}, color};
+        Vertex left_v1 = {{-w, +h, -d}, {0, 0}, color};
+        Vertex left_v2 = {{-w, +h, +d}, {1, 0}, color};
+        Vertex left_v3 = {{-w, -h, +d}, {1, 1}, color};
+        Vertex left_v4 = {{-w, -h, -d}, {0, 1}, color};
         vertices->AddFace(left_v1, left_v2, left_v3, left_v4);
         // top
-        Vertex* top_v1 = new Vertex{new Vec3{-w, +h, -d}, new UV{0, 0}, color};
-        Vertex* top_v2 = new Vertex{new Vec3{+w, +h, -d}, new UV{1, 0}, color};
-        Vertex* top_v3 = new Vertex{new Vec3{+w, +h, +d}, new UV{1, 1}, color};
-        Vertex* top_v4 = new Vertex{new Vec3{-w, +h, +d}, new UV{0, 1}, color};
+        Vertex top_v1 = {{-w, +h, -d}, {0, 0}, color};
+        Vertex top_v2 = {{+w, +h, -d}, {1, 0}, color};
+        Vertex top_v3 = {{+w, +h, +d}, {1, 1}, color};
+        Vertex top_v4 = {{-w, +h, +d}, {0, 1}, color};
         vertices->AddFace(top_v1, top_v2, top_v3, top_v4);
         // bottom
-        Vertex* bottom_v1 = new Vertex{new Vec3{-w, -h, +d}, new UV{0, 0}, color};
-        Vertex* bottom_v2 = new Vertex{new Vec3{+w, -h, +d}, new UV{1, 0}, color};
-        Vertex* bottom_v3 = new Vertex{new Vec3{+w, -h, -d}, new UV{1, 1}, color};
-        Vertex* bottom_v4 = new Vertex{new Vec3{-w, -h, -d}, new UV{0, 1}, color};
+        Vertex bottom_v1 = {{-w, -h, +d}, {0, 0}, color};
+        Vertex bottom_v2 = {{+w, -h, +d}, {1, 0}, color};
+        Vertex bottom_v3 = {{+w, -h, -d}, {1, 1}, color};
+        Vertex bottom_v4 = {{-w, -h, -d}, {0, 1}, color};
         vertices->AddFace(bottom_v1, bottom_v2, bottom_v3, bottom_v4);
     }
 

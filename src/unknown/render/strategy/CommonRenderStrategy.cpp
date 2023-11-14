@@ -24,8 +24,8 @@ UNKNOWN_NS_BEGIN
         uint16_t height = context_->render_config_.height;
         bgfx::setViewRect(view_id, 0, 0, width, height);
         bgfx::touch(view_id);
-        bgfx::setVertexBuffer(0, handle.vertex_buffer_handle);
-        bgfx::setIndexBuffer(handle.index_buffer_handle);
+        bgfx::setVertexBuffer(0, handle.vertex_buffer);
+        bgfx::setIndexBuffer(handle.index_buffer);
         bgfx::setViewFrameBuffer(0, BGFX_INVALID_HANDLE);
         bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_BLEND_ALPHA);
         bgfx::submit(view_id, program_->program_handle_);

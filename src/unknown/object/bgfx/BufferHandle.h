@@ -12,15 +12,17 @@
 UNKNOWN_NS_BEGIN
 
     struct BufferHandle {
-        bgfx::DynamicVertexBufferHandle vertex_buffer_handle = BGFX_INVALID_HANDLE;
-        bgfx::DynamicIndexBufferHandle index_buffer_handle = BGFX_INVALID_HANDLE;
+        Vertex* vertices = nullptr;
+        uint16_t* indices = nullptr;
+        bgfx::DynamicVertexBufferHandle vertex_buffer = BGFX_INVALID_HANDLE;
+        bgfx::DynamicIndexBufferHandle index_buffer = BGFX_INVALID_HANDLE;
     };
 
     class BufferHandleManager {
     public:
         BufferHandle& CreateOrUpdate(const Name& name,
                                      bgfx::VertexLayout& vertex_layout,
-                                     std::vector<Vertex*>& vertex_list,
+                                     std::vector<Vertex>& vertex_list,
                                      std::vector<uint32_t>& index_list);
 
         BufferHandle& GetBufferHandle(const Name& name);

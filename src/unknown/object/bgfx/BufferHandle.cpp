@@ -16,30 +16,40 @@ UNKNOWN_NS_BEGIN
 
     BufferHandle& BufferHandleManager::CreateOrUpdate(const Name& name,
                                                       bgfx::VertexLayout& vertex_layout,
-                                                      std::vector<Vertex*>& vertex_list,
+                                                      std::vector<Vertex>& vertex_list,
                                                       std::vector<uint32_t>& index_list) {
-        Vertex** vertex_arr = vertex_list.data();
-        uint32_t* index_arr = index_list.data();
-        auto vertex_ref = bgfx::makeRef(
-                vertex_arr,
-                sizeof(Vertex) * vertex_list.size()
-        );
-        auto index_ref = bgfx::makeRef(
-                index_arr,
-                sizeof(uint32_t) * index_list.size()
-        );
         if (name_buffer_handle_map_.find(name) == name_buffer_handle_map_.end()) {
+            Vertex vertices[vertex_list.size()];
+            uint16_t indices[index_list.size()];
+            for (int i = 0; i < vertex_list.size(); ++i) {
+                vertices[i] = vertex_list[i];
+            }
+            for (int i = 0; i < index_list.size(); ++i) {
+                indices[i] = index_list[i];
+            }
+            auto vertex_ref = bgfx::makeRef(
+                    vertices,
+                    sizeof(Vertex) * vertex_list.size()
+            );
+            auto index_ref = bgfx::makeRef(
+                    indices,
+                    sizeof(uint32_t) * index_list.size()
+            );
             bgfx::DynamicVertexBufferHandle vertex_buffer =
                     bgfx::createDynamicVertexBuffer(vertex_ref,vertex_layout);
             bgfx::DynamicIndexBufferHandle index_buffer = bgfx::createDynamicIndexBuffer(index_ref);
-            BufferHandle handle = {vertex_buffer, index_buffer};
+            BufferHandle handle = {vertices, indices, vertex_buffer, index_buffer};
             PutBufferHandle(name, handle);
-
             return name_buffer_handle_map_[name];
         } else {
+            //暂时不做顶点更新
             BufferHandle& exists = name_buffer_handle_map_[name];
-            bgfx::update(exists.vertex_buffer_handle, 0, vertex_ref);
-            bgfx::update(exists.index_buffer_handle, 0, index_ref);
+            /*DELETE_ARRAY(exists.vertices);
+            DELETE_ARRAY(exists.indices);
+            exists.vertices = vertices;
+            exists.indices = indices;
+            bgfx::update(exists.vertex_buffer, 0, vertex_ref);
+            bgfx::update(exists.index_buffer, 0, index_ref);*/
             return exists;
         }
     }

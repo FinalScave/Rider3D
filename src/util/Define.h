@@ -22,10 +22,20 @@ typedef std::string Name;
 #define DELETE_PTR(ptr) \
 if (ptr != nullptr) {   \
     delete ptr;         \
+}
+
+#define SAFE_DELETE_PTR(ptr) \
+if (ptr != nullptr) {   \
+    delete ptr;         \
     ptr = nullptr;      \
 }
 
 #define DELETE_ARRAY(array) \
+if (array != nullptr) {     \
+    delete[] array;         \
+}
+
+#define SAFE_DELETE_ARRAY(array) \
 if (array != nullptr) {     \
     delete[] array;         \
     array = nullptr;        \
