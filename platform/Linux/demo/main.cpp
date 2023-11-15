@@ -3,6 +3,7 @@
 #include "GLFW/glfw3.h"
 #include "GLFW/glfw3native.h"
 #include "Unknown3DEngine.h"
+#include "bx/math.h"
 
 using namespace unknown;
 
@@ -39,9 +40,11 @@ int main(int argc, char **argv)
     RenderConfig config = {(uint16_t) width, (uint16_t) height, handle};
     Unknown3DEngine* engine = new Unknown3DEngine(config);
     Scene* scene = new Scene();
+    Camera* camera = new Camera {{3,2,-3}, {0, 0, 0}};
+    scene->SetCamera(camera);
     engine->SetScene(scene);
-    unknown::Rectangle rectangle = {"rect1", 0.5, 0.5};
-    scene->AddChild(rectangle);
+    Box box = {"box1", 0.4, 0.8, 0.4};
+    scene->AddChild(box);
     // render loop
     while (!glfwWindowShouldClose(window))
     {
