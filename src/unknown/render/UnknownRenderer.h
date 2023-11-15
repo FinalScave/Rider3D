@@ -11,6 +11,7 @@
 #include "object/Vertex.h"
 #include "context/RenderContext.h"
 #include "strategy/SimpleRenderStrategy.h"
+#include "strategy/CommonRenderStrategy.h"
 
 UNKNOWN_NS_BEGIN
 
@@ -35,6 +36,7 @@ UNKNOWN_NS_BEGIN
         /// Context for rendering
         SMART_PTR<RenderContext> render_context_;
         SMART_PTR<SimpleRenderStrategy> simple_renderer_;
+        SMART_PTR<CommonRenderStrategy> common_renderer_;
 
         void RenderScene();
 

@@ -15,6 +15,10 @@ UNKNOWN_NS_BEGIN
         explicit SimpleRenderStrategy(const SMART_PTR<RenderContext>& context);
 
         void RenderObject(Object3D &object) override;
+    private:
+        float* model_matrix_ = nullptr;
+        float* view_matrix_ = nullptr;
+        float* proj_matrix_ = nullptr;
     };
 
 UNKNOWN_NS_END

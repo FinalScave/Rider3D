@@ -110,7 +110,7 @@ UNKNOWN_NS_BEGIN
         float h = height / 2.f;
         float d = depth / 2.f;
 
-        Color color = {36, 77, 0xff, 0xff};
+        Color color = {1.0, 1.0, 1.0, 1.0};
         // front
         Vertex front_v1 = {{-w, +h, +d}, {0, 0}, color};
         Vertex front_v2 = {{+w, +h, +d}, {1, 0}, color};

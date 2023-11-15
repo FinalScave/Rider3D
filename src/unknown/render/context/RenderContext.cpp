@@ -31,4 +31,8 @@ UNKNOWN_NS_BEGIN
         handle_manager_->PutBufferHandle(name, handle);
     }
 
+    Camera* RenderContext::GetCamera() {
+        return scene_->camera_;
+    }
+
 UNKNOWN_NS_END

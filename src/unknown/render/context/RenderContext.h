@@ -31,6 +31,8 @@ UNKNOWN_NS_BEGIN
 
         void PutBufferHandle(const Name& name, const BufferHandle& handle);
 
+        Camera* GetCamera();
+
         RenderConfig render_config_;
         uint16_t curr_view_id_;
     private:

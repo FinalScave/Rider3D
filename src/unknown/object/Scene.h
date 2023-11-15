@@ -12,9 +12,9 @@
 UNKNOWN_NS_BEGIN
 
     struct Camera {
-        Vec3 *position = nullptr;
-        Vec3 *target = nullptr;
-        Vec3 *up_axis = nullptr;
+        Vec3 position = {0, 0, 0};
+        Vec3 target = {0, 0, 0};
+        Vec3 up_axis = {0, 1, 0};
     };
 
     class Scene : public Object3DContainer {
@@ -22,6 +22,8 @@ UNKNOWN_NS_BEGIN
         Scene();
 
         ~Scene();
+
+        void SetCamera(Camera* camera);
 
         Camera *camera_ = nullptr;
         Color *background_color_ = nullptr;

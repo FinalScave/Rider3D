@@ -44,6 +44,7 @@ UNKNOWN_NS_BEGIN
         this->render_context_ = MAKE_SMART_PTR<RenderContext>(config);
         // initialize render strategies
         this->simple_renderer_ = MAKE_SMART_PTR<SimpleRenderStrategy>(render_context_);
+        this->common_renderer_ = MAKE_SMART_PTR<CommonRenderStrategy>(render_context_);
     }
 
     UnknownRenderer::~UnknownRenderer() {

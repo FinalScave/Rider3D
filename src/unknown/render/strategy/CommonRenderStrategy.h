@@ -17,6 +17,9 @@ UNKNOWN_NS_BEGIN
         void RenderObject(Object3D &object) override;
     private:
         float vec4_resolution_[4] = {0};
+        float model_matrix_[16] = {0};
+        float view_matrix_[16] = {0};
+        float proj_matrix_[16] = {0};
     };
 
 UNKNOWN_NS_END
