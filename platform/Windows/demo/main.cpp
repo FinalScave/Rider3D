@@ -41,7 +41,7 @@ int main(int argc, char **argv)
     Unknown3DEngine* engine = new Unknown3DEngine(config);
     Scene* scene = new Scene();
 
-    Camera* camera = new Camera {{},{3,2,-3}, {0, 0, 0}};
+    Camera* camera = new Camera {{3,2,-3}, {0, 0, 0}};
     scene->SetCamera(camera);
     engine->SetScene(scene);
     Box box = {"box1", 0.4, 0.8, 0.4};

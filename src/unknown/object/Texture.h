@@ -6,20 +6,19 @@
 #define UNKNOWN3D_TEXTURE_H
 
 #include "Define.h"
-#include "entityx/entityx.h"
 
 UNKNOWN_NS_BEGIN
 
     const static uint16_t kInvalidIndex = UINT16_MAX;
 
-    class TextureHandle : public Component<TextureHandle> {
+    class TextureHandle {
     public:
         virtual uint16_t GetIndex() = 0;
 
         bool isValid();
     };
 
-    class TextureManager : public Entity {
+    class TextureManager {
     public:
         SMART_PTR<TextureHandle> GetTexture(const Name &name);
 
