@@ -39,4 +39,4 @@
 1. 直接打开该工程即可
 
 # 开发路线
-参见[项目规划](1st-plan/1.Structure.md)
+参见[项目规划](1st-plan/1-Structure/index.md)

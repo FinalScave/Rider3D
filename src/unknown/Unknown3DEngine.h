@@ -8,22 +8,25 @@
 #include "Define.h"
 #include "render/UnknownRenderer.h"
 #include "object/Object3D.h"
+#include "entityx/entityx.h"
+#include "entityx/help/Timer.h"
+#include "event/SceneUpdateEvent.h"
 
 UNKNOWN_NS_BEGIN
 
-    class Unknown3DEngine {
+    class Unknown3DEngine : public EntityX, public Receiver<SceneUpdateEvent> {
     public:
         explicit Unknown3DEngine(const RenderConfig &config);
         ~Unknown3DEngine();
 
         void SetScene(Scene* scene);
 
-        uint16_t Render();
+        void Render();
 
-        RenderConfig GetRenderConfig();
+        void receive(const SceneUpdateEvent& event);
+
     private:
-        SMART_PTR<UnknownRenderer> renderer_;
-
+        help::Timer timer_;
     };
 
 UNKNOWN_NS_END // unknown

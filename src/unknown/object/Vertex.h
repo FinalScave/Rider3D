@@ -9,6 +9,7 @@
 #include "Define.h"
 #include "unknown/object/bgfx/BgfxTexture.h"
 #include "Supposition.h"
+#include "entityx/entityx.h"
 
 UNKNOWN_NS_BEGIN
 
@@ -18,7 +19,7 @@ UNKNOWN_NS_BEGIN
         Color color = {1, 1, 1, 1};
     };
 
-    struct Vertices {
+    struct Vertices : public Component<Vertices> {
         ~Vertices();
 
         void AddVertex(Vertex& vertex);
@@ -37,7 +38,7 @@ UNKNOWN_NS_BEGIN
         std::vector<uint32_t> vertex_index_list;
     };
 
-    class VerticesManager {
+    class VerticesManager : Entity {
     public:
         VerticesManager();
 

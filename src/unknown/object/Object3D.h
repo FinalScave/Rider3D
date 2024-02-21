@@ -20,7 +20,7 @@ UNKNOWN_NS_BEGIN
         TRISTRIP = 3
     };
 
-    struct Object3D {
+    struct Object3D : public Component<Object3D> {
     public:
         explicit Object3D(std::string name);
 
@@ -48,7 +48,7 @@ UNKNOWN_NS_BEGIN
         std::string name;
     };
 
-    struct Object3DContainer {
+    struct Object3DContainer : public Component<Object3DContainer> {
         void AddChild(Object3D& object);
 
         void AddChildAt(uint8_t index, Object3D& object);
@@ -65,7 +65,7 @@ UNKNOWN_NS_BEGIN
         std::vector<Object3D> child_list;
     };
 
-    struct Rectangle : Object3D {
+    struct Rectangle : public Object3D, public Component<Rectangle> {
         Rectangle(const Name& name, float width, float height);
 
         float width;
@@ -74,7 +74,7 @@ UNKNOWN_NS_BEGIN
         void Build();
     };
 
-    struct Box : Object3D {
+    struct Box : public Object3D, public Component<Box> {
         Box(const Name& name, float width, float height, float depth);
 
         float width;
@@ -84,7 +84,7 @@ UNKNOWN_NS_BEGIN
         void Build();
     };
 
-    struct Sphere : Object3D {
+    struct Sphere : Object3D, public Component<Sphere>{
         Sphere(Name name, uint16_t row_count, uint16_t column_count, float radius);
 
         uint16_t row_count;

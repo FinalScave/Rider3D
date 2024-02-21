@@ -3,29 +3,28 @@
 //
 
 #include "Unknown3DEngine.h"
+#include "system/MoveSystem.h"
+#include "system/RenderSystem.h"
 
 UNKNOWN_NS_BEGIN
 
     Unknown3DEngine::Unknown3DEngine(const RenderConfig &config) {
-        this->renderer_ = MAKE_SMART_PTR<UnknownRenderer>(config);
+        auto renderer = MAKE_SMART_PTR<UnknownRenderer>(config);
+        auto render_system = systems.add<RenderSystem>(renderer);
+        systems.add<MoveSystem>();
+        systems.configure();
+        events.subscribe<SceneUpdateEvent>(*render_system);
     }
 
-    Unknown3DEngine::~Unknown3DEngine() {
-        this->renderer_ = nullptr;
-    }
+    Unknown3DEngine::~Unknown3DEngine() {}
 
     void Unknown3DEngine::SetScene(Scene* scene) {
-        renderer_->SetScene(SMART_PTR<Scene>(scene));
+        events.emit<SceneUpdateEvent>(scene);
     }
 
-    uint16_t Unknown3DEngine::Render() {
-        return renderer_->Render();
+    void Unknown3DEngine::Render() {
+        systems.update<RenderSystem>(timer_.elapsed());
     }
-
-    RenderConfig Unknown3DEngine::GetRenderConfig() {
-        return renderer_->render_config_;
-    }
-
 
 UNKNOWN_NS_END
 

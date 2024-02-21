@@ -11,7 +11,7 @@
 
 UNKNOWN_NS_BEGIN
 
-    struct Camera {
+    struct Camera: public Component<Camera> {
         Vec3 position = {0, 0, 0};
         Vec3 target = {0, 0, 0};
         Vec3 up_axis = {0, 1, 0};

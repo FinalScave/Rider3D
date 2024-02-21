@@ -29,7 +29,6 @@ UNKNOWN_NS_BEGIN
         /// OffScreen render, return the texture id after rendering
         /// \return Texture ID
         uint16_t Render();
-
     private:
         /// Configuration for rendering
         RenderConfig render_config_;

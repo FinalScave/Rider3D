@@ -35,12 +35,15 @@ file(GLOB_RECURSE CORE_SOURCE_FILES
         ${SRC_DIR}/util/*.*
         ${SRC_DIR}/util/bgfx/*.*
         ${SRC_DIR}/unknown/*.*
+        ${SRC_DIR}/unknown/entityx/*.*
+        ${SRC_DIR}/unknown/event/*.*
         ${SRC_DIR}/unknown/render/*.*
         ${SRC_DIR}/unknown/render/config/*.*
         ${SRC_DIR}/unknown/render/context/*.*
         ${SRC_DIR}/unknown/object/*.*
         ${SRC_DIR}/unknown/object/bgfx/*.*
         ${SRC_DIR}/unknown/shader/*.*
+        ${SRC_DIR}/unknown/system/*.*
 )
 if (ENABLE_LOG)
     file(GLOB_RECURSE LOGGER_FILES ${3DPARTY_DIR}/logger/*.*)
