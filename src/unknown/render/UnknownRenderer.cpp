@@ -13,11 +13,11 @@ UNKNOWN_NS_BEGIN
         this->render_config_ = config;
         // initialize bgfx
         bgfx::Init init;
-#if (defined(WINDOWS) || defined(LINUX) )
-        init.type = bgfx::RendererType::Enum::OpenGL;
+#if (defined(WINDOWS) || defined(LINUX) || defined(MACOS))
+        init.type = bgfx::RendererType::Enum::Count;
 #elif (defined(ANDROID) || defined(HARMONY))
         init.type = bgfx::RendererType::Enum::OpenGLES;
-#elif (defined(IOS) || defined(MACOS))
+#elif (defined(IOS))
         init.type = bgfx::RendererType::Enum::Metal;
 #else
         init.type = bgfx::RendererType::Enum::Count;

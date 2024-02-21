@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define GLFW_EXPOSE_NATIVE_NSGL
+#define GLFW_EXPOSE_NATIVE_COCOA
 #include "GLFW/glfw3.h"
 #include "GLFW/glfw3native.h"
 #include "Unknown3DEngine.h"
@@ -26,28 +26,29 @@ int main(int argc, char **argv)
     if (!glfwInit())
         return 1;
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    GLFWwindow *window = glfwCreateWindow(1024, 768, "helloworld", nullptr, nullptr);
+    GLFWwindow *window = glfwCreateWindow(1024, 768, "Unknown3D", nullptr, nullptr);
     if (!window)
         return 1;
     glfwSetKeyCallback(window, glfw_keyCallback);
 
-    void* handle = glfwGetNSGLContext(window);
+    void* handle = glfwGetCocoaWindow(window);
     int width, height;
     glfwGetWindowSize(window, &width, &height);
 
     // init engine
-    RenderConfig config;
-    config.width = width;
-    config.height = height;
-    config.native_window_handle = handle;
+    RenderConfig config = {(uint16_t) width, (uint16_t) height, handle};
     Unknown3DEngine* engine = new Unknown3DEngine(config);
+    Scene* scene = new Scene();
+    Camera* camera = new Camera {{3,2,-3}, {0, 0, 0}};
+    scene->SetCamera(camera);
+    engine->SetScene(scene);
+    Box box = {"box1", 0.4, 0.8, 0.4};
+    //box.rotation->z = -0.5;
+    scene->AddChild(box);
     // render loop
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-        // Handle window resize.
-        int oldWidth = width, oldHeight = height;
-        glfwGetWindowSize(window, &width, &height);
         engine->Render();
     }
     glfwTerminate();
