@@ -11,7 +11,7 @@ UNKNOWN_NS_BEGIN
     }
 
     void RenderSystem::configure(EntityManager& entities, EventManager& events) {
-
+        events.subscribe<SceneUpdateEvent>(*this);
     }
 
     void RenderSystem::update(EntityManager& entities, EventManager& events, TimeDelta dt) {
