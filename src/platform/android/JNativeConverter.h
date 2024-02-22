@@ -6,7 +6,7 @@
 #define UNKNOWN3D_JNATIVECONVERTER_H
 
 #include <jni.h>
-#include "Unknown3DEngine.h"
+#include "UnknownEngine.h"
 
 NS_UNKNOWN::Unknown3DEngine* To3DEngineNativeObject(jlong address);
 

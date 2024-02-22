@@ -13,10 +13,10 @@
 
 UNKNOWN_NS_BEGIN
 
-    class UnknownRenderer;
+    class ObjectRenderer;
 
     class RenderContext {
-        friend UnknownRenderer;
+        friend ObjectRenderer;
     public:
         explicit RenderContext(const RenderConfig& config);
 

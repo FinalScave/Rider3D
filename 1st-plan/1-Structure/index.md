@@ -40,7 +40,7 @@ Manager采用单例模式，一个进程中只能存在一个SystemManager/Event
 
 # 三、项目实现
 ## 渲染引擎
-参见[渲染引擎实现概览](../2-Render/index.md)
+参见[渲染引擎实现概览](../2-Update/index.md)
 ## 资源管理
 参见[资源管理器实现概览](../3-ResourceManager/index.md)
 ## 模型加载

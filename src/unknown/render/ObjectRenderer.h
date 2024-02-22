@@ -2,8 +2,8 @@
 // Created by Scave on 2023/11/8.
 //
 
-#ifndef UNKNOWN3D_UNKNOWNRENDERER_H
-#define UNKNOWN3D_UNKNOWNRENDERER_H
+#ifndef UNKNOWN3D_OBJECTRENDERER_H
+#define UNKNOWN3D_OBJECTRENDERER_H
 
 #include "Define.h"
 #include "config/RenderConfig.h"
@@ -15,14 +15,14 @@
 
 UNKNOWN_NS_BEGIN
 
-    class Unknown3DEngine;
+    class UnknownEngine;
 
-    class UnknownRenderer {
-        friend Unknown3DEngine;
+    class ObjectRenderer {
+        friend UnknownEngine;
     public:
-        explicit UnknownRenderer(const RenderConfig &config);
+        explicit ObjectRenderer(const RenderConfig &config);
 
-        ~UnknownRenderer();
+        ~ObjectRenderer();
 
         void SetScene(const SMART_PTR<Scene> &scene);
 
@@ -44,4 +44,4 @@ UNKNOWN_NS_BEGIN
 
 UNKNOWN_NS_END
 
-#endif //UNKNOWN3D_UNKNOWNRENDERER_H
+#endif //UNKNOWN3D_OBJECTRENDERER_H

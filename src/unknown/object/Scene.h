@@ -17,7 +17,7 @@ UNKNOWN_NS_BEGIN
         Vec3 up_axis = {0, 1, 0};
     };
 
-class Scene : public Object3DContainer {
+    class Scene : public Object3DContainer {
     public:
         Scene();
 
@@ -25,8 +25,8 @@ class Scene : public Object3DContainer {
 
         void SetCamera(Camera* camera);
 
-        Camera *camera_ = nullptr;
-        Color *background_color_ = nullptr;
+        Camera* camera_ = nullptr;
+        Color* background_color_ = nullptr;
         bool lighting_enabled_;
     private:
 

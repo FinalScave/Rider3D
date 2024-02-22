@@ -36,6 +36,7 @@ file(GLOB_RECURSE CORE_SOURCE_FILES
         ${SRC_DIR}/util/bgfx/*.*
         ${SRC_DIR}/unknown/*.*
         ${SRC_DIR}/unknown/entityx/*.*
+        ${SRC_DIR}/unknown/component/*.*
         ${SRC_DIR}/unknown/event/*.*
         ${SRC_DIR}/unknown/render/*.*
         ${SRC_DIR}/unknown/render/config/*.*
