@@ -7,10 +7,11 @@
 
 #include "Define.h"
 #include "render/UnknownRenderer.h"
-#include "object/Object3D.h"
+#include "Object3D.h"
 #include "entityx/entityx.h"
 #include "entityx/help/Timer.h"
 #include "event/SceneUpdateEvent.h"
+#include "Scene.h"
 
 UNKNOWN_NS_BEGIN
 

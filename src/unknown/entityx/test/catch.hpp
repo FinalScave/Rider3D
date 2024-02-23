@@ -5901,7 +5901,7 @@ namespace Catch {
             // which getExpandedExpression() calls to build the expression string.
             // Our section stack copy of the assertionResult will likely outlive the
             // temporary, so it must be expanded or discarded now to avoid calling
-            // a destroyed object later.
+            // a destroyed core later.
             prepareExpandedExpression(const_cast<AssertionResult&>( assertionStats.assertionResult ) );
             SectionNode& sectionNode = *m_sectionStack.back();
             sectionNode.assertions.push_back(assertionStats);
@@ -6017,7 +6017,7 @@ namespace Catch {
             Headers = White
         };
 
-        // Use constructed object for RAII guard
+        // Use constructed core for RAII guard
         Colour( Code _colourCode );
         Colour( Colour&& other ) noexcept;
         Colour& operator=( Colour&& other ) noexcept;
@@ -7417,7 +7417,7 @@ namespace Catch {
                 }
 
             private:
-                // If this is a constructor benchmark, destruct the underlying object
+                // If this is a constructor benchmark, destruct the underlying core
                 template <typename U>
                 void destruct_on_exit(typename std::enable_if<Destruct, U>::type* = 0) { destruct<true>(); }
                 // Otherwise, don't
@@ -15028,7 +15028,7 @@ namespace Detail {
         };
     }
 
-    std::string rawMemoryToString( const void *object, std::size_t size ) {
+    std::string rawMemoryToString( const void *core, std::size_t size ) {
         // Reverse order for little endian architectures
         int i = 0, end = static_cast<int>( size ), inc = 1;
         if( Endianness::which() == Endianness::Little ) {
@@ -15036,7 +15036,7 @@ namespace Detail {
             end = inc = -1;
         }
 
-        unsigned char const *bytes = static_cast<unsigned char const *>(object);
+        unsigned char const *bytes = static_cast<unsigned char const *>(core);
         ReusableStringStream rss;
         rss << "0x" << std::setfill('0') << std::hex;
         for( ; i != end; i += inc )

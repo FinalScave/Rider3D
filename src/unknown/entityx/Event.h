@@ -98,7 +98,7 @@ class EventManager : unknown::help::NonCopyable {
   virtual ~EventManager();
 
   /**
-   * Subscribe an object to receive events of type E.
+   * Subscribe an core to receive events of type E.
    *
    * Receivers must be subclasses of Receiver and must implement a receive() method accepting the given event type.
    *
@@ -123,7 +123,7 @@ class EventManager : unknown::help::NonCopyable {
   }
 
   /**
-   * Unsubscribe an object in order to not receive events of type E anymore.
+   * Unsubscribe an core in order to not receive events of type E anymore.
    *
    * Receivers must have subscribed for event E before unsubscribing from event E.
    *
@@ -160,7 +160,7 @@ class EventManager : unknown::help::NonCopyable {
   /**
    * Emit an event to receivers.
    *
-   * This method constructs a new event object of type E with the provided arguments, then delivers it to all receivers.
+   * This method constructs a new event core of type E with the provided arguments, then delivers it to all receivers.
    *
    * eg.
    *

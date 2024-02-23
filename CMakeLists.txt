@@ -21,6 +21,7 @@ include_directories(${3DPARTY_DIR}/json-cpp)
 include_directories(${SRC_DIR})
 include_directories(${SRC_DIR}/util)
 include_directories(${SRC_DIR}/unknown)
+include_directories(${SRC_DIR}/unknown/core)
 if (ENABLE_LOG)
     include_directories(${3DPARTY_DIR}/logger)
 endif ()
@@ -36,14 +37,14 @@ file(GLOB_RECURSE CORE_SOURCE_FILES
         ${SRC_DIR}/util/bgfx/*.*
         ${SRC_DIR}/unknown/*.*
         ${SRC_DIR}/unknown/entityx/*.*
-        ${SRC_DIR}/unknown/event/*.*
-        ${SRC_DIR}/unknown/render/*.*
-        ${SRC_DIR}/unknown/render/config/*.*
-        ${SRC_DIR}/unknown/render/context/*.*
-        ${SRC_DIR}/unknown/object/*.*
-        ${SRC_DIR}/unknown/object/bgfx/*.*
-        ${SRC_DIR}/unknown/shader/*.*
-        ${SRC_DIR}/unknown/system/*.*
+        ${SRC_DIR}/unknown/core/*.*
+        ${SRC_DIR}/unknown/core/render/*.*
+        ${SRC_DIR}/unknown/core/render/config/*.*
+        ${SRC_DIR}/unknown/core/render/context/*.*
+        ${SRC_DIR}/unknown/core/object/*.*
+        ${SRC_DIR}/unknown/core/object/bgfx/*.*
+        ${SRC_DIR}/unknown/core/shader/*.*
+        ${SRC_DIR}/unknown/core/system/*.*
 )
 if (ENABLE_LOG)
     file(GLOB_RECURSE LOGGER_FILES ${3DPARTY_DIR}/logger/*.*)
