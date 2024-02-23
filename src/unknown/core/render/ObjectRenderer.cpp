@@ -2,14 +2,14 @@
 // Created by Scave on 2023/11/8.
 //
 
-#include "UnknownRenderer.h"
+#include "ObjectRenderer.h"
 #include "bgfx/bgfx.h"
 #include "bx/math.h"
 #include "LogUtil.h"
 
 UNKNOWN_NS_BEGIN
 
-    UnknownRenderer::UnknownRenderer(const RenderConfig& config) {
+    ObjectRenderer::ObjectRenderer(const RenderConfig& config) {
         this->render_config_ = config;
         // initialize bgfx
         bgfx::Init init;
@@ -47,16 +47,16 @@ UNKNOWN_NS_BEGIN
         this->common_renderer_ = MAKE_SMART_PTR<CommonRenderStrategy>(render_context_);
     }
 
-    UnknownRenderer::~UnknownRenderer() {
+    ObjectRenderer::~ObjectRenderer() {
         render_context_ = nullptr;
         bgfx::shutdown();
     }
 
-    void UnknownRenderer::SetScene(const SMART_PTR<Scene>& scene) {
+    void ObjectRenderer::SetScene(const SMART_PTR<Scene>& scene) {
         render_context_->scene_ = scene;
     }
 
-    uint16_t UnknownRenderer::Render() {
+    uint16_t ObjectRenderer::Render() {
         bgfx::setViewRect(render_context_->main_view_id_, 0, 0, render_config_.width, render_config_.height);
         bgfx::setViewClear(render_context_->main_view_id_, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x000000ff);
 
@@ -66,7 +66,7 @@ UNKNOWN_NS_BEGIN
         return render_context_->main_view_id_;
     }
 
-    void UnknownRenderer::RenderScene() {
+    void ObjectRenderer::RenderScene() {
         uint8_t size = render_context_->scene_->Size();
         for (uint8_t i = 0; i < size; ++i) {
             Object3D& object = render_context_->scene_->GetChildAt(i);
@@ -74,7 +74,7 @@ UNKNOWN_NS_BEGIN
         }
     }
 
-    void UnknownRenderer::RenderObject(Object3D& object, uint8_t id) {
+    void ObjectRenderer::RenderObject(Object3D& object, uint8_t id) {
         if (!object.visible) {
             return;
         }

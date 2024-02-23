@@ -2,8 +2,9 @@
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3.h"
 #include "GLFW/glfw3native.h"
-#include "Unknown3DEngine.h"
+#include "UnknownEngine.h"
 #include "bx/math.h"
+#include "component/BasicComponents.h"
 
 using namespace unknown;
 
@@ -38,12 +39,17 @@ int main(int argc, char **argv)
 
     // init engine
     RenderConfig config = {(uint16_t) width, (uint16_t) height, handle};
-    Unknown3DEngine* engine = new Unknown3DEngine(config);
+    UnknownEngine* engine = new UnknownEngine(config);
+    Entity entity = engine->GetEntities().create();
+    entity.assign<Scene>();
+    entity.assign<Camera>();
+    entity.assign<Position>();
+    entity.assign<Transform>();
+    entity.component<Transform>()->rotation = Vec3{1,1,1};
     Scene* scene = new Scene();
 
     Camera* camera = new Camera {{3,2,-3}, {0, 0, 0}};
     scene->SetCamera(camera);
-    engine->SetScene(scene);
     Box box = {"box1", 0.4, 0.8, 0.4};
     //box.rotation->z = -0.5;
     scene->AddChild(box);
@@ -51,7 +57,7 @@ int main(int argc, char **argv)
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-        engine->Render();
+        engine->Update();
     }
     glfwTerminate();
     return 0;

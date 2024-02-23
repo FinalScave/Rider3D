@@ -2,19 +2,19 @@
 // Created by Scave on 2024/2/21.
 //
 
-#ifndef UNKNOWN3D_RENDERSYSTEM_H
-#define UNKNOWN3D_RENDERSYSTEM_H
+#ifndef UNKNOWN3D_BASICRENDERSYSTEM_H
+#define UNKNOWN3D_BASICRENDERSYSTEM_H
 
 #include "Define.h"
 #include "entityx/entityx.h"
-#include "render/UnknownRenderer.h"
+#include "render/ObjectRenderer.h"
 #include "event/SceneUpdateEvent.h"
 
 UNKNOWN_NS_BEGIN
 
-    class RenderSystem : public System<RenderSystem>, public Receiver<SceneUpdateEvent> {
+    class BasicRenderSystem : public System<BasicRenderSystem>, public Receiver<SceneUpdateEvent> {
     public:
-        explicit RenderSystem(SMART_PTR<UnknownRenderer>& renderer);
+        explicit BasicRenderSystem(SMART_PTR<ObjectRenderer>& renderer);
 
         void configure(EntityManager& entities, EventManager& events) override;
 
@@ -22,9 +22,9 @@ UNKNOWN_NS_BEGIN
 
         void receive(const SceneUpdateEvent& event);
     private:
-        SMART_PTR<UnknownRenderer> renderer_;
+        SMART_PTR<ObjectRenderer> renderer_;
     };
 
 UNKNOWN_NS_END
 
-#endif //UNKNOWN3D_RENDERSYSTEM_H
+#endif //UNKNOWN3D_BASICRENDERSYSTEM_H
