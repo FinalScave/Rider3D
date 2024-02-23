@@ -5,6 +5,7 @@
 #include "UnknownEngine.h"
 #include "bx/math.h"
 #include "component/BasicComponents.h"
+#include "net/Http.h"
 
 using namespace unknown;
 
@@ -48,6 +49,11 @@ int main(int argc, char **argv)
     entity.component<Transform>()->rotation = Vec3{1,1,1};
     Scene* scene = new Scene();
 
+    Http http;
+    HttpRequest request{Get, "http://aaa.com/api/test"};
+    http.SendRequestAsync(request, [&](const HttpResponse& res) {
+        std::cout << res.body;
+    })
     Camera* camera = new Camera {{3,2,-3}, {0, 0, 0}};
     scene->SetCamera(camera);
     Box box = {"box1", 0.4, 0.8, 0.4};

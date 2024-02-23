@@ -30,7 +30,7 @@ UNKNOWN_NS_BEGIN
         void PutBufferHandle(const Name& name, const BufferHandle& handle);
 
     private:
-        HashMap<Name, BufferHandle> name_buffer_handle_map_;
+        HASHMAP<Name, BufferHandle> name_buffer_handle_map_;
     };
 
 UNKNOWN_NS_END

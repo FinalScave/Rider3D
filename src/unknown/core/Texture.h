@@ -25,7 +25,7 @@ UNKNOWN_NS_BEGIN
         void PutTexture(const Name &name, const SMART_PTR<TextureHandle> &handle);
 
     private:
-        HashMap<Name, SMART_PTR<TextureHandle>> name_texture_map_;
+        HASHMAP<Name, SMART_PTR<TextureHandle>> name_texture_map_;
     };
 
 UNKNOWN_NS_END

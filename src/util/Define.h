@@ -13,8 +13,15 @@
 #define UNKNOWN_NS_BEGIN namespace NS_UNKNOWN {
 #define UNKNOWN_NS_END }
 
+typedef uint64_t UInt64;
+typedef uint32_t UInt32;
+typedef uint16_t UInt16;
+typedef uint8_t UInt8;
 typedef std::string Name;
-#define HashMap std::unordered_map
+typedef std::string String;
+typedef std::byte Byte;
+#define PAIR std::pair
+#define HASHMAP std::unordered_map
 
 #define SMART_PTR std::shared_ptr
 #define MAKE_SMART_PTR std::make_shared

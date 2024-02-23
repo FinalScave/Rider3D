@@ -4,5 +4,18 @@
 
 #include "Input.h"
 
-namespace unknown {
-} // unknown
+UNKNOWN_NS_BEGIN
+
+    bool InputManager::IsKeyDown(KeyCode& code) {
+        return false;
+    }
+
+    bool InputManager::IsKeyLongPress(KeyCode& code) {
+        return false;
+    }
+
+    bool InputManager::IsKeyUp(KeyCode& code) {
+        return false;
+    }
+
+UNKNOWN_NS_END

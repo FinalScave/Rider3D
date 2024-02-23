@@ -43,7 +43,7 @@ UNKNOWN_NS_BEGIN
 
         ~VerticesManager();
 
-        HashMap<Name, int> map;
+        HASHMAP<Name, int> map;
     private:
 
     };

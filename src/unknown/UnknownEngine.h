@@ -12,6 +12,8 @@
 #include "entityx/help/Timer.h"
 #include "event/SceneUpdateEvent.h"
 #include "Scene.h"
+#include "input/Input.h"
+#include "file/File.h"
 
 UNKNOWN_NS_BEGIN
 
@@ -23,6 +25,10 @@ UNKNOWN_NS_BEGIN
 
         SceneManager& GetScenes();
 
+        InputManager& GetInputs();
+
+        FileManager& GetFiles();
+
         EntityManager& GetEntities();
 
         SystemManager& GetSystems();
@@ -33,6 +39,8 @@ UNKNOWN_NS_BEGIN
 
     private:
         SceneManager scenes_;
+        InputManager inputs_;
+        FileManager files_;
         EntityManager entities_;
         SystemManager systems_;
         EventManager events_;

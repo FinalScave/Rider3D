@@ -26,6 +26,14 @@ UNKNOWN_NS_BEGIN
         return scenes_;
     }
 
+    InputManager& UnknownEngine::GetInputs() {
+        return inputs_;
+    }
+
+    FileManager& UnknownEngine::GetFiles() {
+        return files_;
+    }
+
     EntityManager& UnknownEngine::GetEntities() {
         return entities_;
     }
