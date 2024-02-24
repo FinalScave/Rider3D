@@ -4,6 +4,11 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 # project name
 project(unknown3d)
 
+# Compiler special
+if(MSVC)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus")
+endif()
+
 # macro
 add_definitions(-DBX_CONFIG_DEBUG=ON)
 add_definitions(-DENABLE_LOG)

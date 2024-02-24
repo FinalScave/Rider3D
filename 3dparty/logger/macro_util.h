@@ -1,7 +1,8 @@
 #pragma once
 
+#ifndef WINDOWS
 #include <sys/time.h>
-
+#endif
 #include <cstring>
 #include <string>
 
@@ -16,7 +17,7 @@
 /**
  * printf with debug info
  */
-#define printf2console(fmt, args...)                                                                              \
+#define printf2console(fmt, ...)                                                                              \
   do {                                                                                                            \
     struct timeval now;                                                                                           \
     ::gettimeofday(&now, nullptr);                                                                                \
@@ -24,7 +25,7 @@
     ::localtime_r(&now.tv_sec, &tm_now);                                                                          \
     printf("[%04d-%02d-%02d %02d:%02d:%02d.%06ld][%s:%d][%s]" fmt "\n", tm_now.tm_year + 1900, tm_now.tm_mon + 1, \
            tm_now.tm_mday, tm_now.tm_hour, tm_now.tm_min, tm_now.tm_sec, now.tv_usec, __FILE__, __LINE__,         \
-           __FUNCTION__, ##args);                                                                                 \
+           __FUNCTION__, __VA_ARGS__);                                                                                 \
     fflush(stdout);                                                                                               \
   } while (0)
 

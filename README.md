@@ -17,10 +17,6 @@
 ## Clion
 1. 直接打开该工程即可
 
-## Visual Studio
-1. 使用Visual Studio Installer安装C++工具(包含适用于Windows的CMake工具)
-2. 打开项目根目录，选择启动项为 `Unknown3DDemo.exe`
-
 ## Visual Studio Code
 1. 如果是Windows系统，安装 [MinGW64](https://zenlayer.dl.sourceforge.net/project/mingw-w64/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/8.1.0/threads-posix/sjlj/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0.7z) 和 [CMake](https://cmake.org/files/v3.10/cmake-3.10.2-win64-x64.msi)；
    如果是MacOS系统，安装 Xcode 和 cmake
@@ -41,6 +37,11 @@
 1. 安装 cocoapods 和 cmake
 2. 进入 platform/iOS 目录，执行 pod install
 3. 打开 Unknown3DWorkspace.xcworkspace，Build And Run
+
+## ~~Visual Studio~~
+`由于MSVC适配麻烦，对VS的支持废弃`
+1. 使用Visual Studio Installer安装C++工具(包含适用于Windows的CMake工具)
+2. 打开项目根目录，选择启动项为 `Unknown3DDemo.exe`
 
 # 开发路线
 参见[项目规划](1st-plan/1-Structure/index.md)
