@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class SurfaceRenderLooper {
     private final static byte INIT = 0;
-    private final static byte RENDER = 1;
+    private final static byte UPDATE = 1;
     private final static byte DESTROY = 2;
     public final static byte DEFAULT_FPS = 70;
 
@@ -66,9 +66,9 @@ public final class SurfaceRenderLooper {
                 if (callback != null) {
                     callback.onInit(engine);
                 }
-                handler.sendEmptyMessageDelayed(RENDER, 1000 / fps);
+                handler.sendEmptyMessageDelayed(UPDATE, 1000 / fps);
                 break;
-            case RENDER:
+            case UPDATE:
                 if (destroyed.get()) {
                     return true;
                 }
@@ -76,11 +76,11 @@ public final class SurfaceRenderLooper {
                     callback.onUpdate();
                     callback.beforeRender();
                 }
-                engine.render();
+                engine.update();
                 if (callback != null) {
                     callback.afterRender();
                 }
-                handler.sendEmptyMessageDelayed(RENDER, 1000 / fps);
+                handler.sendEmptyMessageDelayed(UPDATE, 1000 / fps);
                 break;
             case DESTROY:
                 engine.destroy();

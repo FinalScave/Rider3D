@@ -6,7 +6,6 @@ import com.unknown.core.entity.EntityManager;
 import com.unknown.core.scene.SceneManager;
 
 public final class UnknownEngine {
-
     private final long nativePtr;
     private SceneManager sceneManager;
     private EntityManager entityManager;
@@ -25,8 +24,8 @@ public final class UnknownEngine {
         return entityManager;
     }
 
-    public void render() {
-        nativeRender(nativePtr);
+    public void update() {
+        nativeUpdate(nativePtr);
     }
 
     public void destroy() {
@@ -39,6 +38,6 @@ public final class UnknownEngine {
     private static native long nativeMakeEngineForSurface(Surface surface, int width, int height);
     private static native long nativeGetSceneManager(long ptr);
     private static native long nativeGetEntityManager(long ptr);
-    private static native void nativeRender(long ptr);
+    private static native void nativeUpdate(long ptr);
     private static native void nativeDestroy(long ptr);
 }

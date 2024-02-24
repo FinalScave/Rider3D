@@ -2,6 +2,7 @@ package com.unknown.core.entity;
 
 import com.unknown.core.NativeObject;
 
+import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
 
 public class EntityManager extends NativeObject {
@@ -13,6 +14,6 @@ public class EntityManager extends NativeObject {
         return new Entity(nativeCreateEntity(nativePtr));
     }
 
-    @FastNative
+    @CriticalNative
     private static native long nativeCreateEntity(long managerPtr);
 }
