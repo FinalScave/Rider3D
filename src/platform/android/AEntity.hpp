@@ -1,6 +1,7 @@
 //
 // Created by Scave on 2024/2/24.
 //
+#pragma once
 #include <jni.h>
 #include "JNativeConverter.h"
 #include "JObjectHolder.h"

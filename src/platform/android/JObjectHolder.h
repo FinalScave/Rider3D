@@ -10,15 +10,17 @@
 template<typename T>
 class JObjectHolder {
 public:
-    T Get() {
+    explicit JObjectHolder(T& target) : target(target) {}
+
+    T& Get() {
         return this->target;
     }
 
-    void Set(T obj) {
+    void Set(T& obj) {
         this->target = obj;
     }
 private:
-    T target;
+    T& target;
 };
 
 template<typename T>

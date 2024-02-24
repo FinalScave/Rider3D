@@ -17,8 +17,9 @@ void AddEntity(jlong ptr, jlong entity_ptr) {
 }
 
 jlong CreateScene(jlong manager_ptr) {
-    auto *manager = ToNativePointer<SceneManager>(manager_ptr);
-    return ToJavaObject(manager->CreateScene());
+    auto &manager =
+            ToNativePointer<JObjectHolder<SceneManager>>(manager_ptr)->Get();
+    return ToJavaObject(manager.CreateScene());
 }
 
 constexpr const char *scene_name = "com/unknown/core/scene/Scene";

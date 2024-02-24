@@ -7,6 +7,7 @@
 #include <android/native_window_jni.h>
 #include "UnknownEngine.h"
 #include "JNativeConverter.h"
+#include "JObjectHolder.h"
 
 using namespace unknown;
 
@@ -26,7 +27,8 @@ Java_com_unknown_UnknownEngine_nativeMakeEngineForSurface(JNIEnv *env, jclass cl
 JNIEXPORT jlong JNICALL
 Java_com_unknown_UnknownEngine_nativeGetSceneManager(JNIEnv *env, jclass clazz, jlong ptr) {
     UnknownEngine *engine = ToEngineNativePointer(ptr);
-    return ToJavaObject(&engine->GetScenes());
+    JObjectHolder<SceneManager>* holder = new JObjectHolder<SceneManager>(engine->GetScenes());
+    return ToJavaObject(holder);
 }
 
 JNIEXPORT jlong JNICALL

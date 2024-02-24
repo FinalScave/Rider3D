@@ -24,4 +24,9 @@ inline T* ToNativePointer(jlong address) {
     return (T*) address;
 }
 
+template<class T>
+inline T& ToNativeObject(jlong address) {
+    return (T&) address;
+}
+
 #endif //UNKNOWN3D_JNATIVECONVERTER_H

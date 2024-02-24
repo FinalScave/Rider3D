@@ -3,7 +3,7 @@
 //
 // Created by Scave on 2023/11/10.
 //
-
+#pragma once
 #include "Supposition.h"
 #include "JNativeConverter.h"
 #include "JObjectHolder.h"
