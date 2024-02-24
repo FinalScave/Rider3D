@@ -50,15 +50,10 @@ int main(int argc, char **argv)
     Scene* scene = new Scene();
 
     Http http;
-    HttpRequest request{Get, "http://aaa.com/api/test"};
+    HttpRequest request{HttpMethod::Get, "http://aaa.com/api/test"};
     http.SendRequestAsync(request, [&](const HttpResponse& res) {
         std::cout << res.body;
-    })
-    Camera* camera = new Camera {{3,2,-3}, {0, 0, 0}};
-    scene->SetCamera(camera);
-    Box box = {"box1", 0.4, 0.8, 0.4};
-    //box.rotation->z = -0.5;
-    scene->AddChild(box);
+    });
     // render loop
     while (!glfwWindowShouldClose(window))
     {

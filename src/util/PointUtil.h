@@ -6,7 +6,7 @@
 #define UNKNOWN3D_POINTUTIL_H
 
 #include "Define.h"
-#include "object/Supposition.h"
+#include "Supposition.h"
 
 UNKNOWN_NS_BEGIN
 
