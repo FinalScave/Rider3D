@@ -33,8 +33,8 @@ public class MainActivity extends UnknownSurfaceActivity {
         NdcPoint translation = NdcPoint.zero();
         NdcPoint rotation = NdcPoint.zero();
         NdcPoint scale = NdcPoint.zero();
-        Transform transform = new Transform(translation, rotation, scale);
-        rectangle.addComponent(transform);
+        /*Transform transform = new Transform(translation, rotation, scale);
+        rectangle.addComponent(transform);*/
 
         mainScene.addEntity(rectangle);
     }
