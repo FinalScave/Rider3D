@@ -10,11 +10,11 @@ UNKNOWN_NS_BEGIN
         return GetIndex() != kInvalidIndex;
     }
 
-    SMART_PTR<TextureHandle> TextureManager::GetTexture(const Name &name) {
+    SMART_PTR<TextureHandle> TextureManager::GetTexture(const Name& name) {
         return name_texture_map_[name];
     }
 
-    void TextureManager::PutTexture(const Name &name, const SMART_PTR<TextureHandle> &handle) {
+    void TextureManager::PutTexture(const Name& name, const SMART_PTR<TextureHandle>& handle) {
         name_texture_map_[name] = handle;
     }
 

@@ -8,9 +8,11 @@
 #include <jni.h>
 #include "UnknownEngine.h"
 
-NS_UNKNOWN::Unknown3DEngine* To3DEngineNativeObject(jlong address);
+using namespace NS_UNKNOWN;
 
-jlong To3DEngineJavaObject(NS_UNKNOWN::Unknown3DEngine* engine);
+UnknownEngine* ToEngineNativePointer(jlong address);
+
+jlong ToEngineJavaObject(UnknownEngine *engine);
 
 template<class T>
 inline jlong ToJavaObject(T* ptr) {
@@ -18,7 +20,7 @@ inline jlong ToJavaObject(T* ptr) {
 }
 
 template<class T>
-inline T* ToNativeObject(jlong address) {
+inline T* ToNativePointer(jlong address) {
     return (T*) address;
 }
 

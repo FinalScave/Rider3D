@@ -20,9 +20,9 @@ UNKNOWN_NS_BEGIN
 
     class TextureManager {
     public:
-        SMART_PTR<TextureHandle> GetTexture(const Name &name);
+        SMART_PTR<TextureHandle> GetTexture(const Name& name);
 
-        void PutTexture(const Name &name, const SMART_PTR<TextureHandle> &handle);
+        void PutTexture(const Name& name, const SMART_PTR<TextureHandle>& handle);
 
     private:
         HASHMAP<Name, SMART_PTR<TextureHandle>> name_texture_map_;

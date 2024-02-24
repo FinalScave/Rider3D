@@ -4,6 +4,7 @@
 
 #ifndef UNKNOWN3D_SOCKET_H
 #define UNKNOWN3D_SOCKET_H
+
 #include "Define.h"
 
 UNKNOWN_NS_BEGIN
@@ -17,6 +18,7 @@ UNKNOWN_NS_BEGIN
         bool IsConnected();
 
         String ReadString();
+
     private:
         String address_;
         int port_;

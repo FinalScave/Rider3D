@@ -21,6 +21,7 @@ UNKNOWN_NS_BEGIN
         void update(EntityManager& entities, EventManager& events, TimeDelta dt) override;
 
         void receive(const SceneUpdateEvent& event);
+
     private:
         SMART_PTR<SceneRenderer> renderer_;
     };

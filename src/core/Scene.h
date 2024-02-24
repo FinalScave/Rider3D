@@ -22,6 +22,7 @@ UNKNOWN_NS_BEGIN
 
     class Scene : public Entity {
         friend class SceneManager;
+
     private:
         Scene(EntityManager* manager, Entity::Id id);
 

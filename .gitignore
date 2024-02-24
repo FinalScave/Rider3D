@@ -2,7 +2,9 @@
 *.DS_Store
 .idea
 .vscode
+.vs
 .cxx
 .cache
 /cmake-build-debug
 /build
+/out

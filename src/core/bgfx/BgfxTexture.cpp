@@ -6,7 +6,7 @@
 
 UNKNOWN_NS_BEGIN
 
-    BgfxTextureHandle::BgfxTextureHandle(bgfx::TextureHandle &handle) : handle_(handle) {
+    BgfxTextureHandle::BgfxTextureHandle(bgfx::TextureHandle& handle) : handle_(handle) {
     }
 
     BgfxTextureHandle::~BgfxTextureHandle() {

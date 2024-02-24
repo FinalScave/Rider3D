@@ -13,7 +13,7 @@ UNKNOWN_NS_BEGIN
 
     class BgfxTextureHandle : public TextureHandle {
     public:
-        explicit BgfxTextureHandle(bgfx::TextureHandle &handle);
+        explicit BgfxTextureHandle(bgfx::TextureHandle& handle);
 
         ~BgfxTextureHandle();
 

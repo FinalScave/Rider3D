@@ -14,7 +14,8 @@ UNKNOWN_NS_BEGIN
     public:
         explicit Graph2DRenderer(const SMART_PTR<RenderContext>& context);
 
-        void RenderEntity(Entity &entity) override;
+        void RenderEntity(Entity& entity) override;
+
     private:
         float model_matrix_[16] = {0};
         float view_matrix_[16] = {0};

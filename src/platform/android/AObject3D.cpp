@@ -18,12 +18,12 @@ extern "C"
 JNIEXPORT void JNICALL
 Java_com_unknown_object_Object3D_nativeSetRenderType(JNIEnv *env, jclass clazz, jlong ptr,
                                                      jint type) {
-    auto* object_3d = ToNativeObject<NS_UNKNOWN::Object3D>(ptr);
+    auto* object_3d = ToNativePointer<NS_UNKNOWN::Object3D>(ptr);
     object_3d->render_type = static_cast<unknown::RenderType>(type);
 }
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_unknown_object_Object3D_nativeDestroy(JNIEnv *env, jclass clazz, jlong ptr) {
-    auto* object_3d = ToNativeObject<NS_UNKNOWN::Object3D>(ptr);
+    auto* object_3d = ToNativePointer<NS_UNKNOWN::Object3D>(ptr);
     DELETE_PTR(object_3d);
 }

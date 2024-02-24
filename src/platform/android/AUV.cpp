@@ -17,20 +17,20 @@ Java_com_unknown_object_UV_nativeMakeUV(JNIEnv *env, jclass clazz, jfloat u, jfl
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_unknown_object_UV_nativeSetU(JNIEnv *env, jclass clazz, jlong ptr, jfloat u) {
-    auto* uv = ToNativeObject<NS_UNKNOWN::TextureUVPoint>(ptr);
+    auto* uv = ToNativePointer<NS_UNKNOWN::TextureUVPoint>(ptr);
     uv->u = u;
 }
 
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_unknown_object_UV_nativeSetV(JNIEnv *env, jclass clazz, jlong ptr, jfloat v) {
-    auto* uv = ToNativeObject<NS_UNKNOWN::TextureUVPoint>(ptr);
+    auto* uv = ToNativePointer<NS_UNKNOWN::TextureUVPoint>(ptr);
     uv->v = v;
 }
 
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_unknown_object_UV_nativeDestroy(JNIEnv *env, jclass clazz, jlong ptr) {
-    auto* uv = ToNativeObject<NS_UNKNOWN::TextureUVPoint>(ptr);
+    auto* uv = ToNativePointer<NS_UNKNOWN::TextureUVPoint>(ptr);
     DELETE_PTR(uv);
 }

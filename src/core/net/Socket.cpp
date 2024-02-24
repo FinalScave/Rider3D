@@ -5,7 +5,7 @@
 #include "Socket.h"
 
 UNKNOWN_NS_BEGIN
-    Socket::Socket(String address, int port): address_(std::move(address)), port_(port) {
+    Socket::Socket(String address, int port) : address_(std::move(address)), port_(port) {
     }
 
     void Socket::Connect() {

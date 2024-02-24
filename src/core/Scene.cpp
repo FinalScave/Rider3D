@@ -9,7 +9,7 @@
 
 UNKNOWN_NS_BEGIN
 
-    Scene::Scene(EntityManager* manager, Entity::Id id): Entity(manager, id) {
+    Scene::Scene(EntityManager* manager, Entity::Id id) : Entity(manager, id) {
     }
 
     Scene::~Scene() {

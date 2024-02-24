@@ -16,6 +16,7 @@ UNKNOWN_NS_BEGIN
     class ShaderProgram {
     public:
         ShaderProgram();
+
         ~ShaderProgram();
 
         /// 从二进制数据中载入着色器程序
@@ -24,9 +25,9 @@ UNKNOWN_NS_BEGIN
         /// \param fs_data 片元着色器代码
         /// \param fs_data_len 片元着色器代码长度
         void Load(const unsigned char* vs_data,
-                          const unsigned int vs_data_len,
-                          const unsigned char* fs_data,
-                          const unsigned int fs_data_len);
+                  const unsigned int vs_data_len,
+                  const unsigned char* fs_data,
+                  const unsigned int fs_data_len);
 
         /// 从指定路径加载着色器程序
         /// \param res_path 着色器程序所处目录路径

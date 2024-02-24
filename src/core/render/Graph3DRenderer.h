@@ -14,7 +14,8 @@ UNKNOWN_NS_BEGIN
     public:
         explicit Graph3DRenderer(const SMART_PTR<RenderContext>& context);
 
-        void RenderEntity(Entity &entity) override;
+        void RenderEntity(Entity& entity) override;
+
     private:
         float vec4_resolution_[4] = {0};
         float model_matrix_[16] = {0};

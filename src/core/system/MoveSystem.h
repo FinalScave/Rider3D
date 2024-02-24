@@ -4,6 +4,7 @@
 
 #ifndef UNKNOWN3D_MOVESYSTEM_H
 #define UNKNOWN3D_MOVESYSTEM_H
+
 #include "Define.h"
 #include "entityx/entityx.h"
 
@@ -13,9 +14,9 @@ UNKNOWN_NS_BEGIN
     public:
         MoveSystem();
 
-        void configure(EntityManager &entities, EventManager &events) override;
+        void configure(EntityManager& entities, EventManager& events) override;
 
-        void update(EntityManager &entities, EventManager &events, TimeDelta dt) override;
+        void update(EntityManager& entities, EventManager& events, TimeDelta dt) override;
     };
 
 UNKNOWN_NS_END

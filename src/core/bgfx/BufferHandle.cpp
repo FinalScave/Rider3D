@@ -36,7 +36,7 @@ UNKNOWN_NS_BEGIN
                     sizeof(uint32_t) * index_list.size()
             );
             bgfx::DynamicVertexBufferHandle vertex_buffer =
-                    bgfx::createDynamicVertexBuffer(vertex_ref,vertex_layout);
+                    bgfx::createDynamicVertexBuffer(vertex_ref, vertex_layout);
             bgfx::DynamicIndexBufferHandle index_buffer = bgfx::createDynamicIndexBuffer(index_ref);
             BufferHandle* handle = new BufferHandle{vertices, indices, vertex_buffer, index_buffer};
             PutBufferHandle(entity, handle);

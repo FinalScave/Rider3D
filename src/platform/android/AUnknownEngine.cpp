@@ -30,11 +30,6 @@ Java_com_unknown_UnknownEngine_nativeRender(JNIEnv *env, jclass clazz, jlong ptr
 JNIEXPORT void JNICALL
 Java_com_unknown_UnknownEngine_nativeDestroy(JNIEnv *env, jclass clazz, jlong ptr) {
     NS_UNKNOWN::UnknownEngine *engine = ToEngineNativePointer(ptr);
-    NS_UNKNOWN::RenderConfig render_config = engine->GetRenderConfig();
-    if (render_config.native_window_handle != nullptr) {
-        ANativeWindow *native_window = (ANativeWindow *) render_config.native_window_handle;
-        DELETE_PTR(native_window);
-    }
     DELETE_PTR(engine);
 }
 

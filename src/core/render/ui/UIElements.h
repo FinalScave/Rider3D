@@ -13,6 +13,7 @@ UNKNOWN_NS_BEGIN
     class UIElement {
     public:
         void SetEventListener(std::function<void()> callback);
+
     private:
         std::function<void()> callback_{};
     };
