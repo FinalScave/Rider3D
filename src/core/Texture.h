@@ -9,11 +9,11 @@
 
 UNKNOWN_NS_BEGIN
 
-    const static uint16_t kInvalidIndex = UINT16_MAX;
+    const static TEXTURE_ID_TYPE kInvalidIndex = UINT16_MAX;
 
     class TextureHandle {
     public:
-        virtual uint16_t GetIndex() = 0;
+        virtual TEXTURE_ID_TYPE GetIndex() = 0;
 
         bool isValid();
     };

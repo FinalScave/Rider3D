@@ -4,7 +4,6 @@
 namespace unknown {
 
 const Entity::Id Entity::INVALID;
-const char* Entity::INVALID_NAME = "INVALID";
 BaseComponent::Family BaseComponent::family_counter_ = 0;
 
 void Entity::invalidate() {

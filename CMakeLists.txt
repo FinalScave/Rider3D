@@ -6,6 +6,7 @@ project(unknown3d)
 # macro
 add_definitions(-DBX_CONFIG_DEBUG=ON)
 add_definitions(-DENABLE_LOG)
+add_definitions(-DFORCE_GLFW)
 option(ENABLE_LOG "Enable logging" ON)
 option(BUILD_PC_DEMO "Build demo for Windows/Mac/Linux to test" ON)
 

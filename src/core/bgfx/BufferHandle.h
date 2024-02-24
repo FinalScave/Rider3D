@@ -8,6 +8,7 @@
 #include "Define.h"
 #include "bgfx/bgfx.h"
 #include "Vertex.h"
+#include "entityx/Entity.h"
 
 UNKNOWN_NS_BEGIN
 
@@ -20,17 +21,17 @@ UNKNOWN_NS_BEGIN
 
     class BufferHandleManager {
     public:
-        BufferHandle& CreateOrUpdate(const Name& name,
+        BufferHandle* CreateOrUpdate(const Entity& entity,
                                      bgfx::VertexLayout& vertex_layout,
                                      std::vector<Vertex>& vertex_list,
                                      std::vector<uint32_t>& index_list);
 
-        BufferHandle& GetBufferHandle(const Name& name);
+        BufferHandle* GetBufferHandle(const Entity& entity);
 
-        void PutBufferHandle(const Name& name, const BufferHandle& handle);
+        void PutBufferHandle(const Entity& entity, BufferHandle* handle);
 
     private:
-        HASHMAP<Name, BufferHandle> name_buffer_handle_map_;
+        HASHMAP<Entity, BufferHandle*> name_buffer_handle_map_;
     };
 
 UNKNOWN_NS_END

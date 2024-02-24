@@ -10,8 +10,6 @@
 #include "entityx/Entity.h"
 
 UNKNOWN_NS_BEGIN
-#define ENTITY_SIZE_TYPE uint8_t
-#define ENTITY_SIZE_MAX UINT8_MAX
 
     struct RenderType {
         enum Enum {
@@ -23,8 +21,11 @@ UNKNOWN_NS_BEGIN
     };
 
     class Scene : public Entity {
+        friend class SceneManager;
+    private:
+        Scene(EntityManager* manager, Entity::Id id);
+
     public:
-        Scene();
 
         ~Scene();
 
@@ -39,23 +40,25 @@ UNKNOWN_NS_BEGIN
         Entity& GetEntityAt(ENTITY_SIZE_TYPE index);
 
         ENTITY_SIZE_TYPE Size();
+
     private:
         std::vector<Entity> entity_list_;
     };
 
     class SceneManager {
     public:
-        explicit SceneManager(EventManager& events);
+        explicit SceneManager(EntityManager& entities, EventManager& events);
 
-        SMART_PTR<Scene> CreateScene();
+        Scene* CreateScene();
 
-        SMART_PTR<Scene> GetCurrentScene();
+        Scene* GetCurrentScene();
 
-        void LoadScene(SMART_PTR<Scene>& scene);
+        void LoadScene(Scene* scene);
 
     private:
+        EntityManager& entities_;
         EventManager& events_;
-        SMART_PTR<Scene> current_scene_ = nullptr;
+        Scene* current_scene_ = nullptr;
     };
 
 UNKNOWN_NS_END

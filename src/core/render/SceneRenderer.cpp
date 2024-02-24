@@ -4,6 +4,7 @@
 
 #include "SceneRenderer.h"
 #include "bgfx/bgfx.h"
+#include "BasicComponents.h"
 
 UNKNOWN_NS_BEGIN
 
@@ -11,12 +12,18 @@ UNKNOWN_NS_BEGIN
         this->render_config_ = config;
         // initialize bgfx
         bgfx::Init init;
-#if (defined(WINDOWS) || defined(LINUX) || defined(MACOS))
-        init.type = bgfx::RendererType::Enum::Count;
-#elif (defined(ANDROID) || defined(HARMONY))
+#if (defined(ANDROID) || defined(HARMONY))
         init.type = bgfx::RendererType::Enum::OpenGLES;
 #elif (defined(IOS))
         init.type = bgfx::RendererType::Enum::Metal;
+#elif (defined(FORCE_GLFW))
+        init.type = bgfx::RendererType::Enum::OpenGL;
+#elif (defined(WINDOWS))
+        init.type = bgfx::RendererType::Enum::Direct3D12;
+#elif (defined(MACOS))
+        init.type = bgfx::RendererType::Enum::Metal;
+/*#elif (defined(LINUX))
+        init.type = bgfx::RendererType::Enum::OpenGL;*/
 #else
         init.type = bgfx::RendererType::Enum::Count;
 #endif
@@ -39,45 +46,46 @@ UNKNOWN_NS_BEGIN
         bgfx::reset(config.width, config.height, BGFX_RESET_VSYNC, init.resolution.format);
 
         // initialize context
-        this->render_context_ = MAKE_SMART_PTR<RenderContext>(config);
+        this->context_ = MAKE_SMART_PTR<RenderContext>(config);
         // initialize render strategies
-        this->simple_renderer_ = MAKE_SMART_PTR<SimpleRenderStrategy>(render_context_);
-        this->common_renderer_ = MAKE_SMART_PTR<CommonRenderStrategy>(render_context_);
+        this->renderer_2d = MAKE_SMART_PTR<Graph2DRenderer>(context_);
+        this->renderer_3d = MAKE_SMART_PTR<Graph3DRenderer>(context_);
     }
 
     SceneRenderer::~SceneRenderer() {
-        render_context_ = nullptr;
+        context_ = nullptr;
         bgfx::shutdown();
     }
 
-    void SceneRenderer::SetScene(const SMART_PTR<Scene>& scene) {
-        render_context_->scene_ = scene;
+    void SceneRenderer::SetScene(Scene* scene) {
+        context_->scene_ = scene;
     }
 
-    uint16_t SceneRenderer::Render() {
-        bgfx::setViewRect(render_context_->main_view_id_, 0, 0, render_config_.width, render_config_.height);
-        bgfx::setViewClear(render_context_->main_view_id_, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x000000ff);
+    TEXTURE_ID_TYPE SceneRenderer::Render() {
+        bgfx::setViewRect(context_->main_view_id_, 0, 0, render_config_.width, render_config_.height);
+        bgfx::setViewClear(context_->main_view_id_, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x000000ff);
 
         this->RenderScene();
 
         bgfx::frame();
-        return render_context_->main_view_id_;
+        return context_->main_view_id_;
     }
 
     void SceneRenderer::RenderScene() {
-        /*uint8_t size = render_context_->scene_->Size();
-        for (uint8_t i = 0; i < size; ++i) {
-            Object3D& object = render_context_->scene_->GetChildAt(i);
-            this->RenderObject(object, i + 1);
-        }*/
+        NULL_RETURN(context_->scene_);
+        ENTITY_SIZE_TYPE size = context_->scene_->Size();
+        for (ENTITY_SIZE_TYPE i = 0; i < size; ++i) {
+            Entity& entity = context_->scene_->GetEntityAt(i);
+            this->RenderEntity(entity, i + 1);
+        }
     }
 
-    void SceneRenderer::RenderObject(Object3D& object, uint8_t id) {
-        if (!object.visible) {
+    void SceneRenderer::RenderEntity(Entity& entity, ENTITY_SIZE_TYPE order) {
+        if (!entity.component<EntityConfig>()->visible) {
             return;
         }
-        render_context_->curr_view_id_ = id;
-        simple_renderer_->RenderEntity(object);
+        context_->curr_view_id_ = order;
+        renderer_2d->RenderEntity(entity);
     }
 
 UNKNOWN_NS_END

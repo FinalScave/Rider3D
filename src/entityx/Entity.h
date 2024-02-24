@@ -49,7 +49,7 @@ class ComponentHandle;
  */
 class Entity {
 public:
-  /*struct Id {
+  struct Id {
     Id() : id_(0) {}
     explicit Id(uint64_t id) : id_(id) {}
     Id(uint32_t index, uint32_t version) : id_(uint64_t(index) | uint64_t(version) << 32UL) {}
@@ -67,17 +67,16 @@ public:
     friend class EntityManager;
 
     uint64_t id_;
-  };*/
+  };
 
 
   /**
    * Id of an invalid Entity.
    */
-  typedef const char* EntityName;
-  static const char* INVALID_NAME;
+  const static Id INVALID;
 
   Entity() = default;
-  Entity(EntityManager *manager, EntityName name): manager_(manager), name_(name) {}
+  Entity(EntityManager *manager, Id id): manager_(manager), id_(id) {}
   Entity(const Entity &other) = default;
   Entity &operator = (const Entity &other) = default;
 
@@ -89,16 +88,16 @@ public:
   }
 
   bool operator == (const Entity &other) const {
-    return other.manager_ == manager_ && other.name_ == name_;
+    return other.manager_ == manager_ && other.id_ == id_;
   }
 
   bool operator != (const Entity &other) const {
     return !(other == *this);
   }
 
-  /*bool operator < (const Entity &other) const {
+  bool operator < (const Entity &other) const {
     return other.id_ < id_;
-  }*/
+  }
 
   /**
    * Is this Entity handle valid?
@@ -118,9 +117,7 @@ public:
    */
   void invalidate();
 
-  /*Id id() const { return id_; }*/
-
-  EntityName name() { return name_; }
+  Id id() const { return id_; }
 
   template <typename C, typename ... Args>
   ComponentHandle<C> assign(Args && ... args);
@@ -161,8 +158,7 @@ public:
 
  private:
   EntityManager *manager_ = nullptr;
-  //Entity::Id id_ = INVALID;
-  EntityName name_ = INVALID_NAME;
+  Entity::Id id_ = INVALID;
 };
 
 
@@ -205,7 +201,7 @@ public:
   Entity entity();
 
   bool operator == (const ComponentHandle<C> &other) const {
-    return manager_ == other.manager_ && name_ == other.name_;
+    return manager_ == other.manager_ && id_ == other.id_;
   }
 
   bool operator != (const ComponentHandle<C> &other) const {
@@ -215,12 +211,11 @@ public:
 private:
   friend class EntityManager;
 
-  ComponentHandle(EM *manager, Entity::EntityName name) :
-      manager_(manager), name_(name) {}
+  ComponentHandle(EM *manager, Entity::Id id) :
+      manager_(manager), id_(id) {}
 
   EM *manager_;
-  //Entity::Id id_;
-  Entity::EntityName name_;
+  Entity::Id id_;
 };
 
 
@@ -350,10 +345,12 @@ public:
   }
 };
 
+class SceneManager;
 /**
  * Manages Entity::Id creation and component assignment.
  */
 class EntityManager : unknown::help::NonCopyable {
+ friend class SceneManager;
  public:
   typedef std::bitset<unknown::MAX_COMPONENTS> ComponentMask;
 
@@ -363,7 +360,7 @@ class EntityManager : unknown::help::NonCopyable {
   /// An iterator over a view of the entities in an EntityManager.
   /// If All is true it will iterate over all valid entities and will ignore the entity mask.
   template <class Delegate, bool All = false>
-  class ViewIterator : public std::iterator<std::input_iterator_tag, Entity::EntityName> {
+  class ViewIterator : public std::iterator<std::input_iterator_tag, Entity::Id> {
    public:
     Delegate &operator ++() {
       ++i_;
@@ -548,8 +545,8 @@ class EntityManager : unknown::help::NonCopyable {
   /**
    * Return true if the given entity ID is still valid.
    */
-  bool valid(Entity::EntityName name) const {
-    return name != Entity::INVALID_NAME;
+  bool valid(Entity::Id id) const {
+    return id != Entity::INVALID;
   }
 
   /**
@@ -557,7 +554,7 @@ class EntityManager : unknown::help::NonCopyable {
    *
    * Emits EntityCreatedEvent.
    */
-  Entity create(const char* name) {
+  Entity create() {
     uint32_t index, version;
     if (free_list_.empty()) {
       index = index_counter_++;
@@ -568,7 +565,7 @@ class EntityManager : unknown::help::NonCopyable {
       free_list_.pop_back();
        version = entity_version_[index];
     }
-    Entity entity(this, name);
+    Entity entity(this, Entity::Id(index, version));
     event_manager_.emit<EntityCreatedEvent>(entity);
     return entity;
   }
@@ -580,7 +577,7 @@ class EntityManager : unknown::help::NonCopyable {
    */
   Entity create_from_copy(Entity original) {
     assert(original.valid());
-    auto clone = create(original.name());
+    auto clone = create();
     auto mask = original.component_mask();
     for (size_t i = 0; i < component_helpers_.size(); i++) {
       BaseComponentHelper *helper = component_helpers_[i];
@@ -596,7 +593,7 @@ class EntityManager : unknown::help::NonCopyable {
    *
    * Emits EntityDestroyedEvent.
    */
-  void destroy(Entity::EntityName entity) {
+  void destroy(Entity::Id entity) {
     assert_valid(entity);
     uint32_t index = entity.index();
     auto mask = entity_component_mask_[index];
@@ -634,7 +631,7 @@ class EntityManager : unknown::help::NonCopyable {
    * @returns Smart pointer to newly created component.
    */
   template <typename C, typename ... Args>
-  ComponentHandle<C> assign(Entity::EntityName id, Args && ... args) {
+  ComponentHandle<C> assign(Entity::Id id, Args && ... args) {
     assert_valid(id);
     const BaseComponent::Family family = component_family<C>();
     assert(!entity_component_mask_[id.index()].test(family));

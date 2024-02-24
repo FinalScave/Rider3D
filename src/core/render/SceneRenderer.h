@@ -10,10 +10,9 @@
 #include "Supposition.h"
 #include "Vertex.h"
 #include "context/RenderContext.h"
-#include "strategy/SimpleRenderStrategy.h"
-#include "strategy/CommonRenderStrategy.h"
+#include "Graph2DRenderer.h"
+#include "Graph3DRenderer.h"
 #include "Scene.h"
-#include "Object3D.h"
 
 UNKNOWN_NS_BEGIN
 
@@ -22,26 +21,27 @@ UNKNOWN_NS_BEGIN
     class SceneRenderer {
         friend UnknownEngine;
     public:
-        explicit SceneRenderer(const RenderConfig &config);
+        explicit SceneRenderer(const RenderConfig& config);
 
         ~SceneRenderer();
 
-        void SetScene(const SMART_PTR<Scene> &scene);
+        void SetScene(Scene* scene);
 
         /// OffScreen render, return the texture id after rendering
         /// \return Texture ID
-        uint16_t Render();
+        TEXTURE_ID_TYPE Render();
+
     private:
         /// Configuration for rendering
         RenderConfig render_config_;
         /// Context for rendering
-        SMART_PTR<RenderContext> render_context_;
-        SMART_PTR<SimpleRenderStrategy> simple_renderer_;
-        SMART_PTR<CommonRenderStrategy> common_renderer_;
+        SMART_PTR<RenderContext> context_;
+        SMART_PTR<Graph2DRenderer> renderer_2d;
+        SMART_PTR<Graph3DRenderer> renderer_3d;
 
         void RenderScene();
 
-        void RenderObject(Object3D &object, uint8_t id);
+        void RenderEntity(Entity& entity, ENTITY_SIZE_TYPE order);
     };
 
 UNKNOWN_NS_END

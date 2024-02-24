@@ -11,7 +11,7 @@ UNKNOWN_NS_BEGIN
     UnknownEngine::UnknownEngine(const RenderConfig& config)
             : entities_(events_),
               systems_(entities_, events_),
-              scenes_(events_) {
+              scenes_(entities_, events_) {
         SMART_PTR<SceneRenderer> renderer = MAKE_SMART_PTR<SceneRenderer>(config);
         systems_.add<BasicRenderSystem>(renderer);
         systems_.add<MoveSystem>();

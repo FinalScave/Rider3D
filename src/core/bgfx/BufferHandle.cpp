@@ -6,21 +6,21 @@
 
 UNKNOWN_NS_BEGIN
 
-    BufferHandle& BufferHandleManager::GetBufferHandle(const Name& name) {
-        return name_buffer_handle_map_[name];
+    BufferHandle* BufferHandleManager::GetBufferHandle(const Entity& entity) {
+        return name_buffer_handle_map_[entity];
     }
 
-    void BufferHandleManager::PutBufferHandle(const Name& name, const BufferHandle& handle) {
-        name_buffer_handle_map_[name] = handle;
+    void BufferHandleManager::PutBufferHandle(const Entity& entity, BufferHandle* handle) {
+        name_buffer_handle_map_[entity] = handle;
     }
 
-    BufferHandle& BufferHandleManager::CreateOrUpdate(const Name& name,
+    BufferHandle* BufferHandleManager::CreateOrUpdate(const Entity& entity,
                                                       bgfx::VertexLayout& vertex_layout,
                                                       std::vector<Vertex>& vertex_list,
                                                       std::vector<uint32_t>& index_list) {
-        if (name_buffer_handle_map_.find(name) == name_buffer_handle_map_.end()) {
-            Vertex vertices[vertex_list.size()];
-            uint16_t indices[index_list.size()];
+        if (name_buffer_handle_map_.find(entity) == name_buffer_handle_map_.end()) {
+            Vertex* vertices = new Vertex[vertex_list.size()];
+            UInt16* indices = new UInt16[index_list.size()];
             for (int i = 0; i < vertex_list.size(); ++i) {
                 vertices[i] = vertex_list[i];
             }
@@ -38,12 +38,12 @@ UNKNOWN_NS_BEGIN
             bgfx::DynamicVertexBufferHandle vertex_buffer =
                     bgfx::createDynamicVertexBuffer(vertex_ref,vertex_layout);
             bgfx::DynamicIndexBufferHandle index_buffer = bgfx::createDynamicIndexBuffer(index_ref);
-            BufferHandle handle = {vertices, indices, vertex_buffer, index_buffer};
-            PutBufferHandle(name, handle);
-            return name_buffer_handle_map_[name];
+            BufferHandle* handle = new BufferHandle{vertices, indices, vertex_buffer, index_buffer};
+            PutBufferHandle(entity, handle);
+            return name_buffer_handle_map_[entity];
         } else {
             //暂时不做顶点更新
-            BufferHandle& exists = name_buffer_handle_map_[name];
+            BufferHandle* exists = name_buffer_handle_map_[entity];
             /*DELETE_ARRAY(exists.vertices);
             DELETE_ARRAY(exists.indices);
             exists.vertices = vertices;

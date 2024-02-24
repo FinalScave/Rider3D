@@ -9,8 +9,7 @@
 
 UNKNOWN_NS_BEGIN
 
-    Scene::Scene() {
-        this->assign<Camera>();
+    Scene::Scene(EntityManager* manager, Entity::Id id): Entity(manager, id) {
     }
 
     Scene::~Scene() {
@@ -73,18 +72,31 @@ UNKNOWN_NS_BEGIN
         return entity_list_.size();
     }
 
-    SceneManager::SceneManager(EventManager& events) : events_(events) {
+    SceneManager::SceneManager(EntityManager& entities, EventManager& events)
+            : entities_(entities), events_(events) {
     }
 
-    SMART_PTR<Scene> SceneManager::CreateScene() {
-        return MAKE_SMART_PTR<Scene>();
+    Scene* SceneManager::CreateScene() {
+        uint32_t index, version;
+        if (entities_.free_list_.empty()) {
+            index = entities_.index_counter_++;
+            entities_.accomodate_entity(index);
+            version = entities_.entity_version_[index] = 1;
+        } else {
+            index = entities_.free_list_.back();
+            entities_.free_list_.pop_back();
+            version = entities_.entity_version_[index];
+        }
+        Scene* scene = new Scene(&entities_, Entity::Id(index, version));
+        events_.emit<EntityCreatedEvent>(*scene);
+        return scene;
     }
 
-    SMART_PTR<Scene> SceneManager::GetCurrentScene() {
+    Scene* SceneManager::GetCurrentScene() {
         return current_scene_;
     }
 
-    void SceneManager::LoadScene(SMART_PTR<Scene>& scene) {
+    void SceneManager::LoadScene(Scene* scene) {
         current_scene_ = scene;
         events_.emit<SceneUpdateEvent>(scene);
     }

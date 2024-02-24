@@ -7,7 +7,6 @@
 
 #include "Define.h"
 #include "render/SceneRenderer.h"
-#include "Object3D.h"
 #include "entityx/entityx.h"
 #include "entityx/help/Timer.h"
 #include "event/SceneUpdateEvent.h"

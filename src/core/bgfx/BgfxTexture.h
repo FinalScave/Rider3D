@@ -17,7 +17,7 @@ UNKNOWN_NS_BEGIN
 
         ~BgfxTextureHandle();
 
-        uint16_t GetIndex() override;
+        TEXTURE_ID_TYPE GetIndex() override;
 
     private:
         bgfx::TextureHandle handle_ = BGFX_INVALID_HANDLE;

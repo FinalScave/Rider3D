@@ -16,9 +16,9 @@ UNKNOWN_NS_BEGIN
 
         void RenderEntity(Entity &entity) override;
     private:
-        float* model_matrix_ = nullptr;
-        float* view_matrix_ = nullptr;
-        float* proj_matrix_ = nullptr;
+        float model_matrix_[16] = {0};
+        float view_matrix_[16] = {0};
+        float proj_matrix_[16] = {0};
     };
 
 UNKNOWN_NS_END

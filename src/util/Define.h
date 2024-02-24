@@ -20,11 +20,19 @@ typedef uint8_t UInt8;
 typedef std::string Name;
 typedef std::string String;
 typedef std::byte Byte;
+#define ENTITY_SIZE_TYPE uint8_t
+#define ENTITY_SIZE_MAX UINT8_MAX
+#define TEXTURE_ID_TYPE uint16_t
 #define PAIR std::pair
 #define HASHMAP std::unordered_map
 
 #define SMART_PTR std::shared_ptr
 #define MAKE_SMART_PTR std::make_shared
+
+#define NULL_RETURN(expr) \
+if (expr == nullptr) {    \
+    return;               \
+}
 
 #define DELETE_PTR(ptr) \
 if (ptr != nullptr) {   \

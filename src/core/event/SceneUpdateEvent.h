@@ -11,9 +11,9 @@
 UNKNOWN_NS_BEGIN
     class SceneUpdateEvent : public Event<SceneUpdateEvent> {
     public:
-        explicit SceneUpdateEvent(SMART_PTR<Scene>& scene) : scene(scene) {}
+        explicit SceneUpdateEvent(Scene* scene) : scene(scene) {}
 
-        SMART_PTR<Scene> scene;
+        Scene* scene;
     };
 
 UNKNOWN_NS_END

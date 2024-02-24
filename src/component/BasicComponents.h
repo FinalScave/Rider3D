@@ -15,18 +15,18 @@ UNKNOWN_NS_BEGIN
     };
 
     struct Transform {
-        Vec3 translation;
-        Vec3 rotation;
-        Vec3 scale;
+        Vec3 translation = {0, 0, 0};
+        Vec3 rotation = {0, 0, 0};
+        Vec3 scale = {1, 1, 1};
     };
 
     struct Camera {
-        Vec3 position = {0, 0, 0};
+        Vec3 position = {0, 0, 5};
         Vec3 target = {0, 0, 0};
-        Vec3 up_axis = {0, 1, 0};
+        Vec3 up_axis = {0, 0, 0};
     };
 
-    struct EntityProperty {
+    struct EntityConfig {
         bool visible = true;
         bool vertex_colors_enabled = true;
         bool textures_enabled = true;
@@ -37,6 +37,7 @@ UNKNOWN_NS_BEGIN
         bool point_smoothing = true;
         float line_width = 1.f;
         bool line_smoothing = false;
+        Color background_color = {0, 0, 0, 0};
     };
 
 UNKNOWN_NS_END

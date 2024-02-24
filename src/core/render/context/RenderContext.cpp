@@ -16,19 +16,19 @@ UNKNOWN_NS_BEGIN
         handle_manager_ = nullptr;
     }
 
-    BufferHandle& RenderContext::CreateOrUpdateBuffer(const Name& name,
+    BufferHandle* RenderContext::CreateOrUpdateBuffer(const Entity& entity,
                                                       bgfx::VertexLayout& vertex_layout,
                                                       std::vector<Vertex>& vertex_list,
                                                       std::vector<uint32_t>& index_list) {
-        return handle_manager_->CreateOrUpdate(name, vertex_layout, vertex_list, index_list);
+        return handle_manager_->CreateOrUpdate(entity, vertex_layout, vertex_list, index_list);
     }
 
-    BufferHandle& RenderContext::GetBufferHandle(const Name& name) {
-        return handle_manager_->GetBufferHandle(name);
+    BufferHandle* RenderContext::GetBufferHandle(const Entity& entity) {
+        return handle_manager_->GetBufferHandle(entity);
     }
 
-    void RenderContext::PutBufferHandle(const Name& name, const BufferHandle& handle) {
-        handle_manager_->PutBufferHandle(name, handle);
+    void RenderContext::PutBufferHandle(const Entity& entity, BufferHandle* handle) {
+        handle_manager_->PutBufferHandle(entity, handle);
     }
 
 UNKNOWN_NS_END

@@ -13,7 +13,7 @@ UNKNOWN_NS_BEGIN
         bgfx::destroy(handle_);
     }
 
-    uint16_t BgfxTextureHandle::GetIndex() {
+    TEXTURE_ID_TYPE BgfxTextureHandle::GetIndex() {
         return handle_.idx;
     }
 

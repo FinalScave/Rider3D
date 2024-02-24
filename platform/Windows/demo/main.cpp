@@ -6,6 +6,7 @@
 #include "bx/math.h"
 #include "component/BasicComponents.h"
 #include "net/Http.h"
+#include "VertexUtil.h"
 
 using namespace unknown;
 
@@ -20,6 +21,37 @@ static void glfw_keyCallback(GLFWwindow *window, int key, int scancode, int acti
 {
     if (key == GLFW_KEY_F1 && action == GLFW_RELEASE)
         s_showStats = !s_showStats;
+}
+
+void add_rect(UnknownEngine* engine, Scene* scene) {
+    Entity rectangle = engine->GetEntities().create();
+    rectangle.assign<EntityConfig>();
+    Color red {1, 0, 0, 1};
+    Vertices vertices = VertexUtil::BuildRectangle(0.75, 0.75, red);
+    rectangle.assign_from_copy(vertices);
+    Transform transform;
+    transform.translation.x = 0.5;
+    rectangle.assign_from_copy(transform);
+    scene->AddEntity(rectangle);
+}
+
+void add_box(UnknownEngine* engine, Scene* scene) {
+    Entity box = engine->GetEntities().create();
+    box.assign<EntityConfig>();
+    Color colors[6]  = {
+            {1, 0, 0, 1},
+            {0, 1, 0, 1},
+            {0, 0, 1, 1},
+            {0, 1, 1, 1},
+            {1, 1, 0, 1},
+            {1, 0, 1, 1}
+    };;
+    Vertices vertices = VertexUtil::BuildBox(0.8, 0.8, 0.8, colors);
+    box.assign_from_copy(vertices);
+    Transform transform;
+    transform.translation.x = 0.5;
+    box.assign_from_copy(transform);
+    scene->AddEntity(box);
 }
 
 int main(int argc, char **argv)
@@ -41,19 +73,14 @@ int main(int argc, char **argv)
     // init engine
     RenderConfig config = {(uint16_t) width, (uint16_t) height, handle};
     UnknownEngine* engine = new UnknownEngine(config);
-    Entity entity = engine->GetEntities().create();
-    entity.assign<Scene>();
-    entity.assign<Camera>();
-    entity.assign<Position>();
-    entity.assign<Transform>();
-    entity.component<Transform>()->rotation = Vec3{1,1,1};
-    Scene* scene = new Scene();
+    SceneManager scenes = engine->GetScenes();
+    Scene* scene_main = scenes.CreateScene();
+    Camera camera{0,0,1};
+    scene_main->assign_from_copy(camera);
+    scenes.LoadScene(scene_main);
+    // add entity
+    add_box(engine, scene_main);
 
-    Http http;
-    HttpRequest request{HttpMethod::Get, "http://aaa.com/api/test"};
-    http.SendRequestAsync(request, [&](const HttpResponse& res) {
-        std::cout << res.body;
-    });
     // render loop
     while (!glfwWindowShouldClose(window))
     {

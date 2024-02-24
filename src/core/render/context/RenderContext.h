@@ -22,18 +22,18 @@ UNKNOWN_NS_BEGIN
 
         ~RenderContext();
 
-        BufferHandle& CreateOrUpdateBuffer(const Name& name,
+        BufferHandle* CreateOrUpdateBuffer(const Entity& entity,
                                            bgfx::VertexLayout& vertex_layout,
                                            std::vector<Vertex>& vertex_list,
                                            std::vector<uint32_t>& index_list);
 
-        BufferHandle& GetBufferHandle(const Name& name);
+        BufferHandle* GetBufferHandle(const Entity& entity);
 
-        void PutBufferHandle(const Name& name, const BufferHandle& handle);
+        void PutBufferHandle(const Entity& entity, BufferHandle* handle);
 
         RenderConfig render_config_;
         uint16_t curr_view_id_;
-        SMART_PTR<Scene> scene_;
+        Scene* scene_ = nullptr;
     private:
         uint16_t main_view_id_;
         SMART_PTR<BufferHandleManager> handle_manager_;
