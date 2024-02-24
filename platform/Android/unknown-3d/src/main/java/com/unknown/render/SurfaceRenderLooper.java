@@ -5,7 +5,7 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.view.Surface;
 
-import com.unknown.Unknown3DEngine;
+import com.unknown.UnknownEngine;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -15,7 +15,7 @@ public final class SurfaceRenderLooper {
     private final static byte DESTROY = 2;
     public final static byte DEFAULT_FPS = 70;
 
-    private Unknown3DEngine engine;
+    private UnknownEngine engine;
     private final Handler handler;
     private final HandlerThread renderThread = new HandlerThread("Unknown3D");
     private final AtomicBoolean destroyed = new AtomicBoolean(false);
@@ -64,7 +64,7 @@ public final class SurfaceRenderLooper {
                 Surface surface = (Surface) params[0];
                 int width = (int) params[1];
                 int height = (int) params[2];
-                this.engine = new Unknown3DEngine(surface, width, height);
+                this.engine = new UnknownEngine(surface, width, height);
                 destroyed.set(false);
                 handler.sendEmptyMessageDelayed(RENDER, 1000 / fps);
                 break;

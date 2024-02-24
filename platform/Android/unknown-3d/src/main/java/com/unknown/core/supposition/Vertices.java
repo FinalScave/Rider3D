@@ -1,4 +1,6 @@
-package com.unknown.object;
+package com.unknown.core.supposition;
+
+import com.unknown.core.NativeObject;
 
 import java.util.ArrayList;
 import java.util.List;

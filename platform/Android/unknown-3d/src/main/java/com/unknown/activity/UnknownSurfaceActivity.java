@@ -6,17 +6,16 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.unknown.render.SurfaceRenderLooper;
-import com.unknown.view.Unknown3DGLSurfaceView;
-import com.unknown.view.Unknown3DSurfaceView;
+import com.unknown.view.UnknownSurfaceView;
 
-public class Unknown3DActivity extends Activity implements SurfaceRenderLooper.Callback {
-    private Unknown3DSurfaceView unknown3DView;
+public class UnknownSurfaceActivity extends Activity implements SurfaceRenderLooper.Callback {
+    private UnknownSurfaceView unknown3DView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.unknown3DView = new Unknown3DSurfaceView(this);
+        this.unknown3DView = new UnknownSurfaceView(this);
         setContentView(unknown3DView);
         unknown3DView.setCallback(this);
     }

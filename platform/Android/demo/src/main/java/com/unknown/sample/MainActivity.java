@@ -4,11 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.unknown.activity.Unknown3DActivity;
+import com.unknown.activity.UnknownSurfaceActivity;
 
-import java.util.Calendar;
-
-public class MainActivity extends Unknown3DActivity {
+public class MainActivity extends UnknownSurfaceActivity {
 
     private final static short FPS = 60;
     private long startTime;

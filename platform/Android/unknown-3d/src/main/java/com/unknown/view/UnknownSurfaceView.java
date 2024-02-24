@@ -10,24 +10,24 @@ import androidx.annotation.NonNull;
 
 import com.unknown.render.SurfaceRenderLooper;
 
-public class Unknown3DSurfaceView extends SurfaceView {
+public class UnknownSurfaceView extends SurfaceView {
     private SurfaceRenderLooper renderLooper;
     private SurfaceRenderLooper.Callback callback;
     private short fps = SurfaceRenderLooper.DEFAULT_FPS;
 
-    public Unknown3DSurfaceView(Context context) {
+    public UnknownSurfaceView(Context context) {
         this(context, null);
     }
 
-    public Unknown3DSurfaceView(Context context, AttributeSet attrs) {
+    public UnknownSurfaceView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public Unknown3DSurfaceView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public UnknownSurfaceView(Context context, AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr, 0);
     }
 
-    public Unknown3DSurfaceView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public UnknownSurfaceView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
     }

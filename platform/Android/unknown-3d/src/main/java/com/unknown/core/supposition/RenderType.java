@@ -1,4 +1,4 @@
-package com.unknown.object;
+package com.unknown.core.supposition;
 
 public enum RenderType {
     POINTS(0),

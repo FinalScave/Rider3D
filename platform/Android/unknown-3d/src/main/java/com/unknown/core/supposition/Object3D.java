@@ -1,4 +1,6 @@
-package com.unknown.object;
+package com.unknown.core.supposition;
+
+import com.unknown.core.NativeObject;
 
 public class Object3D extends NativeObject {
     private RenderType renderType = RenderType.TRISTRP;
