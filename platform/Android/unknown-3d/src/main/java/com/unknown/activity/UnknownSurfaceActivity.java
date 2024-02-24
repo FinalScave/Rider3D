@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.unknown.UnknownEngine;
 import com.unknown.render.SurfaceRenderLooper;
 import com.unknown.view.UnknownSurfaceView;
 
@@ -25,12 +26,12 @@ public class UnknownSurfaceActivity extends Activity implements SurfaceRenderLoo
     }
 
     @Override
-    public void onInitScene() {
+    public void onInit(UnknownEngine engine) {
 
     }
 
     @Override
-    public void onUpdateScene() {
+    public void onUpdate() {
 
     }
 

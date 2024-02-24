@@ -1,14 +1,18 @@
-package com.unknown.core.supposition;
+package com.unknown.component;
 
-import com.unknown.core.NativeObject;
+import com.unknown.core.supposition.Color;
+import com.unknown.core.supposition.NdcPoint;
+import com.unknown.core.supposition.UV;
 
-public class Vertex extends NativeObject {
+import dalvik.annotation.optimization.CriticalNative;
+
+public class Vertex extends Component {
     private NdcPoint position;
     private UV uv;
     private Color color;
 
     public Vertex(NdcPoint position, UV uv, Color color) {
-        this.nativePtr = nativeMakeVertex(position.nativePtr, uv.nativePtr, color.nativePtr);
+        super(nativeMakeVertex(position.nativePtr, uv.nativePtr, color.nativePtr));
         this.position = position;
         this.uv = uv;
         this.color = color;
@@ -47,9 +51,14 @@ public class Vertex extends NativeObject {
         nativeDestroy(nativePtr);
     }
 
+    @CriticalNative
     private static native long nativeMakeVertex(long ndcPointPtr, long uvPtr, long colorPtr);
+    @CriticalNative
     private static native void nativeSetPosition(long ptr, long ndcPointPtr);
+    @CriticalNative
     private static native void nativeSetUv(long ptr, long uvPtr);
+    @CriticalNative
     private static native void nativeSetColor(long ptr, long colorPtr);
+    @CriticalNative
     private static native void nativeDestroy(long ptr);
 }

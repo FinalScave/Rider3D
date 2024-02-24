@@ -3,10 +3,12 @@
 //
 // Created by Scave on 2023/11/10.
 //
-
+#pragma once
 #include <android/native_window_jni.h>
 #include "UnknownEngine.h"
 #include "JNativeConverter.h"
+
+using namespace unknown;
 
 extern "C" {
 JNIEXPORT jlong JNICALL
@@ -14,22 +16,34 @@ Java_com_unknown_UnknownEngine_nativeMakeEngineForSurface(JNIEnv *env, jclass cl
                                                           jobject surface, jint width,
                                                           jint height) {
     ANativeWindow *native_window = ANativeWindow_fromSurface(env, surface);
-    NS_UNKNOWN::RenderConfig render_config = {
+    RenderConfig render_config = {
             (uint16_t) width, (uint16_t) height, native_window
     };
-    NS_UNKNOWN::UnknownEngine *engine = new NS_UNKNOWN::UnknownEngine(render_config);
+    UnknownEngine *engine = new UnknownEngine(render_config);
     return ToEngineJavaObject(engine);
+}
+
+JNIEXPORT jlong JNICALL
+Java_com_unknown_UnknownEngine_nativeGetSceneManager(JNIEnv *env, jclass clazz, jlong ptr) {
+    UnknownEngine *engine = ToEngineNativePointer(ptr);
+    return ToJavaObject(&engine->GetScenes());
+}
+
+JNIEXPORT jlong JNICALL
+Java_com_unknown_UnknownEngine_nativeGetEntityManager(JNIEnv *env, jclass clazz, jlong ptr) {
+    UnknownEngine *engine = ToEngineNativePointer(ptr);
+    return ToJavaObject(&engine->GetEntities());
 }
 
 JNIEXPORT void JNICALL
 Java_com_unknown_UnknownEngine_nativeRender(JNIEnv *env, jclass clazz, jlong ptr) {
-    NS_UNKNOWN::UnknownEngine *engine = ToEngineNativePointer(ptr);
+    UnknownEngine *engine = ToEngineNativePointer(ptr);
     engine->Update();
 }
 
 JNIEXPORT void JNICALL
 Java_com_unknown_UnknownEngine_nativeDestroy(JNIEnv *env, jclass clazz, jlong ptr) {
-    NS_UNKNOWN::UnknownEngine *engine = ToEngineNativePointer(ptr);
+    UnknownEngine *engine = ToEngineNativePointer(ptr);
     DELETE_PTR(engine);
 }
 

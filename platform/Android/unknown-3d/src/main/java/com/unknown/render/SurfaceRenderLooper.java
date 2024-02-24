@@ -33,9 +33,6 @@ public final class SurfaceRenderLooper {
 
     public void init(Surface surface, int width, int height) {
         sendMessage(INIT, new Object[] {surface, width, height});
-        if (callback != null) {
-            callback.onInitScene();
-        }
     }
 
     public void destroy() {
@@ -66,6 +63,9 @@ public final class SurfaceRenderLooper {
                 int height = (int) params[2];
                 this.engine = new UnknownEngine(surface, width, height);
                 destroyed.set(false);
+                if (callback != null) {
+                    callback.onInit(engine);
+                }
                 handler.sendEmptyMessageDelayed(RENDER, 1000 / fps);
                 break;
             case RENDER:
@@ -73,7 +73,7 @@ public final class SurfaceRenderLooper {
                     return true;
                 }
                 if (callback != null) {
-                    callback.onUpdateScene();
+                    callback.onUpdate();
                     callback.beforeRender();
                 }
                 engine.render();
@@ -91,8 +91,8 @@ public final class SurfaceRenderLooper {
     }
 
     public interface Callback {
-        void onInitScene();
-        void onUpdateScene();
+        void onInit(UnknownEngine engine);
+        void onUpdate();
         void beforeRender();
         void afterRender();
     }

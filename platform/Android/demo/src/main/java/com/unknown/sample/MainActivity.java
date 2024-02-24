@@ -4,7 +4,13 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.unknown.UnknownEngine;
 import com.unknown.activity.UnknownSurfaceActivity;
+import com.unknown.component.Transform;
+import com.unknown.core.entity.Entity;
+import com.unknown.core.scene.Scene;
+import com.unknown.core.scene.SceneManager;
+import com.unknown.core.supposition.NdcPoint;
 
 public class MainActivity extends UnknownSurfaceActivity {
 
@@ -18,13 +24,24 @@ public class MainActivity extends UnknownSurfaceActivity {
     }
 
     @Override
-    public void onInitScene() {
+    public void onInit(UnknownEngine engine) {
+        SceneManager scenes = engine.getScenes();
+        Scene mainScene = scenes.createScene();
+        scenes.loadScene(mainScene);
 
+        Entity rectangle = engine.getEntities().createEntity();
+        NdcPoint translation = NdcPoint.zero();
+        NdcPoint rotation = NdcPoint.zero();
+        NdcPoint scale = NdcPoint.zero();
+        Transform transform = new Transform(translation, rotation, scale);
+        rectangle.addComponent(transform);
+
+        mainScene.addEntity(rectangle);
     }
 
     @Override
-    public void onUpdateScene() {
-
+    public void onUpdate() {
+        super.onUpdate();
     }
 
     @Override

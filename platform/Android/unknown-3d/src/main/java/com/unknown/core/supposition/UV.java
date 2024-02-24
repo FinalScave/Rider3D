@@ -2,10 +2,12 @@ package com.unknown.core.supposition;
 
 import com.unknown.core.NativeObject;
 
+import dalvik.annotation.optimization.CriticalNative;
+
 public class UV extends NativeObject {
 
     public UV(float u, float v) {
-        this.nativePtr = nativeMakeUV(u, v);
+        super(nativeMakeUV(u, v));
     }
 
     public void setU(float u) {
@@ -22,8 +24,12 @@ public class UV extends NativeObject {
         nativeDestroy(nativePtr);
     }
 
+    @CriticalNative
     private static native long nativeMakeUV(float u, float v);
+    @CriticalNative
     private static native void nativeSetU(long ptr, float u);
+    @CriticalNative
     private static native void nativeSetV(long ptr, float v);
+    @CriticalNative
     private static native void nativeDestroy(long ptr);
 }
