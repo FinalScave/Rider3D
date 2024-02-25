@@ -71,15 +71,18 @@ int main(int argc, char **argv)
     glfwGetWindowSize(window, &width, &height);
 
     // init engine
-    RenderConfig config = {(uint16_t) width, (uint16_t) height, handle};
+    RenderConfig config = {(uint16_t) width, (uint16_t) height,
+                           handle, true};
     UnknownEngine* engine = new UnknownEngine(config);
     SceneManager scenes = engine->GetScenes();
     Scene* scene_main = scenes.CreateScene();
-    Camera camera{0,0,1};
-    scene_main->assign_from_copy(camera);
+    /*Camera camera{0,0,1};
+    scene_main->assign_from_copy(camera);*/
     scenes.LoadScene(scene_main);
+    DebugInfo debugInfo{1,1,0xff,"Hello"};
+    scene_main->assign_from_copy(debugInfo);
     // add entity
-    add_box(engine, scene_main);
+    add_rect(engine, scene_main);
 
     // render loop
     while (!glfwWindowShouldClose(window))

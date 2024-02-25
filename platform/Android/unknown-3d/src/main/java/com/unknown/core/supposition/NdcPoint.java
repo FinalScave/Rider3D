@@ -18,6 +18,10 @@ public class NdcPoint extends NativeObject {
         super(nativeMakeNdcPoint(x, y, z));
     }
 
+    public NdcPoint(long nativePtr) {
+        super(nativePtr);
+    }
+
     public void setX(float x) {
         nativeSetX(nativePtr, x);
     }

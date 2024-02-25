@@ -23,6 +23,7 @@ jint JNI_OnLoad(JavaVM *javaVm, void *) {
     TransformJni().RegisterTransformMethods(env);
     VertexJni().RegisterVertexMethods(env);
     VerticesJni().RegisterVerticesJni(env);
+    DebugInfoJni().RegisterDebugInfoMethods(env);
     // core ecs
     EntityJni().RegisterForEntity(env);
     SceneJni().RegisterForScene(env);

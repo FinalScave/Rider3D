@@ -132,5 +132,11 @@ UNKNOWN_NS_BEGIN
             1, 2, 3
     };
 
+    struct DebugInfo {
+        UInt16 x = 0, y = 0;
+        UInt8 color = 0xff;
+        const char* text = nullptr;
+    };
+
 UNKNOWN_NS_END
 #endif //UNKNOWN3D_BASICCOMPONENTS_H

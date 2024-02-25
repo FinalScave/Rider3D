@@ -3,6 +3,7 @@ package com.unknown.core.entity;
 import com.unknown.component.Camera;
 import com.unknown.component.Component;
 import com.unknown.component.ComponentType;
+import com.unknown.component.DebugInfo;
 import com.unknown.component.Transform;
 import com.unknown.component.Vertices;
 import com.unknown.core.NativeObject;
@@ -35,6 +36,9 @@ public class Entity extends NativeObject {
                 break;
             case VERTICES:
                 component = (T) new Vertices(componentPtr);
+                break;
+            case DEBUG_INFO:
+                component = (T) new DebugInfo(componentPtr);
                 break;
         }
         if (components == null) {

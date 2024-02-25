@@ -7,9 +7,6 @@ import com.unknown.core.supposition.NdcPoint;
 import dalvik.annotation.optimization.CriticalNative;
 
 public class Transform extends Component {
-    private NdcPoint translation;
-    private NdcPoint rotation;
-    private NdcPoint scale;
 
     /*public static Transform makeTranslation(NdcPoint translation) {
         return new Transform(translation, NdcPoint.zero(), NdcPoint.identity());
@@ -34,31 +31,16 @@ public class Transform extends Component {
         super(nativePtr, TRANSFORM);
     }
 
-    public NdcPoint translation() {
-        return translation;
-    }
-
-    public NdcPoint rotation() {
-        return rotation;
-    }
-
-    public NdcPoint scale() {
-        return scale;
-    }
-
     public void setTranslation(NdcPoint translation) {
         nativeSetTranslation(nativePtr, translation.nativePtr);
-        this.translation = translation;
     }
 
     public void setRotation(NdcPoint rotation) {
         nativeSetRotation(nativePtr, rotation.nativePtr);
-        this.rotation = rotation;
     }
 
     public void setScale(NdcPoint scale) {
         nativeSetScale(nativePtr, scale.nativePtr);
-        this.scale = scale;
     }
 
     @Override

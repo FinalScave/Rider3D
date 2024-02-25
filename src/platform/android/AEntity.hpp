@@ -27,6 +27,9 @@ public:
             case 101:
                 component_address = ToJavaObject(entity.assign<Vertices>().get());
                 break;
+            case 200:
+                component_address = ToJavaObject(entity.assign<DebugInfo>().get());
+                break;
         }
         return component_address;
     }

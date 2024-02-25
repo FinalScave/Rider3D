@@ -44,6 +44,9 @@ UNKNOWN_NS_BEGIN
         init.platformData = platform_data;
         bgfx::init(init);
         bgfx::reset(config.width, config.height, BGFX_RESET_VSYNC, init.resolution.format);
+        if (config.debug) {
+            bgfx::setDebug(BGFX_DEBUG_TEXT);
+        }
 
         // initialize context
         this->context_ = MAKE_SMART_PTR<RenderContext>(config);
@@ -66,6 +69,15 @@ UNKNOWN_NS_BEGIN
         bgfx::setViewClear(context_->main_view_id_, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x000000ff);
 
         this->RenderScene();
+        
+        if (context_->scene_->has_component<DebugInfo>()) {
+            auto debugInfo = context_->scene_->component<DebugInfo>();
+            if (debugInfo->text != nullptr) {
+                bgfx::touch(context_->main_view_id_);
+                bgfx::dbgTextClear();
+                bgfx::dbgTextPrintf(debugInfo->x, debugInfo->y, debugInfo->color, debugInfo->text);
+            }
+        }
 
         bgfx::frame();
         return context_->main_view_id_;

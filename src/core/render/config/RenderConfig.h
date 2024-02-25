@@ -12,8 +12,8 @@ UNKNOWN_NS_BEGIN
     struct RenderConfig {
         uint16_t width = 720;
         uint16_t height = 1280;
-
         void* native_window_handle = nullptr;
+        bool debug = false;
     };
 
 UNKNOWN_NS_END

@@ -203,3 +203,46 @@ public:
                              sizeof(vertices_methods) / sizeof(JNINativeMethod));
     }
 };
+
+class DebugInfoJni {
+public:
+    static void DestroyDebugInfo(jlong ptr) {
+        auto *holder = ToNativePointer<DebugInfo>(ptr);
+        DELETE_PTR(holder);
+    }
+
+    static void SetX(jlong ptr, jint screen_x) {
+        auto *holder = ToNativePointer<DebugInfo>(ptr);
+        holder->x = screen_x;
+    }
+
+    static void SetY(jlong ptr, jint screen_y) {
+        auto *holder = ToNativePointer<DebugInfo>(ptr);
+        holder->y = screen_y;
+    }
+
+    static void SetColor(jlong ptr, jshort color) {
+        auto *holder = ToNativePointer<DebugInfo>(ptr);
+        holder->color = color;
+    }
+
+    static void SetText(JNIEnv *env, jclass klass, jlong ptr, jstring text) {
+        auto *holder = ToNativePointer<DebugInfo>(ptr);
+        const char* chars = env->GetStringUTFChars(text, JNI_FALSE);
+        holder->text = chars;
+    }
+
+    static constexpr const char *debuginfo_name = "com/unknown/component/DebugInfo";
+    constexpr static const JNINativeMethod debuginfo_methods[] = {
+            {"nativeSetX",        "(JI)V",   (void *) SetX},
+            {"nativeSetY", "(JI)V",  (void *) SetY},
+            {"nativeSetColor", "(JS)V",  (void *) SetColor},
+            {"nativeSetText", "(JLjava/lang/String;)V",  (void *) SetText},
+    };
+
+    void RegisterDebugInfoMethods(JNIEnv *env) {
+        jclass debuginfo_class = env->FindClass(debuginfo_name);
+        env->RegisterNatives(debuginfo_class, debuginfo_methods,
+                             sizeof(debuginfo_methods) / sizeof(JNINativeMethod));
+    }
+};
