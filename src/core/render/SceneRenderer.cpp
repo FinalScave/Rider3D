@@ -81,7 +81,7 @@ UNKNOWN_NS_BEGIN
     }
 
     void SceneRenderer::RenderEntity(Entity& entity, ENTITY_SIZE_TYPE order) {
-        if (!entity.component<EntityConfig>()->visible) {
+        if (entity.has_component<EntityConfig>() && !entity.component<EntityConfig>()->visible) {
             return;
         }
         context_->curr_view_id_ = order;

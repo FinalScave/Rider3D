@@ -1,16 +1,17 @@
 //
-// Created by Scave on 2023/11/9.
+// Created by Scave on 2024/2/25.
 //
-
-#include "Vertex.h"
+#include "BasicComponents.h"
 
 UNKNOWN_NS_BEGIN
+
+    Vertices::Vertices() = default;
 
     Vertices::~Vertices() {
         vertex_data_list.clear();
     }
 
-    void Vertices::AddVertex(Vertex& vertex) {
+    void Vertices::AddVertex(Vertex &vertex) {
         vertex_data_list.push_back(vertex);
     }
 
@@ -18,7 +19,8 @@ UNKNOWN_NS_BEGIN
         vertex_index_list.push_back(index);
     }
 
-    void Vertices::AddFace(Vertex& upper_left, Vertex& upper_right, Vertex& lower_right, Vertex& lower_left) {
+    void Vertices::AddFace(Vertex &upper_left, Vertex &upper_right, Vertex &lower_right,
+                           Vertex &lower_left) {
         // add vertex indices,2 triangles have 6 vertices,so there is 6 indices
         uint32_t index1 = vertex_data_list.size();
         uint32_t index2 = index1 + 1;
@@ -39,7 +41,7 @@ UNKNOWN_NS_BEGIN
         vertex_data_list.push_back(lower_left);
     }
 
-    void Vertices::SetVertices(uint16_t vertices_count, Vertex*& vertices) {
+    void Vertices::SetVertices(uint16_t vertices_count, Vertex *&vertices) {
         vertex_data_list.clear();
         for (uint16_t i = 0; i < vertices_count; ++i) {
             vertex_data_list.push_back(vertices[i]);

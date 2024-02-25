@@ -11,20 +11,17 @@ UNKNOWN_NS_BEGIN
             kDefaultRectColor, kDefaultRectColor, kDefaultRectColor
     };
 
-    Vertices VertexUtil::BuildRectangle(float width, float height, Color color) {
+    void VertexUtil::BuildRectangle(Vertices& vertices, float width, float height, Color color) {
         float w = width / 2.f;
         float h = height / 2.f;
         Vertex v1 = {{-w, h, 0.5}, {0, 1}, color};
         Vertex v2 = {{w, h, 0.5}, {1, 1}, color};
         Vertex v3 = {{w, -h, 0.5}, {1, 0}, color};
         Vertex v4 = {{-w, -h, 0.5}, {0, 0}, color};
-        Vertices vertices;
         vertices.AddFace(v1, v2, v3, v4);
-        return vertices;
     }
 
-    Vertices VertexUtil::BuildBox(float width, float height, float depth, Color colors[6]) {
-        Vertices vertices;
+    void VertexUtil::BuildBox(Vertices& vertices, float width, float height, float depth, Color colors[6]) {
         float w = width / 2.f;
         float h = height / 2.f;
         float d = depth / 2.f;
@@ -71,11 +68,28 @@ UNKNOWN_NS_BEGIN
         Vertex bottom_v3 = {{+w, -h, -d}, {1, 1}, color};
         Vertex bottom_v4 = {{-w, -h, -d}, {0, 1}, color};
         vertices.AddFace(bottom_v1, bottom_v2, bottom_v3, bottom_v4);
-        return vertices;
     }
 
-    Vertices VertexUtil::BuildSphere(uint16_t row_count, uint16_t row_height, float radius) {
-        return {};
+    void VertexUtil::BuildSphere(Vertices& vertices, uint16_t row_count, uint16_t row_height, float radius) {
+
+    }
+
+    void VertexUtil::BuildSkyBox(Vertices& vertices, float size, float quality) {
+
+    }
+
+    void VertexUtil::BuildCapsule(Vertices& vertices, float radius, float length) {
+
+    }
+
+    void VertexUtil::BuildCylinder(Vertices& vertices,
+                                   float radius_outer, float radius_inner, float height, int segs) {
+
+    }
+
+    void VertexUtil::BuildTorus(Vertices& vertices,
+                                float large_radius, float small_radius, int segments_w, int segments_h) {
+
     }
 
 UNKNOWN_NS_END

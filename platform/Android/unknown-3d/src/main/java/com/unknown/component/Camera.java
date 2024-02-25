@@ -1,5 +1,7 @@
 package com.unknown.component;
 
+import static com.unknown.component.ComponentType.CAMERA;
+
 import com.unknown.core.supposition.NdcPoint;
 
 import dalvik.annotation.optimization.CriticalNative;
@@ -9,11 +11,19 @@ public class Camera extends Component {
     private NdcPoint target;
     private NdcPoint upAxis;
 
+    /*public static Camera makeInPosition(NdcPoint position) {
+        return new Camera(position, NdcPoint.zero(), NdcPoint.zero());
+    }
+
     public Camera(NdcPoint position, NdcPoint target, NdcPoint upAxis) {
-        super(nativeMakeCamera(position.nativePtr, target.nativePtr, upAxis.nativePtr));
+        super(nativeMakeCamera(position.nativePtr, target.nativePtr, upAxis.nativePtr), CAMERA);
         this.position = position;
         this.target = target;
         this.upAxis = upAxis;
+    }*/
+
+    public Camera(long nativePtr) {
+        super(nativePtr, CAMERA);
     }
 
     public NdcPoint position() {
@@ -49,8 +59,8 @@ public class Camera extends Component {
         nativeDestroy(nativePtr);
     }
 
-    @CriticalNative
-    private static native long nativeMakeCamera(long positionPtr, long targetPtr, long upAxisPtr);
+    /*@CriticalNative
+    private static native long nativeMakeCamera(long positionPtr, long targetPtr, long upAxisPtr);*/
     @CriticalNative
     private static native void nativeSetPosition(long ptr, long positionPtr);
     @CriticalNative

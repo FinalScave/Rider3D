@@ -10,6 +10,10 @@ public class NdcPoint extends NativeObject {
         return new NdcPoint(0, 0, 0);
     }
 
+    public static NdcPoint identity() {
+        return new NdcPoint(1, 1, 1);
+    }
+
     public NdcPoint(float x, float y, float z) {
         super(nativeMakeNdcPoint(x, y, z));
     }

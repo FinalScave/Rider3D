@@ -1,5 +1,7 @@
 package com.unknown.component;
 
+import static com.unknown.component.ComponentType.VERTEX;
+
 import com.unknown.core.supposition.Color;
 import com.unknown.core.supposition.NdcPoint;
 import com.unknown.core.supposition.UV;
@@ -12,7 +14,7 @@ public class Vertex extends Component {
     private Color color;
 
     public Vertex(NdcPoint position, UV uv, Color color) {
-        super(nativeMakeVertex(position.nativePtr, uv.nativePtr, color.nativePtr));
+        super(nativeMakeVertex(position.nativePtr, uv.nativePtr, color.nativePtr), VERTEX);
         this.position = position;
         this.uv = uv;
         this.color = color;

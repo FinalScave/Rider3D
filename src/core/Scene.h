@@ -20,6 +20,18 @@ UNKNOWN_NS_BEGIN
         };
     };
 
+    struct PrimitiveType {
+        enum Enum {
+            Rectangle = 0,
+            Box,
+            Sphere,
+            SkyBox,
+            Capsule,
+            Cylinder,
+            Torus
+        };
+    };
+
     class Scene : public Entity {
         friend class SceneManager;
 
@@ -55,6 +67,8 @@ UNKNOWN_NS_BEGIN
         Scene* GetCurrentScene();
 
         void LoadScene(Scene* scene);
+
+        Entity CreatePrimitiveEntity(PrimitiveType::Enum type);
 
     private:
         EntityManager& entities_;

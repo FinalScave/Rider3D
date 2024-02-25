@@ -3,14 +3,10 @@
 //
 
 #include <jni.h>
-#include "AScene.hpp"
+#include "ASuppositions.hpp"
+#include "AComponents.hpp"
 #include "AEntity.hpp"
-#include "AColor.hpp"
-#include "APoint.hpp"
-#include "AUV.hpp"
-#include "AVertex.hpp"
-#include "ACamera.hpp"
-#include "ATransform.hpp"
+#include "AScene.hpp"
 
 jint JNI_OnLoad(JavaVM *javaVm, void *) {
     JNIEnv *env = nullptr;
@@ -18,13 +14,17 @@ jint JNI_OnLoad(JavaVM *javaVm, void *) {
     if (result != JNI_OK) {
         return -1;
     }
-    register_scene_jni(env);
-    register_entity_jni(env);
-    register_color_jni(env);
-    register_point_jni(env);
-    register_uv_jni(env);
-    register_vertices_jni(env);
-    register_camera_jni(env);
-    register_transform_jni(env);
+    // suppositions
+    NdcPointJni().RegisterNdcPointMethods(env);
+    ColorJni().RegisterColorMethods(env);
+    UVJni().RegisterUvMethods(env);
+    // components
+    CameraJni().RegisterCameraMethods(env);
+    TransformJni().RegisterTransformMethods(env);
+    VertexJni().RegisterVertexMethods(env);
+    VerticesJni().RegisterVerticesJni(env);
+    // core ecs
+    EntityJni().RegisterForEntity(env);
+    SceneJni().RegisterForScene(env);
     return JNI_VERSION_1_6;
 }

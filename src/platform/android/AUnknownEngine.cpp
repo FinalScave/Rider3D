@@ -1,13 +1,12 @@
-#include <jni.h>
-
 //
 // Created by Scave on 2023/11/10.
 //
 #pragma once
+#include <jni.h>
 #include <android/native_window_jni.h>
 #include "UnknownEngine.h"
 #include "JNativeConverter.h"
-#include "JObjectHolder.h"
+#include "JRefHolder.h"
 
 using namespace unknown;
 
@@ -27,18 +26,19 @@ Java_com_unknown_UnknownEngine_nativeMakeEngineForSurface(JNIEnv *env, jclass cl
 JNIEXPORT jlong JNICALL
 Java_com_unknown_UnknownEngine_nativeGetSceneManager(JNIEnv *env, jclass clazz, jlong ptr) {
     UnknownEngine *engine = ToEngineNativePointer(ptr);
-    JObjectHolder<SceneManager>* holder = new JObjectHolder<SceneManager>(engine->GetScenes());
+    JRefHolder<SceneManager>* holder = new JRefHolder<SceneManager>(engine->GetScenes());
     return ToJavaObject(holder);
 }
 
 JNIEXPORT jlong JNICALL
 Java_com_unknown_UnknownEngine_nativeGetEntityManager(JNIEnv *env, jclass clazz, jlong ptr) {
     UnknownEngine *engine = ToEngineNativePointer(ptr);
-    return ToJavaObject(&engine->GetEntities());
+    JRefHolder<EntityManager>* holder = new JRefHolder<EntityManager>(engine->GetEntities());
+    return ToJavaObject(holder);
 }
 
 JNIEXPORT void JNICALL
-Java_com_unknown_UnknownEngine_nativeRender(JNIEnv *env, jclass clazz, jlong ptr) {
+Java_com_unknown_UnknownEngine_nativeUpdate(JNIEnv *env, jclass clazz, jlong ptr) {
     UnknownEngine *engine = ToEngineNativePointer(ptr);
     engine->Update();
 }

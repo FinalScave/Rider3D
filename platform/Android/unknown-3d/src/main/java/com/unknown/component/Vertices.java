@@ -1,5 +1,7 @@
 package com.unknown.component;
 
+import static com.unknown.component.ComponentType.VERTICES;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +11,12 @@ import dalvik.annotation.optimization.FastNative;
 public class Vertices extends Component {
     private List<Vertex> vertexList;
 
-    public Vertices() {
-        super(nativeMakeVertices());
+    public Vertices(long nativePtr) {
+        super(nativePtr, VERTICES);
+    }
+
+    private Vertices() {
+        super(nativeMakeVertices(), VERTICES);
     }
 
     public void addVertex(Vertex vertex) {

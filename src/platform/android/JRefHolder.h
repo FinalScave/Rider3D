@@ -2,29 +2,33 @@
 // Created by Scave on 2023/11/11.
 //
 
-#ifndef UNKNOWN3D_JOBJECTHOLDER_H
-#define UNKNOWN3D_JOBJECTHOLDER_H
+#ifndef UNKNOWN3D_JREFHOLDER_H
+#define UNKNOWN3D_JREFHOLDER_H
 
 #include "Define.h"
 
 template<typename T>
-class JObjectHolder {
+class JRefHolder {
 public:
-    explicit JObjectHolder(T& target) : target(target) {}
+    explicit JRefHolder(T& target) : target(target) {}
 
     T& Get() {
         return this->target;
-    }
-
-    void Set(T& obj) {
-        this->target = obj;
     }
 private:
     T& target;
 };
 
 template<typename T>
-class JSmartPtrHolder : public JObjectHolder<SMART_PTR<T>>{
+class JObjectCopier {
+public:
+    explicit JObjectCopier(T target) : target(target) {}
+
+    T& Get() {
+        return this->target;
+    }
+private:
+    T target;
 };
 
-#endif //UNKNOWN3D_JOBJECTHOLDER_H
+#endif //UNKNOWN3D_JREFHOLDER_H

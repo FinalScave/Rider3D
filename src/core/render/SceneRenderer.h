@@ -8,7 +8,6 @@
 #include "Define.h"
 #include "config/RenderConfig.h"
 #include "Supposition.h"
-#include "Vertex.h"
 #include "context/RenderContext.h"
 #include "Graph2DRenderer.h"
 #include "Graph3DRenderer.h"

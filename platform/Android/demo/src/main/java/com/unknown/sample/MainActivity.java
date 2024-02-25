@@ -6,16 +6,22 @@ import androidx.annotation.Nullable;
 
 import com.unknown.UnknownEngine;
 import com.unknown.activity.UnknownSurfaceActivity;
+import com.unknown.component.ComponentType;
 import com.unknown.component.Transform;
 import com.unknown.core.entity.Entity;
+import com.unknown.core.entity.PrimitiveType;
 import com.unknown.core.scene.Scene;
 import com.unknown.core.scene.SceneManager;
 import com.unknown.core.supposition.NdcPoint;
+import com.unknown.core.supposition.Vec3;
 
 public class MainActivity extends UnknownSurfaceActivity {
 
     private final static short FPS = 60;
     private long startTime;
+    private Entity rectangle;
+    private Transform transform;
+    private int count = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,19 +35,22 @@ public class MainActivity extends UnknownSurfaceActivity {
         Scene mainScene = scenes.createScene();
         scenes.loadScene(mainScene);
 
-        Entity rectangle = engine.getEntities().createEntity();
-        NdcPoint translation = NdcPoint.zero();
-        NdcPoint rotation = NdcPoint.zero();
-        NdcPoint scale = NdcPoint.zero();
-        /*Transform transform = new Transform(translation, rotation, scale);
-        rectangle.addComponent(transform);*/
+        this.rectangle = scenes.createPrimitiveEntity(PrimitiveType.RECTANGLE);
+        this.transform = rectangle.addComponent(ComponentType.TRANSFORM);
 
         mainScene.addEntity(rectangle);
     }
 
     @Override
     public void onUpdate() {
-        super.onUpdate();
+        transform.setTranslation(new NdcPoint(0.5f, 0, 0));
+        /*if (count < 10) {
+            transform.translation().setX(0.1f * count);
+            count++;
+        } else {
+            transform.translation().setX(-0.1f * count);
+            count--;
+        }*/
     }
 
     @Override

@@ -7,8 +7,8 @@
 
 #include "Define.h"
 #include "bgfx/bgfx.h"
-#include "Vertex.h"
 #include "entityx/Entity.h"
+#include "BasicComponents.h"
 
 UNKNOWN_NS_BEGIN
 

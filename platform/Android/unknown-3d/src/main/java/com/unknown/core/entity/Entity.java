@@ -1,6 +1,10 @@
 package com.unknown.core.entity;
 
+import com.unknown.component.Camera;
 import com.unknown.component.Component;
+import com.unknown.component.ComponentType;
+import com.unknown.component.Transform;
+import com.unknown.component.Vertices;
 import com.unknown.core.NativeObject;
 
 import java.util.ArrayList;
@@ -15,12 +19,29 @@ public class Entity extends NativeObject {
         super(nativePtr);
     }
 
-    public void addComponent(Component component) {
-        nativeAddComponent(nativePtr, component.nativePtr);
+    @SuppressWarnings("unchecked")
+    public <T extends Component> T addComponent(ComponentType componentType) {
+        long componentPtr = nativeAddComponent(nativePtr, componentType.type);
+        if (componentPtr == -1) {
+            throw new RuntimeException("Component '" + componentType.name + "' assign failed");
+        }
+        T component = null;
+        switch (componentType) {
+            case CAMERA:
+                component = (T) new Camera(componentPtr);
+                break;
+            case TRANSFORM:
+                component = (T) new Transform(componentPtr);
+                break;
+            case VERTICES:
+                component = (T) new Vertices(componentPtr);
+                break;
+        }
         if (components == null) {
             components = new ArrayList<>();
         }
         components.add(component);
+        return component;
     }
 
     @SuppressWarnings("unchecked")
@@ -43,7 +64,7 @@ public class Entity extends NativeObject {
     }
 
     @CriticalNative
-    private static native void nativeAddComponent(long ptr, long component_ptr);
+    private static native long nativeAddComponent(long ptr, int component_type);
 
     @CriticalNative
     private static native void nativeDestroy(long ptr);

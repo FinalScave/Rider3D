@@ -26,9 +26,9 @@ static void glfw_keyCallback(GLFWwindow *window, int key, int scancode, int acti
 void add_rect(UnknownEngine* engine, Scene* scene) {
     Entity rectangle = engine->GetEntities().create();
     rectangle.assign<EntityConfig>();
+    Vertices& vertices = *rectangle.assign<Vertices>();
     Color red {1, 0, 0, 1};
-    Vertices vertices = VertexUtil::BuildRectangle(0.75, 0.75, red);
-    rectangle.assign_from_copy(vertices);
+    VertexUtil::BuildRectangle(vertices, 0.75, 0.75, red);
     Transform transform;
     transform.translation.x = 0.5;
     rectangle.assign_from_copy(transform);
@@ -46,8 +46,8 @@ void add_box(UnknownEngine* engine, Scene* scene) {
             {1, 1, 0, 1},
             {1, 0, 1, 1}
     };;
-    Vertices vertices = VertexUtil::BuildBox(0.8, 0.8, 0.8, colors);
-    box.assign_from_copy(vertices);
+    Vertices& vertices = *box.assign<Vertices>();
+    VertexUtil::BuildBox(vertices, 0.8, 0.8, 0.8, colors);
     Transform transform;
     transform.translation.x = 0.5;
     box.assign_from_copy(transform);

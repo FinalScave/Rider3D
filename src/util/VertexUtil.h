@@ -6,18 +6,30 @@
 #define UNKNOWN3D_VERTEXUTIL_H
 
 #include "Define.h"
-#include "Vertex.h"
+#include "BasicComponents.h"
 
 UNKNOWN_NS_BEGIN
 
     class VertexUtil {
     public:
-        static Vertices BuildRectangle(float width, float height, Color color = kDefaultRectColor);
+        static void BuildRectangle(Vertices& vertices,
+                                       float width, float height, Color color = kDefaultRectColor);
 
-        static Vertices BuildBox(
-                float width, float height, float depth, Color colors[6] = const_cast<Color*>(kDefaultBoxColors));
+        static void BuildBox(Vertices& vertices,
+                             float width, float height, float depth, Color colors[6] = const_cast<Color*>(kDefaultBoxColors));
 
-        static Vertices BuildSphere(uint16_t row_count, uint16_t row_height, float radius);
+        static void BuildSphere(Vertices& vertices,
+                                UInt16 row_count, UInt16 row_height, float radius);
+
+        static void BuildSkyBox(Vertices& vertices, float size, float quality);
+
+        static void BuildCapsule(Vertices& vertices, float radius, float length);
+
+        static void BuildCylinder(Vertices& vertices,
+                                      float radius_outer, float radius_inner, float height, int segs);
+
+        static void BuildTorus(Vertices& vertices,
+                                   float large_radius, float small_radius, int segments_w, int segments_h);
     private:
         const static Color kDefaultRectColor;
         const static Color kDefaultBoxColors[6];
