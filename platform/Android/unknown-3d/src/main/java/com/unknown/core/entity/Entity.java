@@ -48,6 +48,16 @@ public class Entity extends NativeObject {
         return component;
     }
 
+    public <T extends Component> T addComponent(Class<T> clazz) {
+        ComponentType[] types = ComponentType.values();
+        for (ComponentType type : types) {
+            if (type.klass == clazz) {
+                return addComponent(type);
+            }
+        }
+        return null;
+    }
+
     @SuppressWarnings("unchecked")
     public <T extends Component> T getComponent(Class<T> componentClass) {
         if (components == null) {

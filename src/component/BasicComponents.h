@@ -134,7 +134,7 @@ UNKNOWN_NS_BEGIN
 
     struct DebugInfo {
         UInt16 x = 0, y = 0;
-        UInt8 color = 0xff;
+        UInt8 color = 0x0f;
         const char* text = nullptr;
     };
 

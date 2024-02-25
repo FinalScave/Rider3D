@@ -26,6 +26,11 @@ public class UnknownSurfaceActivity extends Activity implements SurfaceRenderLoo
     }
 
     @Override
+    public boolean isDebug() {
+        return false;
+    }
+
+    @Override
     public void onInit(UnknownEngine engine) {
 
     }

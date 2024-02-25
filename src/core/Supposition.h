@@ -73,6 +73,17 @@ UNKNOWN_NS_BEGIN
         float a;
     };
 
+    struct Colors {
+        const static Color Red;
+        const static Color Green;
+        const static Color Blue;
+        const static Color Black;
+        const static Color White;
+        const static Color Orange;
+        const static Color Purple;
+        const static Color Cyan;
+    };
+
     typedef NS_UNKNOWN::NdcPoint Number3D;
     typedef NS_UNKNOWN::NdcPoint Vec3;
     typedef NS_UNKNOWN::TextureUVPoint UV;

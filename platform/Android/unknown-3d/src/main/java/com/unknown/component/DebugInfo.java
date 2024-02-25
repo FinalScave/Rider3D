@@ -17,7 +17,7 @@ public class DebugInfo extends Component {
         nativeSetY(nativePtr, screenY);
     }
 
-    public void setColor(short color) {
+    public void setColor(int color) {
         nativeSetColor(nativePtr, color);
     }
 
@@ -30,7 +30,7 @@ public class DebugInfo extends Component {
     @CriticalNative
     private static native void nativeSetY(long ptr, int screenY);
     @CriticalNative
-    private static native void nativeSetColor(long ptr, short color);
+    private static native void nativeSetColor(long ptr, int color);
     @FastNative
     private static native void nativeSetText(long ptr, String text);
 }

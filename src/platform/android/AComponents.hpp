@@ -221,7 +221,7 @@ public:
         holder->y = screen_y;
     }
 
-    static void SetColor(jlong ptr, jshort color) {
+    static void SetColor(jlong ptr, jint color) {
         auto *holder = ToNativePointer<DebugInfo>(ptr);
         holder->color = color;
     }
@@ -236,7 +236,7 @@ public:
     constexpr static const JNINativeMethod debuginfo_methods[] = {
             {"nativeSetX",        "(JI)V",   (void *) SetX},
             {"nativeSetY", "(JI)V",  (void *) SetY},
-            {"nativeSetColor", "(JS)V",  (void *) SetColor},
+            {"nativeSetColor", "(JI)V",  (void *) SetColor},
             {"nativeSetText", "(JLjava/lang/String;)V",  (void *) SetText},
     };
 

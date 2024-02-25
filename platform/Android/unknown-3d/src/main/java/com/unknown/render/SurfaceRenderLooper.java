@@ -20,6 +20,7 @@ public final class SurfaceRenderLooper {
     private final HandlerThread renderThread = new HandlerThread("Unknown3D");
     private final AtomicBoolean destroyed = new AtomicBoolean(false);
     private short fps = DEFAULT_FPS;
+    private boolean debug = false;
     private Callback callback;
 
     public SurfaceRenderLooper() {
@@ -29,6 +30,10 @@ public final class SurfaceRenderLooper {
 
     public void setCallback(Callback callback) {
         this.callback = callback;
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
     }
 
     public void init(Surface surface, int width, int height) {
@@ -61,7 +66,11 @@ public final class SurfaceRenderLooper {
                 Surface surface = (Surface) params[0];
                 int width = (int) params[1];
                 int height = (int) params[2];
-                this.engine = new UnknownEngine(surface, width, height);
+                boolean debug = false;
+                if (callback != null) {
+                    debug = callback.isDebug();
+                }
+                this.engine = new UnknownEngine(surface, width, height, debug);
                 destroyed.set(false);
                 if (callback != null) {
                     callback.onInit(engine);
@@ -91,6 +100,7 @@ public final class SurfaceRenderLooper {
     }
 
     public interface Callback {
+        boolean isDebug();
         void onInit(UnknownEngine engine);
         void onUpdate();
         void beforeRender();

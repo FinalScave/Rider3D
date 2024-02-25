@@ -7,8 +7,8 @@
 UNKNOWN_NS_BEGIN
     const Color VertexUtil::kDefaultRectColor = {1, 1, 1, 1};
     const Color VertexUtil::kDefaultBoxColors[6] = {
-            kDefaultRectColor, kDefaultRectColor, kDefaultRectColor,
-            kDefaultRectColor, kDefaultRectColor, kDefaultRectColor
+            Colors::Red, Colors::Green, Colors::Blue,
+            Colors::Orange, Colors::Purple, Colors::Cyan
     };
 
     void VertexUtil::BuildRectangle(Vertices& vertices, float width, float height, Color color) {

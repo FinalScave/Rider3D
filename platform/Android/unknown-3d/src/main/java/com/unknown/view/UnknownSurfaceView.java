@@ -32,6 +32,20 @@ public class UnknownSurfaceView extends SurfaceView {
         init();
     }
 
+    public void setFps(short fps) {
+        this.fps = fps;
+        if (renderLooper != null) {
+            renderLooper.setFps(fps);
+        }
+    }
+
+    public void setCallback(SurfaceRenderLooper.Callback callback) {
+        this.callback = callback;
+        if (renderLooper != null) {
+            renderLooper.setCallback(callback);
+        }
+    }
+
     private void init() {
         getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -61,19 +75,5 @@ public class UnknownSurfaceView extends SurfaceView {
                 }
             }
         });
-    }
-
-    public void setFps(short fps) {
-        this.fps = fps;
-        if (renderLooper != null) {
-            renderLooper.setFps(fps);
-        }
-    }
-
-    public void setCallback(SurfaceRenderLooper.Callback callback) {
-        this.callback = callback;
-        if (renderLooper != null) {
-            renderLooper.setCallback(callback);
-        }
     }
 }

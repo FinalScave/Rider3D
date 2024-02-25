@@ -3,10 +3,7 @@
 #include "GLFW/glfw3.h"
 #include "GLFW/glfw3native.h"
 #include "UnknownEngine.h"
-#include "bx/math.h"
 #include "component/BasicComponents.h"
-#include "net/Http.h"
-#include "VertexUtil.h"
 
 using namespace unknown;
 
@@ -24,11 +21,7 @@ static void glfw_keyCallback(GLFWwindow *window, int key, int scancode, int acti
 }
 
 void add_rect(UnknownEngine* engine, Scene* scene) {
-    Entity rectangle = engine->GetEntities().create();
-    rectangle.assign<EntityConfig>();
-    Vertices& vertices = *rectangle.assign<Vertices>();
-    Color red {1, 0, 0, 1};
-    VertexUtil::BuildRectangle(vertices, 0.75, 0.75, red);
+    Entity rectangle = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Rectangle);
     Transform transform;
     transform.translation.x = 0.5;
     rectangle.assign_from_copy(transform);
@@ -36,21 +29,7 @@ void add_rect(UnknownEngine* engine, Scene* scene) {
 }
 
 void add_box(UnknownEngine* engine, Scene* scene) {
-    Entity box = engine->GetEntities().create();
-    box.assign<EntityConfig>();
-    Color colors[6]  = {
-            {1, 0, 0, 1},
-            {0, 1, 0, 1},
-            {0, 0, 1, 1},
-            {0, 1, 1, 1},
-            {1, 1, 0, 1},
-            {1, 0, 1, 1}
-    };;
-    Vertices& vertices = *box.assign<Vertices>();
-    VertexUtil::BuildBox(vertices, 0.8, 0.8, 0.8, colors);
-    Transform transform;
-    transform.translation.x = 0.5;
-    box.assign_from_copy(transform);
+    Entity box = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
     scene->AddEntity(box);
 }
 
@@ -74,15 +53,14 @@ int main(int argc, char **argv)
     RenderConfig config = {(uint16_t) width, (uint16_t) height,
                            handle, true};
     UnknownEngine* engine = new UnknownEngine(config);
-    SceneManager scenes = engine->GetScenes();
+    SceneManager& scenes = engine->GetScenes();
     Scene* scene_main = scenes.CreateScene();
-    /*Camera camera{0,0,1};
-    scene_main->assign_from_copy(camera);*/
+    Camera camera{0.1f,0.5f,2.f};
+    scene_main->assign_from_copy(camera);
     scenes.LoadScene(scene_main);
-    DebugInfo debugInfo{1,1,0xff,"Hello"};
-    scene_main->assign_from_copy(debugInfo);
     // add entity
-    add_rect(engine, scene_main);
+    Entity box = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+    scene_main->AddEntity(box);
 
     // render loop
     while (!glfwWindowShouldClose(window))

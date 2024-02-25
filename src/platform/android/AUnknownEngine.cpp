@@ -14,10 +14,11 @@ extern "C" {
 JNIEXPORT jlong JNICALL
 Java_com_unknown_UnknownEngine_nativeMakeEngineForSurface(JNIEnv *env, jclass clazz,
                                                           jobject surface, jint width,
-                                                          jint height) {
+                                                          jint height, jboolean debug) {
     ANativeWindow *native_window = ANativeWindow_fromSurface(env, surface);
     RenderConfig render_config = {
-            (uint16_t) width, (uint16_t) height, native_window
+            (uint16_t) width, (uint16_t) height,
+            native_window, (bool) debug
     };
     UnknownEngine *engine = new UnknownEngine(render_config);
     return ToEngineJavaObject(engine);
