@@ -54,15 +54,20 @@ UNKNOWN_NS_BEGIN
         if (entity.has_component<Transform>()) {
             transform = *entity.component<Transform>();
         }
-        bx::mtxScale(model_matrix_,
-                     transform.scale.x, transform.scale.y, transform.scale.z);
+        // 相乘顺序为 平移 * 旋转 * 缩放
+        bx::mtxIdentity(tmp_matrix);
+        bx::mtxTranslate(tmp_matrix,
+                         transform.translation.x, transform.translation.y, transform.translation.z);
+        bx::mtxMul(model_matrix_, tmp_matrix, model_matrix_);
+
         bx::mtxIdentity(tmp_matrix);
         bx::mtxRotateXYZ(tmp_matrix,
                          transform.rotation.x, transform.rotation.y, transform.rotation.z);
         bx::mtxMul(model_matrix_, model_matrix_, tmp_matrix);
+
         bx::mtxIdentity(tmp_matrix);
-        bx::mtxTranslate(tmp_matrix,
-                         transform.translation.x, transform.translation.y, transform.translation.z);
+        bx::mtxScale(tmp_matrix,
+                     transform.scale.x, transform.scale.y, transform.scale.z);
         bx::mtxMul(model_matrix_, model_matrix_, tmp_matrix);
         bgfx::setTransform(model_matrix_);
 
