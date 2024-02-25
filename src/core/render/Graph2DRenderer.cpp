@@ -56,10 +56,14 @@ UNKNOWN_NS_BEGIN
         }
         bx::mtxScale(model_matrix_,
                      transform.scale.x, transform.scale.y, transform.scale.z);
-        bx::mtxRotateXYZ(model_matrix_,
+        bx::mtxIdentity(tmp_matrix);
+        bx::mtxRotateXYZ(tmp_matrix,
                          transform.rotation.x, transform.rotation.y, transform.rotation.z);
-        bx::mtxTranslate(model_matrix_,
+        bx::mtxMul(model_matrix_, model_matrix_, tmp_matrix);
+        bx::mtxIdentity(tmp_matrix);
+        bx::mtxTranslate(tmp_matrix,
                          transform.translation.x, transform.translation.y, transform.translation.z);
+        bx::mtxMul(model_matrix_, model_matrix_, tmp_matrix);
         bgfx::setTransform(model_matrix_);
 
         bgfx::submit(view_id, program_->program_handle_);

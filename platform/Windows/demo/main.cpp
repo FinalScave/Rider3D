@@ -20,19 +20,6 @@ static void glfw_keyCallback(GLFWwindow *window, int key, int scancode, int acti
         s_showStats = !s_showStats;
 }
 
-void add_rect(UnknownEngine* engine, Scene* scene) {
-    Entity rectangle = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Rectangle);
-    Transform transform;
-    transform.translation.x = 0.5;
-    rectangle.assign_from_copy(transform);
-    scene->AddEntity(rectangle);
-}
-
-void add_box(UnknownEngine* engine, Scene* scene) {
-    Entity box = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-    scene->AddEntity(box);
-}
-
 int main(int argc, char **argv)
 {
     // Create a GLFW window without an OpenGL context.
@@ -55,12 +42,18 @@ int main(int argc, char **argv)
     UnknownEngine* engine = new UnknownEngine(config);
     SceneManager& scenes = engine->GetScenes();
     Scene* scene_main = scenes.CreateScene();
-    Camera camera{0.1f,0.5f,2.f};
-    scene_main->assign_from_copy(camera);
+    scene_main->assign<Camera>(Camera{0.1f,0.5f,3.f});
     scenes.LoadScene(scene_main);
     // add entity
-    Entity box = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-    scene_main->AddEntity(box);
+    Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+    box1.assign<Transform>(Transform{{0, 1}, {0.1f, 0.2f, 0.3f}, {2, 2, 2}});
+    scene_main->AddEntity(box1);
+    Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+    box2.assign<Transform>(Transform{{1}, {0.2f, 0.4f, 0.1f}, {3, 3, 2}});
+    scene_main->AddEntity(box2);
+    Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+    box3.assign<Transform>(Transform{{-1, -1}, {0.2f, 0.4f, 0.1f}, {2, 2, 2}});
+    scene_main->AddEntity(box3);
 
     // render loop
     while (!glfwWindowShouldClose(window))
