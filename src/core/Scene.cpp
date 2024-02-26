@@ -133,7 +133,7 @@ UNKNOWN_NS_BEGIN
                                        0.5, 0.4, 100, 100);
                 break;
             case PrimitiveType::TriangularPyramid:
-                std::vector<Vec3> shape = {
+                Vec3 shape[4] = {
                         {-0.5f, 0.0f, -0.5f},
                         {0.5f, 0.0f, -0.5f},
                         {0.0f, 0.0f, 0.5f},

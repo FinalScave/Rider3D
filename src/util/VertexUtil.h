@@ -34,7 +34,7 @@ UNKNOWN_NS_BEGIN
         static void BuildTorus(Vertices& vertices,
                                    float large_radius, float small_radius, int segments_w, int segments_h);
 
-        static void BuildTriangularPyramid(Vertices& vertices, std::vector<Vec3> shape, Color color[4] = const_cast<Color*>(kDefaultTriangularPyramidColor));
+        static void BuildTriangularPyramid(Vertices& vertices, Vec3 shape[4], Color color[4] = const_cast<Color*>(kDefaultTriangularPyramidColor));
     private:
         const static Color kDefaultRectColor;
         const static Color kDefaultBoxColors[6];
