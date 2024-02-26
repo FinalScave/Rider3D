@@ -40,6 +40,18 @@ UNKNOWN_NS_BEGIN
         vertex_data_list.push_back(lower_right);
         vertex_data_list.push_back(lower_left);
     }
+    
+    void Vertices::AddFace(Vertex& v1, Vertex& v2, Vertex& v3) {
+        uint32_t index1 = vertex_data_list.size();
+        uint32_t index2 = index1 + 1;
+        uint32_t index3 = index1 + 2;
+        vertex_index_list.push_back(index1);
+        vertex_index_list.push_back(index2);
+        vertex_index_list.push_back(index3);
+        vertex_data_list.push_back(v1);
+        vertex_data_list.push_back(v2);
+        vertex_data_list.push_back(v3);
+    }
 
     void Vertices::SetVertices(uint16_t vertices_count, Vertex *&vertices) {
         vertex_data_list.clear();

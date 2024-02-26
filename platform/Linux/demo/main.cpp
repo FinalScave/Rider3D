@@ -32,24 +32,34 @@ int main(int argc, char **argv)
         return 1;
     glfwSetKeyCallback(window, glfw_keyCallback);
 
-    void* handle = (void *)glfwGetX11Window(window);
+    void* handle = (void*)glfwGetX11Window(window);
     int width, height;
     glfwGetWindowSize(window, &width, &height);
 
     // init engine
-    RenderConfig config = {(uint16_t) width, (uint16_t) height, handle};
-    Unknown3DEngine* engine = new Unknown3DEngine(config);
-    Scene* scene = new Scene();
-    Camera* camera = new Camera {{3,2,-3}, {0, 0, 0}};
-    scene->SetCamera(camera);
-    engine->SetScene(scene);
-    Box box = {"box1", 0.4, 0.8, 0.4};
-    scene->AddChild(box);
+    RenderConfig config = {(uint16_t) width, (uint16_t) height,
+                           handle, true};
+    UnknownEngine* engine = new UnknownEngine(config);
+    SceneManager& scenes = engine->GetScenes();
+    Scene* scene_main = scenes.CreateScene();
+    scene_main->assign<Camera>(Camera{0.1f,0.5f,3.f});
+    scenes.LoadScene(scene_main);
+    // add entity
+    Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Triangle);
+    // box1.assign<Transform>(Transform{{0, 0.5f}, {0.1f, 0.2f, 0.3f}, {2, 2, 2}});
+    scene_main->AddEntity(box1);
+    // Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+    // box2.assign<Transform>(Transform{{-0.5}, {0.2f, 0.4f, 0.1f}, {3, 3, 2}});
+    // scene_main->AddEntity(box2);
+    // Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+    // box3.assign<Transform>(Transform{{-0.5, -0.5}, {0.2f, 0.4f, 0.1f}, {2, 2, 2}});
+    // scene_main->AddEntity(box3);
+
     // render loop
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-        engine->Render();
+        engine->Update();
     }
     glfwTerminate();
     return 0;

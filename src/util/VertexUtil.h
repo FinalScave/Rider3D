@@ -15,6 +15,9 @@ UNKNOWN_NS_BEGIN
         static void BuildRectangle(Vertices& vertices,
                                        float width, float height, Color color = kDefaultRectColor);
 
+        static void BuildTriangle(Vertices& vertices,
+                                       Vec3 p1, Vec3 p2, Vec3 p3, Color color = kDefaultRectColor);
+
         static void BuildBox(Vertices& vertices,
                              float width, float height, float depth, Color colors[6] = const_cast<Color*>(kDefaultBoxColors));
 

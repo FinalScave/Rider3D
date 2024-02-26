@@ -109,6 +109,9 @@ UNKNOWN_NS_BEGIN
             case PrimitiveType::Rectangle:
                 VertexUtil::BuildRectangle(vertices, 0.5, 0.5);
                 break;
+            case PrimitiveType::Triangle:
+                VertexUtil::BuildTriangle(vertices, {-0.5f, -0.5f, 0.0f}, {0.5f, -0.5f, 0.0f}, {0.0f,  0.5f, 0.0f});
+                break;
             case PrimitiveType::Box:
                 VertexUtil::BuildBox(vertices, 0.5, 0.5, 0.5);
                 break;

@@ -21,6 +21,13 @@ UNKNOWN_NS_BEGIN
         vertices.AddFace(v1, v2, v3, v4);
     }
 
+    void VertexUtil::BuildTriangle(Vertices& vertices, Vec3 p1, Vec3 p2, Vec3 p3, Color color) {
+        Vertex v1 = {p1, {0, 1}, color};
+        Vertex v2 = {p2, {1, 1}, color};
+        Vertex v3 = {p3, {1, 0}, color};
+        vertices.AddFace(v1, v2, v3);
+    }
+
     void VertexUtil::BuildBox(Vertices& vertices, float width, float height, float depth, Color colors[6]) {
         float w = width / 2.f;
         float h = height / 2.f;

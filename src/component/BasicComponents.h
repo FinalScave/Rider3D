@@ -56,6 +56,8 @@ UNKNOWN_NS_BEGIN
         void AddIndex(uint32_t index);
 
         void AddFace(Vertex& upper_left, Vertex& upper_right, Vertex& lower_right, Vertex& lower_left);
+        
+        void AddFace(Vertex& v1, Vertex& v2, Vertex& v3);
 
         void SetVertices(uint16_t vertices_count, Vertex*& vertices);
 

@@ -23,6 +23,7 @@ UNKNOWN_NS_BEGIN
     struct PrimitiveType {
         enum Enum {
             Rectangle = 0,
+            Triangle,
             Box,
             Sphere,
             SkyBox,
