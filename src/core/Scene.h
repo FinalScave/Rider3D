@@ -29,7 +29,8 @@ UNKNOWN_NS_BEGIN
             SkyBox,
             Capsule,
             Cylinder,
-            Torus
+            Torus,
+            TriangularPyramid
         };
     };
 

@@ -45,15 +45,15 @@ int main(int argc, char **argv)
     scene_main->assign<Camera>(Camera{0.1f,0.5f,3.f});
     scenes.LoadScene(scene_main);
     // add entity
-    Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-    box1.assign<Transform>(Transform{{0, 0.5f}, {0.1f, 0.2f, 0.3f}, {2, 2, 2}});
+    Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::TriangularPyramid);
+//    box1.assign<Transform>(Transform{{0, 0.5f}, {0.1f, 0.2f, 0.3f}, {2, 2, 2}});
     scene_main->AddEntity(box1);
-    Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-    box2.assign<Transform>(Transform{{-0.5}, {0.2f, 0.4f, 0.1f}, {3, 3, 2}});
-    scene_main->AddEntity(box2);
-    Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-    box3.assign<Transform>(Transform{{-0.5, -0.5}, {0.2f, 0.4f, 0.1f}, {2, 2, 2}});
-    scene_main->AddEntity(box3);
+//    Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+//    box2.assign<Transform>(Transform{{-0.5}, {0.2f, 0.4f, 0.1f}, {3, 3, 2}});
+//    scene_main->AddEntity(box2);
+//    Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+//    box3.assign<Transform>(Transform{{-0.5, -0.5}, {0.2f, 0.4f, 0.1f}, {2, 2, 2}});
+//    scene_main->AddEntity(box3);
 
     // render loop
     while (!glfwWindowShouldClose(window))

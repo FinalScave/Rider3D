@@ -10,6 +10,10 @@ UNKNOWN_NS_BEGIN
             Colors::Red, Colors::Green, Colors::Blue,
             Colors::Orange, Colors::Purple, Colors::Cyan
     };
+    const Color VertexUtil::kDefaultTriangularPyramidColor[4] = {
+            Colors::Blue, Colors::Red,
+            Colors::Orange, Colors::Purple
+    };
 
     void VertexUtil::BuildRectangle(Vertices& vertices, float width, float height, Color color) {
         float w = width / 2.f;
@@ -98,5 +102,10 @@ UNKNOWN_NS_BEGIN
                                 float large_radius, float small_radius, int segments_w, int segments_h) {
 
     }
-
+    void VertexUtil::BuildTriangularPyramid(Vertices& vertices, std::vector<Vec3> shape, Color color[4]) {
+        BuildTriangle(vertices, shape[0], shape[1], shape[2], color[0]);//bottom
+        BuildTriangle(vertices, shape[1], shape[0], shape[3], color[3]);//back
+        BuildTriangle(vertices, shape[2], shape[1], shape[3], color[1]);//left
+        BuildTriangle(vertices, shape[2], shape[0], shape[3], color[2]);//right
+    }
 UNKNOWN_NS_END

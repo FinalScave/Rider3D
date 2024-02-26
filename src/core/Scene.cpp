@@ -132,6 +132,15 @@ UNKNOWN_NS_BEGIN
                 VertexUtil::BuildTorus(vertices,
                                        0.5, 0.4, 100, 100);
                 break;
+            case PrimitiveType::TriangularPyramid:
+                std::vector<Vec3> shape = {
+                        {-0.5f, 0.0f, -0.5f},
+                        {0.5f, 0.0f, -0.5f},
+                        {0.0f, 0.0f, 0.5f},
+                        {0.0f, 1.0f, 0.0f}
+                };
+                VertexUtil::BuildTriangularPyramid(vertices, shape);
+                break;
         }
         return entity;
     }
