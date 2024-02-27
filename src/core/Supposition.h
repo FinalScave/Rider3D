@@ -23,14 +23,14 @@ UNKNOWN_NS_BEGIN
         float y;
         float z;
 
-        static NdcPoint add(NdcPoint a, NdcPoint b);
-        static NdcPoint sub(NdcPoint a, NdcPoint b);
-        static NdcPoint scalar(NdcPoint a, float b);
-        static float dot(NdcPoint a, NdcPoint b);
-        static NdcPoint cross(NdcPoint a, NdcPoint b);
-        static NdcPoint normalize(NdcPoint a);
-        static float length(NdcPoint a);
-        static float distance(NdcPoint a, NdcPoint b);
+        static NdcPoint Add(const NdcPoint& a, const NdcPoint& b);
+        static NdcPoint Sub(const NdcPoint& a, const NdcPoint& b);
+        static NdcPoint Scalar(const NdcPoint& a, float b);
+        static float Dot(const NdcPoint& a, const NdcPoint& b);
+        static NdcPoint Cross(const NdcPoint& a, const NdcPoint& b);
+        static NdcPoint Normalize(const NdcPoint& a);
+        static float Length(const NdcPoint& a);
+        static float Distance(const NdcPoint& a, const NdcPoint& b);
     };
 
     /// Point of screen(such as phone screen),

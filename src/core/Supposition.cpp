@@ -16,7 +16,7 @@ UNKNOWN_NS_BEGIN
     const Color Colors::Purple = Color{1, 0, 1, 1};
     const Color Colors::Cyan = Color{0, 1, 1, 1};
 
-    NdcPoint NdcPoint::add(NdcPoint a, NdcPoint b) {
+    NdcPoint NdcPoint::Add(const NdcPoint& a, const NdcPoint& b) {
         return {
             a.x + b.x,
             a.y + b.y,
@@ -24,7 +24,7 @@ UNKNOWN_NS_BEGIN
         };
     }
 
-    NdcPoint NdcPoint::sub(NdcPoint a, NdcPoint b) {
+    NdcPoint NdcPoint::Sub(const NdcPoint& a, const NdcPoint& b) {
         return {
             a.x - b.x,
             a.y - b.y,
@@ -32,7 +32,7 @@ UNKNOWN_NS_BEGIN
         };
     }
 
-    NdcPoint NdcPoint::scalar(NdcPoint a, float b) {
+    NdcPoint NdcPoint::Scalar(const NdcPoint& a, const float b) {
         return {
             a.x * b,
             a.y * b,
@@ -40,11 +40,11 @@ UNKNOWN_NS_BEGIN
         };
     }
 
-    float NdcPoint::dot(NdcPoint a, NdcPoint b) {
+    float NdcPoint::Dot(const NdcPoint& a, const NdcPoint& b) {
          return a.x * b.x + a.y * b.y + a.z * b.z;
     }
 
-    NdcPoint NdcPoint::cross(NdcPoint a, NdcPoint b) {
+    NdcPoint NdcPoint::Cross(const NdcPoint& a, const NdcPoint& b) {
         return {
             a.y * b.z - a.z * b.y,
             a.z * b.x - a.x * b.z,
@@ -52,23 +52,23 @@ UNKNOWN_NS_BEGIN
         };
     }
 
-    NdcPoint NdcPoint::normalize(NdcPoint a) {
-        float length = NdcPoint::length(a);
+    NdcPoint NdcPoint::Normalize(const NdcPoint& a) {
+        float length = NdcPoint::Length(a);
         if (length == 0.0f) {
             throw std::invalid_argument("Can't normalize a zero-length vector");
         }
         else {
-            return NdcPoint::scalar(a, 1.0 / length);
+            return NdcPoint::Scalar(a, 1.0 / length);
         }
     }
 
-    float NdcPoint::length(NdcPoint a) {
+    float NdcPoint::Length(const NdcPoint& a) {
         return std::sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
     }
 
-    float NdcPoint::distance(NdcPoint a, NdcPoint b) {
-        NdcPoint c = NdcPoint::sub(a, b);
-        return NdcPoint::length(c);
+    float NdcPoint::Distance(const NdcPoint& a, const NdcPoint& b) {
+        NdcPoint c = NdcPoint::Sub(a, b);
+        return NdcPoint::Length(c);
     }
 
 

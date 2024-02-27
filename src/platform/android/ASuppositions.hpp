@@ -35,6 +35,13 @@ public:
         holder->Get().z = z;
     }
 
+    static jlong Add(jlong p1_ptr, jlong p2_ptr) {
+        auto &p1 = ToNativePointer<JObjectCopier<NdcPoint>>(p1_ptr)->Get();
+        auto &p2 = ToNativePointer<JObjectCopier<NdcPoint>>(p2_ptr)->Get();
+        JObjectCopier<NdcPoint>* r = new JObjectCopier<NdcPoint>(NdcPoint::Add(p1, p2));
+        return ToJavaObject(r);
+    }
+
     constexpr static const char *point_name = "com/unknown/core/supposition/NdcPoint";
     constexpr static const JNINativeMethod point_methods[] = {
             {"nativeDestroy", "(J)V", (void*) DestroyNdcPoint},
@@ -42,6 +49,7 @@ public:
             {"nativeSetX", "(JF)V", (void*) SetPointX},
             {"nativeSetY", "(JF)V", (void*) SetPointY},
             {"nativeSetZ", "(JF)V", (void*) SetPointZ},
+            {"nativeAdd", "(JJ)J", (void*) Add},
     };
 
     void RegisterNdcPointMethods(JNIEnv *env) {

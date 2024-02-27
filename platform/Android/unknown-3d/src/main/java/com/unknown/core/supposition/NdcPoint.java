@@ -14,6 +14,10 @@ public class NdcPoint extends NativeObject {
         return new NdcPoint(1, 1, 1);
     }
 
+    public static NdcPoint add(NdcPoint a, NdcPoint b) {
+        return new NdcPoint(nativeAdd(a.nativePtr, b.nativePtr));
+    }
+
     public NdcPoint(float x, float y, float z) {
         super(nativeMakeNdcPoint(x, y, z));
     }
@@ -50,4 +54,7 @@ public class NdcPoint extends NativeObject {
     private static native void nativeSetZ(long ptr, float z);
     @CriticalNative
     private static native void nativeDestroy(long ptr);
+
+    @CriticalNative
+    private static native long nativeAdd(long p1_ptr, long p2_ptr);
 }

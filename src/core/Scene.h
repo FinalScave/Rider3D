@@ -23,14 +23,14 @@ UNKNOWN_NS_BEGIN
     struct PrimitiveType {
         enum Enum {
             Rectangle = 0,
-            Triangle,
-            Box,
-            Sphere,
-            SkyBox,
-            Capsule,
-            Cylinder,
-            Torus,
-            TriangularPyramid
+            Triangle = 1,
+            Box = 10,
+            Sphere = 11,
+            SkyBox = 12,
+            Capsule = 13,
+            Cylinder = 14,
+            Torus = 15,
+            TriangularPyramid = 16
         };
     };
 
