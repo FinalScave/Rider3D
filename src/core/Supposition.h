@@ -22,6 +22,15 @@ UNKNOWN_NS_BEGIN
         float x;
         float y;
         float z;
+
+        static NdcPoint add(NdcPoint a, NdcPoint b);
+        static NdcPoint sub(NdcPoint a, NdcPoint b);
+        static NdcPoint scalar(NdcPoint a, float b);
+        static float dot(NdcPoint a, NdcPoint b);
+        static NdcPoint cross(NdcPoint a, NdcPoint b);
+        static NdcPoint normalize(NdcPoint a);
+        static float length(NdcPoint a);
+        static float distance(NdcPoint a, NdcPoint b);
     };
 
     /// Point of screen(such as phone screen),
