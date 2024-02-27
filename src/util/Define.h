@@ -19,7 +19,11 @@ typedef uint16_t UInt16;
 typedef uint8_t UInt8;
 typedef std::string Name;
 typedef std::string String;
+#ifdef MACOS
+#include <MacTypes.h>
+#else
 typedef std::byte Byte;
+#endif
 #define ENTITY_SIZE_TYPE uint8_t
 #define ENTITY_SIZE_MAX UINT8_MAX
 #define TEXTURE_ID_TYPE uint16_t

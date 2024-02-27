@@ -12,7 +12,6 @@ endif()
 # macro
 add_definitions(-DBX_CONFIG_DEBUG=ON)
 add_definitions(-DENABLE_LOG)
-add_definitions(-DFORCE_GLFW)
 option(ENABLE_LOG "Enable logging" ON)
 option(BUILD_PC_DEMO "Build demo for Windows/Mac/Linux to test" ON)
 
@@ -62,6 +61,7 @@ if (BUILD_PC_DEMO AND NOT ANDROID AND NOT IOS)
         set(BUILD_DEMO_MACOS ON)
     elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
         add_definitions(-DWINDOWS -D_POSIX -D_POSIX_THREAD_SAFE_FUNCTIONS)
+        add_definitions(-DFORCE_GLFW)
         set(WINDOWS ON)
         set(BUILD_DEMO_WINDOWS ON)
     elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -202,24 +202,30 @@ if (BUILD_DEMO_WINDOWS)
     )
 elseif (BUILD_DEMO_MACOS)
     message(STATUS "Build MacOS demo enabled")
-    include_directories(${CMAKE_SOURCE_DIR}/platform/MacOS/lib/glfw/include)
     add_executable(${DEMO_NAME} MACOSX_BUNDLE
-            ${CMAKE_SOURCE_DIR}/platform/MacOS/demo/main.cpp
+            ${CMAKE_SOURCE_DIR}/platform/MacOS/demo/main.mm
             ${CORE_SOURCE_FILES} ${PLATFORM_FILES}
     )
+    find_library(COCOA_FRAMEWORK Cocoa)
+    find_library(METAL_FRAMEWORK Metal)
+    find_library(QUARTZ_CORE_FRAMEWORK QuartzCore)
+    find_library(IOKIT_FRAMEWORK IOKit)
+    find_library(CORE_FOUNDATION_FRAMEWORK CoreFoundation)
     find_library(FOUNDATION_FRAMEWORK Foundation)
     find_library(CORE_GRAPHICS_FRAMEWORK CoreGraphics)
     find_library(CORE_VIDEO_FRAMEWORK CoreVideo)
     find_library(APPKIT_FRAMEWORK AppKit)
-    find_library(IOKIT_FRAMEWORK IOKit)
     target_link_libraries(${DEMO_NAME}
             ${LINK_LIB}
-            ${CMAKE_SOURCE_DIR}/platform/MacOS/lib/glfw/arm64/libglfw3.a
+            ${COCOA_FRAMEWORK}
+            ${METAL_FRAMEWORK}
+            ${QUARTZ_CORE_FRAMEWORK}
+            ${IOKIT_FRAMEWORK}
+            ${CORE_FOUNDATION_FRAMEWORK}
             ${FOUNDATION_FRAMEWORK}
             ${CORE_GRAPHICS_FRAMEWORK}
             ${CORE_VIDEO_FRAMEWORK}
             ${APPKIT_FRAMEWORK}
-            ${IOKIT_FRAMEWORK}
     )
 elseif (BUILD_DEMO_LINUX)
     message(STATUS "Build Linux demo enabled")
