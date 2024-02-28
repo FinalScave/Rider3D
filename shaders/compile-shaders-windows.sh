@@ -1,8 +1,8 @@
 function compile_vertex_windows() {
-  ../tools/windows/shaderc.exe -f "$1" --varyingdef "$2" -o "../src/core/shader/hlsl/$3" -i ./include --platform windows -p 150 --type vertex --bin2c "$4"
+  ../tools/windows/shaderc.exe -f "$1" --varyingdef "$2" -o "../src/core/shader/hlsl/$3" -i ./include --platform windows -p s_5_0 --type vertex --bin2c "$4"
 }
 function compile_fragment_windows() {
-  ../tools/windows/shaderc.exe -f "$1" --varyingdef "$2" -o "../src/core/shader/hlsl/$3" -i ./include --platform windows -p 150 --type fragment --bin2c "$4"
+  ../tools/windows/shaderc.exe -f "$1" --varyingdef "$2" -o "../src/core/shader/hlsl/$3" -i ./include --platform windows -p s_5_0 --type fragment --bin2c "$4"
 }
 function compile_vertex_mac() {
   ../tools/windows/shaderc.exe -f "$1" --varyingdef "$2" -o "../src/core/shader/metal/$3" -i ./include --platform osx -p metal --type vertex --bin2c "$4"

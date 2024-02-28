@@ -25,9 +25,9 @@ NS_RIDER_BEGIN
         /// \param fs_data 片元着色器代码
         /// \param fs_data_len 片元着色器代码长度
         void Load(const unsigned char* vs_data,
-                  const unsigned int vs_data_len,
+                  uint16_t vs_data_len,
                   const unsigned char* fs_data,
-                  const unsigned int fs_data_len);
+                  uint16_t fs_data_len);
 
         /// 从指定路径加载着色器程序
         /// \param res_path 着色器程序所处目录路径

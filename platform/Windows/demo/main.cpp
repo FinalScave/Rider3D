@@ -1,66 +1,115 @@
-#include <cstdio>
-#define GLFW_EXPOSE_NATIVE_WIN32
-#include "GLFW/glfw3.h"
-#include "GLFW/glfw3native.h"
+#include <windows.h>
+#include <windowsx.h>
 #include "RiderEngine.h"
 #include "component/BasicComponents.h"
+#include "bx/thread.h"
+#include "bgfx/platform.h"
+#include "TimeUtil.h"
+
+#define WIDTH 1024
+#define HEIGHT 720
 
 using namespace NS_RIDER;
 
-static bool s_showStats = false;
+HWND window = nullptr;
+bool m_render_finished = false;
 
-static void glfw_errorCallback(int error, const char *description)
-{
-    fprintf(stderr, "GLFW error %d: %s\n", error, description);
-}
+struct RenderThreadEntry {
+    static int32_t render(bx::Thread* _thread, void* _userData) {
+        RenderConfig config{1024, 728, window, true};
+        RiderEngine* engine = new RiderEngine(config);
+        SceneManager& scenes = engine->GetScenes();
+        Scene* mainScene = scenes.CreateScene();
+        mainScene->assign<Camera>(Camera{0.1f,0.1f,2.f});
+        auto debugInfo = mainScene->assign<DebugInfo>(DebugInfo{1, 1});
+        scenes.LoadScene(mainScene);
 
-static void glfw_keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods)
-{
-    if (key == GLFW_KEY_F1 && action == GLFW_RELEASE)
-        s_showStats = !s_showStats;
-}
+        // add entity
+        Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Rectangle);
+        box1.assign<Transform>(Transform{{-1, 0.5f}});
+        mainScene->AddEntity(box1);
+        Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+        box2.assign<Transform>(Transform{{1, 0.5f}});
+        mainScene->AddEntity(box2);
+        Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+        box3.assign<Transform>(Transform{{-0.5, -0.5}});
+        mainScene->AddEntity(box3);
 
-int main(int argc, char **argv)
-{
-    // Create a GLFW window without an OpenGL context.
-    glfwSetErrorCallback(glfw_errorCallback);
-    if (!glfwInit())
-        return 1;
-    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    GLFWwindow *window = glfwCreateWindow(1024, 768, "Unknown3D", nullptr, nullptr);
-    if (!window)
-        return 1;
-    glfwSetKeyCallback(window, glfw_keyCallback);
-
-    void* handle = glfwGetWin32Window(window);
-    int width, height;
-    glfwGetWindowSize(window, &width, &height);
-
-    // init engine
-    RenderConfig config = {(uint16_t) width, (uint16_t) height,
-                           handle, true};
-    RiderEngine* engine = new RiderEngine(config);
-    SceneManager& scenes = engine->GetScenes();
-    Scene* scene_main = scenes.CreateScene();
-    scene_main->assign<Camera>(Camera{0.1f,0.5f,3.f});
-    scenes.LoadScene(scene_main);
-    // add entity
-    Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::TriangularPyramid);
-//    box1.assign<Transform>(Transform{{0, 0.5f}, {0.1f, 0.2f, 0.3f}, {2, 2, 2}});
-    scene_main->AddEntity(box1);
-//    Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-//    box2.assign<Transform>(Transform{{-0.5}, {0.2f, 0.4f, 0.1f}, {3, 3, 2}});
-//    scene_main->AddEntity(box2);
-//    Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-//    box3.assign<Transform>(Transform{{-0.5, -0.5}, {0.2f, 0.4f, 0.1f}, {2, 2, 2}});
-//    scene_main->AddEntity(box3);
-
-    // render loop
-    while (!glfwWindowShouldClose(window))
-    {
-        glfwPollEvents();
-        engine->Update();
+        UInt64 start = 0;
+        while (!m_render_finished) {
+            start = TimeUtil::MilliTime();
+            engine->Update();
+            UInt64 fps = 1000 / (TimeUtil::MilliTime() - start);
+            char buf[10] = {0};
+            sprintf(buf, "FPS: %lld", fps);
+            debugInfo->text = buf;
+        }
+        return 0;
     }
-    glfwTerminate();
-    return 0;
+};
+
+LRESULT process(HWND _hwnd, UINT _id, WPARAM _wparam, LPARAM _lparam) {
+    switch (_id) {
+        case WM_CLOSE:
+            m_render_finished = true;
+            DestroyWindow(_hwnd);
+            return 0;
+        case WM_DESTROY:
+            PostQuitMessage(0);
+            return 0;
+        case WM_QUIT:
+            m_render_finished = true;
+            // Don't process message. Window will be destroyed later.
+            return 0;
+    }
+    return DefWindowProcW(_hwnd, _id, _wparam, _lparam);
+}
+
+int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,int nShowCmd) {
+    SetDllDirectoryA(".");
+
+    HINSTANCE instance = (HINSTANCE)GetModuleHandle(NULL);
+
+    WNDCLASSEXW wnd;
+    bx::memSet(&wnd, 0, sizeof(wnd) );
+    wnd.cbSize = sizeof(wnd);
+    wnd.style = CS_HREDRAW | CS_VREDRAW;
+    wnd.lpfnWndProc = process;
+    wnd.hInstance = instance;
+    wnd.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+    wnd.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wnd.lpszClassName = L"Rider3D";
+    wnd.hIconSm = LoadIcon(NULL, IDI_APPLICATION);
+    RegisterClassExW(&wnd);
+
+    window = CreateWindowExA(
+            WS_EX_ACCEPTFILES
+            , "Rider3D"
+            , "Rider3D"
+            , WS_OVERLAPPEDWINDOW|WS_VISIBLE
+            , 0
+            , 0
+            , WIDTH
+            , HEIGHT
+            , NULL
+            , NULL
+            , instance
+            , 0
+    );
+
+    RenderThreadEntry render_thread;
+    bx::Thread thread;
+    thread.init(RenderThreadEntry::render, &render_thread);
+
+    MSG msg;
+    msg.message = WM_NULL;
+    while (!m_render_finished) {
+        while (PeekMessageW(
+                &msg, NULL, 0U, 0U, PM_REMOVE)) {
+            TranslateMessage(&msg);
+            DispatchMessageW(&msg);
+        }
+    }
+    thread.shutdown();
+    return thread.getExitCode();
 }
