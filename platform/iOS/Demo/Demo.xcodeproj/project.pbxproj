@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A973F4C6025AC5E8BD93E1B /* libPods-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7A2E26581D19BB2F43945D /* libPods-Demo.a */; };
 		BC3AD79F2AFF8BAA00BACDF1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3AD79E2AFF8BAA00BACDF1 /* AppDelegate.m */; };
 		BC3AD7A22AFF8BAA00BACDF1 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3AD7A12AFF8BAA00BACDF1 /* SceneDelegate.m */; };
 		BC3AD7A52AFF8BAA00BACDF1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC3AD7A42AFF8BAA00BACDF1 /* ViewController.m */; };
@@ -38,8 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		21DC4E1F36C2F1E366BC372E /* Pods-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.release.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.release.xcconfig"; sourceTree = "<group>"; };
-		67965F52754210ABD7DE0F55 /* Pods-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Demo.debug.xcconfig"; path = "Target Support Files/Pods-Demo/Pods-Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		BC3AD79A2AFF8BAA00BACDF1 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC3AD79D2AFF8BAA00BACDF1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BC3AD79E2AFF8BAA00BACDF1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -57,7 +54,6 @@
 		BC3AD7BF2AFF8BAB00BACDF1 /* DemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC3AD7C32AFF8BAB00BACDF1 /* DemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITests.m; sourceTree = "<group>"; };
 		BC3AD7C52AFF8BAB00BACDF1 /* DemoUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoUITestsLaunchTests.m; sourceTree = "<group>"; };
-		FA7A2E26581D19BB2F43945D /* libPods-Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +61,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A973F4C6025AC5E8BD93E1B /* libPods-Demo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,19 +84,8 @@
 		5DA1A8478C16141166B9F458 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FA7A2E26581D19BB2F43945D /* libPods-Demo.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B5F2A943EE1E72AE7E086322 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				67965F52754210ABD7DE0F55 /* Pods-Demo.debug.xcconfig */,
-				21DC4E1F36C2F1E366BC372E /* Pods-Demo.release.xcconfig */,
-			);
-			name = Pods;
-			path = ../Pods;
 			sourceTree = "<group>";
 		};
 		BC3AD7912AFF8BAA00BACDF1 = {
@@ -111,7 +95,6 @@
 				BC3AD7B82AFF8BAB00BACDF1 /* DemoTests */,
 				BC3AD7C22AFF8BAB00BACDF1 /* DemoUITests */,
 				BC3AD79B2AFF8BAA00BACDF1 /* Products */,
-				B5F2A943EE1E72AE7E086322 /* Pods */,
 				5DA1A8478C16141166B9F458 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -494,7 +477,6 @@
 		};
 		BC3AD7CA2AFF8BAB00BACDF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67965F52754210ABD7DE0F55 /* Pods-Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -522,7 +504,6 @@
 		};
 		BC3AD7CB2AFF8BAB00BACDF1 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21DC4E1F36C2F1E366BC372E /* Pods-Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

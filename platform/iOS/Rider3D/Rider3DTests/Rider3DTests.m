@@ -1,17 +1,17 @@
 //
-//  Unknown3DTests.m
-//  Unknown3DTests
+//  Rider3DTests.m
+//  Rider3DTests
 //
 //  Created by Scave on 2023/11/11.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface Unknown3DTests : XCTestCase
+@interface Rider3DTests : XCTestCase
 
 @end
 
-@implementation Unknown3DTests
+@implementation Rider3DTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
