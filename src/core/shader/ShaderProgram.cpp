@@ -19,9 +19,9 @@ NS_RIDER_BEGIN
     }
 
     void ShaderProgram::Load(const unsigned char* vs_data,
-                             const unsigned int vs_data_len,
+                             uint16_t vs_data_len,
                              const unsigned char* fs_data,
-                             const unsigned int fs_data_len) {
+                             uint16_t fs_data_len) {
         this->program_handle_ = loadProgramFromData(
                 vs_data, vs_data_len, fs_data, fs_data_len);
     }

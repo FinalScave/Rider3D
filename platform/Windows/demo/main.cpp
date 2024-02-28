@@ -20,7 +20,7 @@ struct RenderThreadEntry {
         RiderEngine* engine = new RiderEngine(config);
         SceneManager& scenes = engine->GetScenes();
         Scene* mainScene = scenes.CreateScene();
-        mainScene->assign<Camera>(Camera{0.1f,0.5f,2.f});
+        mainScene->assign<Camera>(Camera{0.1f,0.1f,2.f});
         auto debugInfo = mainScene->assign<DebugInfo>(DebugInfo{1, 1});
         scenes.LoadScene(mainScene);
 
