@@ -5,7 +5,7 @@
 #include "RiderEngine.h"
 #include "bx/math.h"
 
-using namespace unknown;
+using namespace NS_RIDER;
 
 static bool s_showStats = false;
 
