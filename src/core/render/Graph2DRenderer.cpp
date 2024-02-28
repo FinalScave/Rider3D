@@ -54,21 +54,24 @@ UNKNOWN_NS_BEGIN
         if (entity.has_component<Transform>()) {
             transform = *entity.component<Transform>();
         }
-        // 相乘顺序为 平移 * 旋转 * 缩放
-        bx::mtxIdentity(tmp_matrix);
-        bx::mtxTranslate(tmp_matrix,
-                         transform.translation.x, transform.translation.y, transform.translation.z);
-        bx::mtxMul(model_matrix_, tmp_matrix, model_matrix_);
-
-        bx::mtxIdentity(tmp_matrix);
-        bx::mtxRotateXYZ(tmp_matrix,
-                         transform.rotation.x, transform.rotation.y, transform.rotation.z);
-        bx::mtxMul(model_matrix_, model_matrix_, tmp_matrix);
-
-        bx::mtxIdentity(tmp_matrix);
-        bx::mtxScale(tmp_matrix,
+        // 相乘顺序为 平移 * 旋转 * 缩放，分步乘则从右往左乘
+        float mtx_scale[16];
+        bx::mtxIdentity(mtx_scale);
+        bx::mtxScale(mtx_scale,
                      transform.scale.x, transform.scale.y, transform.scale.z);
-        bx::mtxMul(model_matrix_, model_matrix_, tmp_matrix);
+        float mtx_rotate[16];
+        bx::mtxIdentity(mtx_rotate);
+        bx::mtxRotateXYZ(mtx_rotate,
+                         transform.rotation.x, transform.rotation.y, transform.rotation.z);
+        float mtx_scale_rotate[16];
+        bx::mtxIdentity(mtx_scale_rotate);
+        bx::mtxMul(mtx_scale_rotate, mtx_scale, mtx_rotate);
+        float mtx_trans[16];
+        bx::mtxIdentity(mtx_trans);
+        bx::mtxTranslate(mtx_trans,
+                         transform.translation.x, transform.translation.y, transform.translation.z);
+        bx::mtxIdentity(model_matrix_);
+        bx::mtxMul(model_matrix_, mtx_scale_rotate, mtx_trans);
         bgfx::setTransform(model_matrix_);
 
         bgfx::submit(view_id, program_->program_handle_);

@@ -2,6 +2,7 @@
 #import "bx/thread.h"
 #import "bgfx/platform.h"
 #include "UnknownEngine.h"
+#import "TimeUtil.h"
 
 #define WIDTH  1024
 #define HEIGHT 728
@@ -217,23 +218,28 @@ int windowLoop(int argc, const char* const* argv) {
     UnknownEngine* engine = new UnknownEngine(config);
     SceneManager& scenes = engine->GetScenes();
     Scene* mainScene = scenes.CreateScene();
-    mainScene->assign<Camera>(Camera{0.1f,0.5f,3.f});
+    mainScene->assign<Camera>(Camera{0.1f,0.5f,2.f});
+    auto debugInfo = mainScene->assign<DebugInfo>(DebugInfo{1, 1});
     scenes.LoadScene(mainScene);
 
     EntityManager& entities = engine->GetEntities();
     // add entity
     Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-    box1.assign<Transform>(Transform{{0, 0.5f}, {0.1f, 0.2f, 0.3f}, {2, 2, 2}});
+    box1.assign<Transform>(Transform{{-1, 0.5f}});
     mainScene->AddEntity(box1);
     Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-    box2.assign<Transform>(Transform{{-0.5}, {0.2f, 0.4f, 0.1f}, {3, 3, 2}});
+    box2.assign<Transform>(Transform{{1, 0.5f}});
     mainScene->AddEntity(box2);
     Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-    box3.assign<Transform>(Transform{{-0.5, -0.5}, {0.2f, 0.4f, 0.1f}, {2, 2, 2}});
+    box3.assign<Transform>(Transform{{-0.5, -0.5}});
     mainScene->AddEntity(box3);
 
+    UInt64 start = 0;
     while ([[NSApplication sharedApplication] isRunning]) {
+        start = TimeUtil::MilliTime();
         engine->Update();
+        UInt64 fps = 1000 / (TimeUtil::MilliTime() - start);
+        debugInfo->text = [[NSString stringWithFormat:@"FPS: %lld", fps] UTF8String];
     }
     return 0;
 }

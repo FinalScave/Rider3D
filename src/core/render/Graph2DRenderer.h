@@ -20,7 +20,6 @@ UNKNOWN_NS_BEGIN
         float model_matrix_[16] = {0};
         float view_matrix_[16] = {0};
         float proj_matrix_[16] = {0};
-        float tmp_matrix[16] = {0};
     };
 
 UNKNOWN_NS_END

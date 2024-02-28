@@ -22,7 +22,7 @@ UNKNOWN_NS_BEGIN
     };
 
     struct Camera {
-        Vec3 position = {0, 0, 5};
+        Vec3 position = {0, 0, 2};
         Vec3 target = {0, 0, 0};
         Vec3 up_axis = {0, 0, 0};
     };
@@ -59,7 +59,7 @@ UNKNOWN_NS_BEGIN
         
         void AddFace(Vertex& v1, Vertex& v2, Vertex& v3);
 
-        void SetVertices(uint16_t vertices_count, Vertex*& vertices);
+        void SetVertices(uint16_t vertices_count, Vertex* vertices);
 
         uint16_t VertexSize() const;
 

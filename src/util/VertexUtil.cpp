@@ -39,45 +39,45 @@ UNKNOWN_NS_BEGIN
 
         // front
         Color color = colors[0];
-        Vertex front_v1 = {{-w, +h, +d}, {0, 0}, color};
-        Vertex front_v2 = {{+w, +h, +d}, {1, 0}, color};
-        Vertex front_v3 = {{+w, -h, +d}, {1, 1}, color};
-        Vertex front_v4 = {{-w, -h, +d}, {0, 1}, color};
+        Vertex front_v1 = {{-w, +h, +d}, {0, 1}, color};
+        Vertex front_v2 = {{+w, +h, +d}, {1, 1}, color};
+        Vertex front_v3 = {{+w, -h, +d}, {1, 0}, color};
+        Vertex front_v4 = {{-w, -h, +d}, {0, 0}, color};
         vertices.AddFace(front_v1, front_v2, front_v3, front_v4);
         // right
         color = colors[1];
-        Vertex right_v1 = {{+w, +h, +d}, {0, 0}, color};
-        Vertex right_v2 = {{+w, +h, -d}, {1, 0}, color};
-        Vertex right_v3 = {{+w, -h, -d}, {1, 1}, color};
-        Vertex right_v4 = {{+w, -h, +d}, {0, 1}, color};
+        Vertex right_v1 = {{+w, +h, +d}, {0, 1}, color};
+        Vertex right_v2 = {{+w, +h, -d}, {1, 1}, color};
+        Vertex right_v3 = {{+w, -h, -d}, {1, 0}, color};
+        Vertex right_v4 = {{+w, -h, +d}, {0, 0}, color};
         vertices.AddFace(right_v1, right_v2, right_v3, right_v4);
         // back
         color = colors[2];
-        Vertex back_v1 = {{+w, +h, -d}, {0, 0}, color};
-        Vertex back_v2 = {{-w, +h, -d}, {1, 0}, color};
-        Vertex back_v3 = {{-w, -h, -d}, {1, 1}, color};
-        Vertex back_v4 = {{+w, -h, -d}, {0, 1}, color};
+        Vertex back_v1 = {{+w, +h, -d}, {0, 1}, color};
+        Vertex back_v2 = {{-w, +h, -d}, {1, 1}, color};
+        Vertex back_v3 = {{-w, -h, -d}, {1, 0}, color};
+        Vertex back_v4 = {{+w, -h, -d}, {0, 0}, color};
         vertices.AddFace(back_v1, back_v2, back_v3, back_v4);
         // left
         color = colors[3];
-        Vertex left_v1 = {{-w, +h, -d}, {0, 0}, color};
+        Vertex left_v1 = {{-w, +h, -d}, {0, 1}, color};
         Vertex left_v2 = {{-w, +h, +d}, {1, 0}, color};
         Vertex left_v3 = {{-w, -h, +d}, {1, 1}, color};
-        Vertex left_v4 = {{-w, -h, -d}, {0, 1}, color};
+        Vertex left_v4 = {{-w, -h, -d}, {0, 0}, color};
         vertices.AddFace(left_v1, left_v2, left_v3, left_v4);
         // top
         color = colors[4];
-        Vertex top_v1 = {{-w, +h, -d}, {0, 0}, color};
+        Vertex top_v1 = {{-w, +h, -d}, {0, 1}, color};
         Vertex top_v2 = {{+w, +h, -d}, {1, 0}, color};
         Vertex top_v3 = {{+w, +h, +d}, {1, 1}, color};
-        Vertex top_v4 = {{-w, +h, +d}, {0, 1}, color};
+        Vertex top_v4 = {{-w, +h, +d}, {0, 0}, color};
         vertices.AddFace(top_v1, top_v2, top_v3, top_v4);
         // bottom
         color = colors[5];
-        Vertex bottom_v1 = {{-w, -h, +d}, {0, 0}, color};
-        Vertex bottom_v2 = {{+w, -h, +d}, {1, 0}, color};
-        Vertex bottom_v3 = {{+w, -h, -d}, {1, 1}, color};
-        Vertex bottom_v4 = {{-w, -h, -d}, {0, 1}, color};
+        Vertex bottom_v1 = {{-w, -h, -d}, {0, 1}, color};
+        Vertex bottom_v2 = {{+w, -h, -d}, {1, 0}, color};
+        Vertex bottom_v3 = {{+w, -h, +d}, {1, 1}, color};
+        Vertex bottom_v4 = {{-w, -h, +d}, {0, 0}, color};
         vertices.AddFace(bottom_v1, bottom_v2, bottom_v3, bottom_v4);
     }
 
