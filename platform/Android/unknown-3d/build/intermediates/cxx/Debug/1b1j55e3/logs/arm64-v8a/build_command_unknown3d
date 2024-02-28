@@ -1,4 +1,0 @@
-/Users/harvenguo/Library/Android/sdk/cmake/3.22.1/bin/ninja \
-  -C \
-  /Users/harvenguo/Projects/CrossPlatform/Unknown3D/platform/Android/unknown-3d/.cxx/Debug/1b1j55e3/arm64-v8a \
-  unknown3d
