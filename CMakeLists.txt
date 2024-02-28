@@ -61,11 +61,11 @@ if (BUILD_PC_DEMO AND NOT ANDROID AND NOT IOS)
         set(BUILD_DEMO_MACOS ON)
     elseif (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
         add_definitions(-DWINDOWS -D_POSIX -D_POSIX_THREAD_SAFE_FUNCTIONS)
-        add_definitions(-DFORCE_GLFW)
         set(WINDOWS ON)
         set(BUILD_DEMO_WINDOWS ON)
     elseif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
         add_definitions(-DLINUX)
+        add_definitions(-DFORCE_GLFW)
         set(LINUX ON)
         set(BUILD_DEMO_LINUX ON)
     endif ()
@@ -191,14 +191,12 @@ target_link_libraries(${CMAKE_PROJECT_NAME} ${LINK_LIB})
 # Build demo executable for pc
 if (BUILD_DEMO_WINDOWS)
     message(STATUS "Build Windows demo enabled")
-    include_directories(${CMAKE_SOURCE_DIR}/platform/Windows/lib/glfw/include)
     add_executable(${DEMO_NAME} WIN32
             ${CMAKE_SOURCE_DIR}/platform/Windows/demo/main.cpp
             ${CORE_SOURCE_FILES} ${PLATFORM_FILES}
     )
     target_link_libraries(${DEMO_NAME}
             ${LINK_LIB}
-            ${CMAKE_SOURCE_DIR}/platform/Windows/lib/glfw/x64/libglfw3.a
     )
 elseif (BUILD_DEMO_MACOS)
     message(STATUS "Build MacOS demo enabled")
