@@ -224,7 +224,7 @@ int windowLoop(int argc, const char* const* argv) {
 
     EntityManager& entities = engine->GetEntities();
     // add entity
-    Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+    Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Rectangle);
     box1.assign<Transform>(Transform{{-1, 0.5f}});
     mainScene->AddEntity(box1);
     Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);

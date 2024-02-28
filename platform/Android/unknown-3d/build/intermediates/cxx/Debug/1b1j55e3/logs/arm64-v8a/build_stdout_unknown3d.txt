@@ -1,0 +1,3 @@
+ninja: Entering directory `/Users/harvenguo/Projects/CrossPlatform/Unknown3D/platform/Android/unknown-3d/.cxx/Debug/1b1j55e3/arm64-v8a'
+[1/2] Building CXX object CMakeFiles/unknown3d.dir/src/platform/android/JniEntry.cpp.o
+[2/2] Linking CXX shared library ../../../../build/intermediates/cxx/Debug/1b1j55e3/obj/arm64-v8a/libunknown3d.so

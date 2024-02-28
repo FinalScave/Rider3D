@@ -1,0 +1,19 @@
+/Users/harvenguo/Library/Android/sdk/cmake/3.22.1/bin/cmake \
+  -H/Users/harvenguo/Projects/CrossPlatform/Unknown3D \
+  -DCMAKE_SYSTEM_NAME=Android \
+  -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+  -DCMAKE_SYSTEM_VERSION=21 \
+  -DANDROID_PLATFORM=android-21 \
+  -DANDROID_ABI=arm64-v8a \
+  -DCMAKE_ANDROID_ARCH_ABI=arm64-v8a \
+  -DANDROID_NDK=/Users/harvenguo/Library/Android/sdk/ndk/23.1.7779620 \
+  -DCMAKE_ANDROID_NDK=/Users/harvenguo/Library/Android/sdk/ndk/23.1.7779620 \
+  -DCMAKE_TOOLCHAIN_FILE=/Users/harvenguo/Library/Android/sdk/ndk/23.1.7779620/build/cmake/android.toolchain.cmake \
+  -DCMAKE_MAKE_PROGRAM=/Users/harvenguo/Library/Android/sdk/cmake/3.22.1/bin/ninja \
+  -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/harvenguo/Projects/CrossPlatform/Unknown3D/platform/Android/unknown-3d/build/intermediates/cxx/Debug/1b1j55e3/obj/arm64-v8a \
+  -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/Users/harvenguo/Projects/CrossPlatform/Unknown3D/platform/Android/unknown-3d/build/intermediates/cxx/Debug/1b1j55e3/obj/arm64-v8a \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -B/Users/harvenguo/Projects/CrossPlatform/Unknown3D/platform/Android/unknown-3d/.cxx/Debug/1b1j55e3/arm64-v8a \
+  -GNinja \
+  -DANDROID_STL=c++_shared \
+  -DANDROID=ON
