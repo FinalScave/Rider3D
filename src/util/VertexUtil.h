@@ -16,7 +16,7 @@ NS_RIDER_BEGIN
                                        float width, float height, Color color = kDefaultRectColor);
 
         static void BuildTriangle(Vertices& vertices,
-                                       Vec3 p1, Vec3 p2, Vec3 p3, Color color = kDefaultRectColor);
+                                       float width, float height, Color color = kDefaultRectColor);
 
         static void BuildBox(Vertices& vertices,
                              float width, float height, float depth, Color colors[6] = const_cast<Color*>(kDefaultBoxColors));
@@ -34,7 +34,8 @@ NS_RIDER_BEGIN
         static void BuildTorus(Vertices& vertices,
                                    float large_radius, float small_radius, int segments_w, int segments_h);
 
-        static void BuildTriangularPyramid(Vertices& vertices, Vec3 shape[4], Color color[4] = const_cast<Color*>(kDefaultTriangularPyramidColor));
+        static void BuildTriangularPyramid(Vertices& vertices,
+                                           float width, float height, float depth, Color color[4] = const_cast<Color*>(kDefaultTriangularPyramidColor));
     private:
         const static Color kDefaultRectColor;
         const static Color kDefaultBoxColors[6];

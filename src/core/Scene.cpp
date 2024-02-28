@@ -110,7 +110,7 @@ NS_RIDER_BEGIN
                 VertexUtil::BuildRectangle(vertices, 0.5, 0.5);
                 break;
             case PrimitiveType::Triangle:
-                VertexUtil::BuildTriangle(vertices, {-0.5f, -0.5f, 0.0f}, {0.5f, -0.5f, 0.0f}, {0.0f,  0.5f, 0.0f});
+                VertexUtil::BuildTriangle(vertices, 0.5, 0.5);
                 break;
             case PrimitiveType::Box:
                 VertexUtil::BuildBox(vertices, 0.5, 0.5, 0.5);
@@ -133,13 +133,7 @@ NS_RIDER_BEGIN
                                        0.5, 0.4, 100, 100);
                 break;
             case PrimitiveType::TriangularPyramid:
-                Vec3 shape[4] = {
-                        {-0.5f, 0.0f, -0.5f},
-                        {0.5f, 0.0f, -0.5f},
-                        {0.0f, 0.0f, 0.5f},
-                        {0.0f, 1.0f, 0.0f}
-                };
-                VertexUtil::BuildTriangularPyramid(vertices, shape);
+                VertexUtil::BuildTriangularPyramid(vertices, 0.5, 0.5, 0.5);
                 break;
         }
         return entity;

@@ -14,7 +14,7 @@ NS_RIDER_BEGIN
 
     struct BufferHandle {
         Vertex* vertices = nullptr;
-        uint16_t* indices = nullptr;
+        uint32_t* indices = nullptr;
         bgfx::DynamicVertexBufferHandle vertex_buffer = BGFX_INVALID_HANDLE;
         bgfx::DynamicIndexBufferHandle index_buffer = BGFX_INVALID_HANDLE;
     };

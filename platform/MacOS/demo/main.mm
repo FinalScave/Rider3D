@@ -218,18 +218,18 @@ int windowLoop(int argc, const char* const* argv) {
     RiderEngine* engine = new RiderEngine(config);
     SceneManager& scenes = engine->GetScenes();
     Scene* mainScene = scenes.CreateScene();
-    mainScene->assign<Camera>(Camera{0.1f,0.5f,2.f});
+    mainScene->assign<Camera>(Camera{-0.3f,0.5f,2.f});
     auto debugInfo = mainScene->assign<DebugInfo>(DebugInfo{1, 1});
     scenes.LoadScene(mainScene);
 
     EntityManager& entities = engine->GetEntities();
     // add entity
-    Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Rectangle);
-    box1.assign<Transform>(Transform{{-1, 0.5f}});
+    Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::TriangularPyramid);
+    box1.assign<Transform>(Transform{{-0.8, 0.3f}});
     mainScene->AddEntity(box1);
-    Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+    /*Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
     box2.assign<Transform>(Transform{{1, 0.5f}});
-    mainScene->AddEntity(box2);
+    mainScene->AddEntity(box2);*/
     Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
     box3.assign<Transform>(Transform{{-0.5, -0.5}});
     mainScene->AddEntity(box3);

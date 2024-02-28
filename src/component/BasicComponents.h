@@ -24,7 +24,7 @@ NS_RIDER_BEGIN
     struct Camera {
         Vec3 position = {0, 0, 2};
         Vec3 target = {0, 0, 0};
-        Vec3 up_axis = {0, 0, 0};
+        Vec3 up_axis = {0, 1, 0};
     };
 
     struct EntityConfig {
@@ -55,9 +55,9 @@ NS_RIDER_BEGIN
 
         void AddIndex(uint32_t index);
 
-        void AddFace(Vertex& upper_left, Vertex& upper_right, Vertex& lower_right, Vertex& lower_left);
-        
         void AddFace(Vertex& v1, Vertex& v2, Vertex& v3);
+
+        void AddQuad(Vertex& upper_left, Vertex& upper_right, Vertex& lower_right, Vertex& lower_left);
 
         void SetVertices(uint16_t vertices_count, Vertex* vertices);
 

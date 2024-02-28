@@ -16,23 +16,12 @@ NS_RIDER_BEGIN
         if (!entity.has_component<Vertices>()) {
             return;
         }
-        auto vertices = entity.component<Vertices>();
-        BufferHandle* handle = context_->CreateOrUpdateBuffer(
-                entity,
-                program_->vertex_layout_,
-                vertices->vertex_data_list,
-                vertices->vertex_index_list
-        );
         uint8_t view_id = context_->curr_view_id_;
         uint16_t width = context_->render_config_.width;
         uint16_t height = context_->render_config_.height;
         bgfx::setViewRect(view_id, 0, 0, width, height);
         //bgfx::setViewClear(view_id, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x666666ff);
         bgfx::touch(view_id);
-        bgfx::setVertexBuffer(0, handle->vertex_buffer);
-        bgfx::setIndexBuffer(handle->index_buffer);
-        bgfx::setViewFrameBuffer(view_id, BGFX_INVALID_HANDLE);
-        bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_BLEND_ALPHA);
         if (context_->scene_->has_component<Camera>()) {
             bx::mtxIdentity(view_matrix_);
             bx::mtxIdentity(proj_matrix_);
@@ -74,6 +63,17 @@ NS_RIDER_BEGIN
         bx::mtxMul(model_matrix_, mtx_scale_rotate, mtx_trans);
         bgfx::setTransform(model_matrix_);
 
+        auto vertices = entity.component<Vertices>();
+        BufferHandle* handle = context_->CreateOrUpdateBuffer(
+                entity,
+                program_->vertex_layout_,
+                vertices->vertex_data_list,
+                vertices->vertex_index_list
+        );
+        bgfx::setVertexBuffer(0, handle->vertex_buffer);
+        bgfx::setIndexBuffer(handle->index_buffer);
+        bgfx::setViewFrameBuffer(view_id, BGFX_INVALID_HANDLE);
+        bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_BLEND_ALPHA);
         bgfx::submit(view_id, program_->program_handle_);
     }
 
