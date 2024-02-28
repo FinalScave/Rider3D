@@ -6,7 +6,7 @@
 #include "entityx/System.h"
 #include "entityx/config.h"
 
-namespace unknown {
+namespace rider {
 
 /**
  * A convenience class for instantiating an EventManager, EntityManager and

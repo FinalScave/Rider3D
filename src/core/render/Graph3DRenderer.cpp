@@ -6,7 +6,7 @@
 #include "bx/math.h"
 #include "BasicComponents.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
     /*static Color red = {1.0, 0.0, 0.0, 1.0};
     static Color green = {0.0, 1.0, 0.0, 1.0};
     static Color blue = {0.0, 0.0, 1.0, 1.0};
@@ -105,4 +105,4 @@ UNKNOWN_NS_BEGIN
     }
 
 
-UNKNOWN_NS_END
+NS_RIDER_END

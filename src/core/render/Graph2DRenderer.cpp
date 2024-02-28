@@ -6,7 +6,7 @@
 #include "bx/math.h"
 #include "BasicComponents.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     Graph2DRenderer::Graph2DRenderer(const SMART_PTR<RenderContext>& context) : EntityRenderer(context) {
         this->program_ = MAKE_SMART_PTR<SimpleShaderProgram>();
@@ -77,4 +77,4 @@ UNKNOWN_NS_BEGIN
         bgfx::submit(view_id, program_->program_handle_);
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

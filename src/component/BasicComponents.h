@@ -2,14 +2,14 @@
 // Created by Scave on 2024/2/22.
 //
 
-#ifndef UNKNOWN3D_BASICCOMPONENTS_H
-#define UNKNOWN3D_BASICCOMPONENTS_H
+#ifndef RIDER3D_BASICCOMPONENTS_H
+#define RIDER3D_BASICCOMPONENTS_H
 
 #include <vector>
 #include "Define.h"
 #include "Supposition.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     struct Position {
         Vec3 value;
@@ -140,5 +140,5 @@ UNKNOWN_NS_BEGIN
         const char* text = nullptr;
     };
 
-UNKNOWN_NS_END
-#endif //UNKNOWN3D_BASICCOMPONENTS_H
+NS_RIDER_END
+#endif //RIDER3D_BASICCOMPONENTS_H

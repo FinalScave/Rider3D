@@ -2,7 +2,7 @@
 #define GLFW_EXPOSE_NATIVE_WIN32
 #include "GLFW/glfw3.h"
 #include "GLFW/glfw3native.h"
-#include "UnknownEngine.h"
+#include "RiderEngine.h"
 #include "component/BasicComponents.h"
 
 using namespace unknown;
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     // init engine
     RenderConfig config = {(uint16_t) width, (uint16_t) height,
                            handle, true};
-    UnknownEngine* engine = new UnknownEngine(config);
+    RiderEngine* engine = new RiderEngine(config);
     SceneManager& scenes = engine->GetScenes();
     Scene* scene_main = scenes.CreateScene();
     scene_main->assign<Camera>(Camera{0.1f,0.5f,3.f});

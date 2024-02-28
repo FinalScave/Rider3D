@@ -1,7 +1,7 @@
 
 #include "entityx/help/Timer.h"
 
-namespace unknown {
+namespace rider {
 namespace help {
 
 Timer::Timer() {

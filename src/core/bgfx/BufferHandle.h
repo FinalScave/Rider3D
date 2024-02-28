@@ -2,15 +2,15 @@
 // Created by Scave on 2023/11/12.
 //
 
-#ifndef UNKNOWN3D_BUFFERHANDLE_H
-#define UNKNOWN3D_BUFFERHANDLE_H
+#ifndef RIDER3D_BUFFERHANDLE_H
+#define RIDER3D_BUFFERHANDLE_H
 
 #include "Define.h"
 #include "bgfx/bgfx.h"
 #include "entityx/Entity.h"
 #include "BasicComponents.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     struct BufferHandle {
         Vertex* vertices = nullptr;
@@ -34,6 +34,6 @@ UNKNOWN_NS_BEGIN
         HASHMAP<Entity, BufferHandle*> name_buffer_handle_map_;
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_BUFFERHANDLE_H
+#endif //RIDER3D_BUFFERHANDLE_H

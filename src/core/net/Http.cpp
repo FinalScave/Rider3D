@@ -6,7 +6,7 @@
 
 #include <utility>
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     HttpRequest::HttpRequest(const HttpMethod::Enum& method, String url)
             : method(method), url(std::move(url)) {
@@ -39,4 +39,4 @@ UNKNOWN_NS_BEGIN
 
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

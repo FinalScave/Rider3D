@@ -2,14 +2,14 @@
 // Created by Scave on 2023/11/12.
 //
 
-#ifndef UNKNOWN3D_BGFXTEXTURE_H
-#define UNKNOWN3D_BGFXTEXTURE_H
+#ifndef RIDER3D_BGFXTEXTURE_H
+#define RIDER3D_BGFXTEXTURE_H
 
 #include "Define.h"
 #include "../Texture.h"
 #include "bgfx/bgfx.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     class BgfxTextureHandle : public TextureHandle {
     public:
@@ -23,6 +23,6 @@ UNKNOWN_NS_BEGIN
         bgfx::TextureHandle handle_ = BGFX_INVALID_HANDLE;
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_BGFXTEXTURE_H
+#endif //RIDER3D_BGFXTEXTURE_H

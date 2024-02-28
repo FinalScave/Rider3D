@@ -6,7 +6,7 @@
 #include "File.h"
 
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
     FileInfo FileSession::GetInfo() {
         return {};
     }
@@ -28,4 +28,4 @@ UNKNOWN_NS_BEGIN
         return FileSession();
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

@@ -2,12 +2,12 @@
 // Created by Scave on 2023/11/12.
 //
 
-#ifndef UNKNOWN3D_TEXTURE_H
-#define UNKNOWN3D_TEXTURE_H
+#ifndef RIDER3D_TEXTURE_H
+#define RIDER3D_TEXTURE_H
 
 #include "Define.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     const static TEXTURE_ID_TYPE kInvalidIndex = UINT16_MAX;
 
@@ -28,6 +28,6 @@ UNKNOWN_NS_BEGIN
         HASHMAP<Name, SMART_PTR<TextureHandle>> name_texture_map_;
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_TEXTURE_H
+#endif //RIDER3D_TEXTURE_H

@@ -5,7 +5,7 @@
 #include <cmath>
 #include "Supposition.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     const Color Colors::Red = Color{1, 0, 0, 1};
     const Color Colors::Green = Color{0, 1, 0, 1};
@@ -72,4 +72,4 @@ UNKNOWN_NS_BEGIN
     }
 
 
-UNKNOWN_NS_END
+NS_RIDER_END

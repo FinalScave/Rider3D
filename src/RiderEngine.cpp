@@ -2,13 +2,13 @@
 // Created by Scave on 2023/11/8.
 //
 
-#include "UnknownEngine.h"
+#include "RiderEngine.h"
 #include "system/MoveSystem.h"
 #include "system/BasicRenderSystem.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
-    UnknownEngine::UnknownEngine(const RenderConfig& config)
+    RiderEngine::RiderEngine(const RenderConfig& config)
             : entities_(events_),
               systems_(entities_, events_),
               scenes_(entities_, events_) {
@@ -18,38 +18,38 @@ UNKNOWN_NS_BEGIN
         systems_.configure();
     }
 
-    UnknownEngine::~UnknownEngine() {
+    RiderEngine::~RiderEngine() {
 
     }
 
-    SceneManager& UnknownEngine::GetScenes() {
+    SceneManager& RiderEngine::GetScenes() {
         return scenes_;
     }
 
-    InputManager& UnknownEngine::GetInputs() {
+    InputManager& RiderEngine::GetInputs() {
         return inputs_;
     }
 
-    FileManager& UnknownEngine::GetFiles() {
+    FileManager& RiderEngine::GetFiles() {
         return files_;
     }
 
-    EntityManager& UnknownEngine::GetEntities() {
+    EntityManager& RiderEngine::GetEntities() {
         return entities_;
     }
 
-    SystemManager& UnknownEngine::GetSystems() {
+    SystemManager& RiderEngine::GetSystems() {
         return systems_;
     }
 
-    EventManager& UnknownEngine::GetEvents() {
+    EventManager& RiderEngine::GetEvents() {
         return events_;
     }
 
-    void UnknownEngine::Update() {
+    void RiderEngine::Update() {
         systems_.update<BasicRenderSystem>(timer_.elapsed());
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
 // unknown

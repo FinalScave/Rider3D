@@ -13,7 +13,7 @@
 #include "entityx/help/NonCopyable.h"
 
 
-namespace unknown {
+namespace rider {
 
 
 /// Used internally by the EventManager.
@@ -92,7 +92,7 @@ class Receiver : public BaseReceiver {
  *
  * Subscriptions are automatically removed when receivers are destroyed..
  */
-class EventManager : unknown::help::NonCopyable {
+class EventManager : rider::help::NonCopyable {
  public:
   EventManager();
   virtual ~EventManager();

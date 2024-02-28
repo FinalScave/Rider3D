@@ -6,7 +6,7 @@
 #include "bgfx/bgfx.h"
 #include "BasicComponents.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     SceneRenderer::SceneRenderer(const RenderConfig& config) {
         this->render_config_ = config;
@@ -96,4 +96,4 @@ UNKNOWN_NS_BEGIN
         renderer_2d->RenderEntity(entity);
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

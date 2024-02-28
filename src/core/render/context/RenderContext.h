@@ -2,8 +2,8 @@
 // Created by Scave on 2023/11/9.
 //
 
-#ifndef UNKNOWN3D_RENDERCONTEXT_H
-#define UNKNOWN3D_RENDERCONTEXT_H
+#ifndef RIDER3D_RENDERCONTEXT_H
+#define RIDER3D_RENDERCONTEXT_H
 
 #include "Define.h"
 #include "bgfx/bgfx.h"
@@ -11,7 +11,7 @@
 #include "bgfx/BufferHandle.h"
 #include "render/config/RenderConfig.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     class SceneRenderer;
 
@@ -39,6 +39,6 @@ UNKNOWN_NS_BEGIN
         SMART_PTR<BufferHandleManager> handle_manager_;
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_RENDERCONTEXT_H
+#endif //RIDER3D_RENDERCONTEXT_H

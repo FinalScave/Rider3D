@@ -4,7 +4,7 @@
 
 #include "Socket.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
     Socket::Socket(String address, int port) : address_(std::move(address)), port_(port) {
     }
 
@@ -27,4 +27,4 @@ UNKNOWN_NS_BEGIN
     Socket ServerSocket::Accept() {
         return Socket{"", 0};
     }
-UNKNOWN_NS_END
+NS_RIDER_END

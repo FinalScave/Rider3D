@@ -1,7 +1,7 @@
 
 #include "entityx/Event.h"
 
-namespace unknown {
+namespace rider {
 
 BaseEvent::Family BaseEvent::family_counter_ = 0;
 

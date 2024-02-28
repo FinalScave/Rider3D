@@ -1,7 +1,7 @@
 #import <AppKit/AppKit.h>
 #import "bx/thread.h"
 #import "bgfx/platform.h"
-#include "UnknownEngine.h"
+#include "RiderEngine.h"
 #import "TimeUtil.h"
 
 #define WIDTH  1024
@@ -104,7 +104,7 @@ namespace demo {
         NSRect screenRect = [[NSScreen mainScreen] frame];
         const float centerX = (screenRect.size.width - WIDTH) * 0.5f;
         const float centerY = (screenRect.size.height - HEIGHT) * 0.5f;
-        createWindow(centerX, centerY, WIDTH, HEIGHT, "Unknown3D");
+        createWindow(centerX, centerY, WIDTH, HEIGHT, "Rider3D");
 
         // 启动运行线程
         MainThreadEntry mte{};
@@ -211,11 +211,11 @@ int main(int argc, const char* const* argv) {
 }
 
 int windowLoop(int argc, const char* const* argv) {
-    using namespace unknown;
+    using namespace rider;
     NSWindow* window = demo::window;
 
     RenderConfig config{1024, 728, window, true};
-    UnknownEngine* engine = new UnknownEngine(config);
+    RiderEngine* engine = new RiderEngine(config);
     SceneManager& scenes = engine->GetScenes();
     Scene* mainScene = scenes.CreateScene();
     mainScene->assign<Camera>(Camera{0.1f,0.5f,2.f});

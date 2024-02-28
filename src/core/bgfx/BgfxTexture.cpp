@@ -4,7 +4,7 @@
 
 #include "BgfxTexture.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     BgfxTextureHandle::BgfxTextureHandle(bgfx::TextureHandle& handle) : handle_(handle) {
     }
@@ -17,4 +17,4 @@ UNKNOWN_NS_BEGIN
         return handle_.idx;
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

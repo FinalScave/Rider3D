@@ -1,7 +1,7 @@
 #include <algorithm>
 #include "Entity.h"
 
-namespace unknown {
+namespace rider {
 
 const Entity::Id Entity::INVALID;
 BaseComponent::Family BaseComponent::family_counter_ = 0;
@@ -17,7 +17,7 @@ void Entity::destroy() {
   invalidate();
 }
 
-std::bitset<unknown::MAX_COMPONENTS> Entity::component_mask() const {
+std::bitset<rider::MAX_COMPONENTS> Entity::component_mask() const {
   return manager_->component_mask(id_);
 }
 

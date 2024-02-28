@@ -4,7 +4,7 @@
 
 #include "PointUtil.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     NdcPoint PointUtil::ScreenPoint2NdcPoint(const ScreenPoint &screen_point,
                                              const ScreenRect &screen_rect) {
@@ -13,4 +13,4 @@ UNKNOWN_NS_BEGIN
         return {x, y};
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

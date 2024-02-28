@@ -4,7 +4,7 @@
 
 #include "BufferHandle.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     BufferHandle* BufferHandleManager::GetBufferHandle(const Entity& entity) {
         return name_buffer_handle_map_[entity];
@@ -54,4 +54,4 @@ UNKNOWN_NS_BEGIN
         }
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

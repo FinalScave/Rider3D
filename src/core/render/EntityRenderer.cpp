@@ -4,10 +4,10 @@
 
 #include "EntityRenderer.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     EntityRenderer::EntityRenderer(const SMART_PTR<RenderContext>& context) {
         this->context_ = context;
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

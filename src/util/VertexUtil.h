@@ -2,13 +2,13 @@
 // Created by Scave on 2024/2/24.
 //
 
-#ifndef UNKNOWN3D_VERTEXUTIL_H
-#define UNKNOWN3D_VERTEXUTIL_H
+#ifndef RIDER3D_VERTEXUTIL_H
+#define RIDER3D_VERTEXUTIL_H
 
 #include "Define.h"
 #include "BasicComponents.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     class VertexUtil {
     public:
@@ -41,6 +41,6 @@ UNKNOWN_NS_BEGIN
         const static Color kDefaultTriangularPyramidColor[4];
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_VERTEXUTIL_H
+#endif //RIDER3D_VERTEXUTIL_H

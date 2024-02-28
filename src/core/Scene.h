@@ -2,14 +2,14 @@
 // Created by Scave on 2023/11/11.
 //
 
-#ifndef UNKNOWN3D_SCENE_H
-#define UNKNOWN3D_SCENE_H
+#ifndef RIDER3D_SCENE_H
+#define RIDER3D_SCENE_H
 
 
 #include "Define.h"
 #include "entityx/Entity.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     struct RenderType {
         enum Enum {
@@ -78,6 +78,6 @@ UNKNOWN_NS_BEGIN
         Scene* current_scene_ = nullptr;
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_SCENE_H
+#endif //RIDER3D_SCENE_H

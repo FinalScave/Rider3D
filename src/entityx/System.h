@@ -12,7 +12,7 @@
 #include "entityx/help/NonCopyable.h"
 
 
-namespace unknown {
+namespace rider {
 
 
 class SystemManager;
@@ -21,7 +21,7 @@ class SystemManager;
 /**
  * Base System class. Generally should not be directly used, instead see System<Derived>.
  */
-class BaseSystem : unknown::help::NonCopyable {
+class BaseSystem : rider::help::NonCopyable {
  public:
   typedef size_t Family;
 
@@ -78,7 +78,7 @@ private:
 };
 
 
-class SystemManager : unknown::help::NonCopyable {
+class SystemManager : rider::help::NonCopyable {
  public:
   SystemManager(EntityManager &entity_manager,
                 EventManager &event_manager) :

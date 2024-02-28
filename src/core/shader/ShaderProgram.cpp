@@ -7,7 +7,7 @@
 #include "bgfx/BgfxUtil.h"
 #include "Supposition.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     ShaderProgram::ShaderProgram() = default;
 
@@ -51,4 +51,4 @@ UNKNOWN_NS_BEGIN
         this->uniform_handles_[0] = bgfx::createUniform("u_resolution", bgfx::UniformType::Enum::Vec4);
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

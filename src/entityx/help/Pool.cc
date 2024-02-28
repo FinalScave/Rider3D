@@ -1,7 +1,7 @@
 
 #include "Pool.h"
 
-namespace unknown {
+namespace rider {
 
 BasePool::~BasePool() {
   for (char *ptr : blocks_) {

@@ -4,7 +4,7 @@
 
 #include "Texture.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     bool TextureHandle::isValid() {
         return GetIndex() != kInvalidIndex;
@@ -18,4 +18,4 @@ UNKNOWN_NS_BEGIN
         name_texture_map_[name] = handle;
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

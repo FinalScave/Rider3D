@@ -2,16 +2,16 @@
 // Created by Scave on 2023/11/8.
 //
 
-#ifndef UNKNOWN3D_DEFINE_H
-#define UNKNOWN3D_DEFINE_H
+#ifndef RIDER3D_DEFINE_H
+#define RIDER3D_DEFINE_H
 
 #include <memory>
 #include <string>
 #include <unordered_map>
 
-#define NS_UNKNOWN unknown
-#define UNKNOWN_NS_BEGIN namespace NS_UNKNOWN {
-#define UNKNOWN_NS_END }
+#define NS_RIDER rider
+#define NS_RIDER_BEGIN namespace NS_RIDER {
+#define NS_RIDER_END }
 
 typedef uint64_t UInt64;
 typedef uint32_t UInt32;
@@ -66,4 +66,4 @@ if (bgfx::isValid(handle)) {       \
     handle = BGFX_INVALID_HANDLE;          \
 }
 
-#endif //UNKNOWN3D_DEFINE_H
+#endif //RIDER3D_DEFINE_H

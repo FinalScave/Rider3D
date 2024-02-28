@@ -2,7 +2,7 @@
 
 #pragma once
 
-namespace unknown {
+namespace rider {
 namespace help {
 
 class NonCopyable {

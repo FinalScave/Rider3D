@@ -6,9 +6,9 @@
 
 #include <utility>
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     void UIElement::SetEventListener(std::function<void()> callback) {
         this->callback_ = std::move(callback);
     }
-UNKNOWN_NS_END
+NS_RIDER_END

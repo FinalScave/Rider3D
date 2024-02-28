@@ -2,13 +2,13 @@
 // Created by Scave on 2023/11/9.
 //
 
-#ifndef UNKNOWN3D_POINTUTIL_H
-#define UNKNOWN3D_POINTUTIL_H
+#ifndef RIDER3D_POINTUTIL_H
+#define RIDER3D_POINTUTIL_H
 
 #include "Define.h"
 #include "Supposition.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     class PointUtil {
     public:
@@ -16,6 +16,6 @@ UNKNOWN_NS_BEGIN
 
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_POINTUTIL_H
+#endif //RIDER3D_POINTUTIL_H

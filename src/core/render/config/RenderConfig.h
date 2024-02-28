@@ -2,12 +2,12 @@
 // Created by Scave on 2023/11/9.
 //
 
-#ifndef UNKNOWN3D_RENDERCONFIG_H
-#define UNKNOWN3D_RENDERCONFIG_H
+#ifndef RIDER3D_RENDERCONFIG_H
+#define RIDER3D_RENDERCONFIG_H
 
 #include "Define.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     struct RenderConfig {
         uint16_t width = 720;
@@ -16,6 +16,6 @@ UNKNOWN_NS_BEGIN
         bool debug = false;
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_RENDERCONFIG_H
+#endif //RIDER3D_RENDERCONFIG_H

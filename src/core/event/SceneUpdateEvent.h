@@ -2,13 +2,13 @@
 // Created by Scave on 2024/2/21.
 //
 
-#ifndef UNKNOWN3D_SCENEUPDATEEVENT_H
-#define UNKNOWN3D_SCENEUPDATEEVENT_H
+#ifndef RIDER3D_SCENEUPDATEEVENT_H
+#define RIDER3D_SCENEUPDATEEVENT_H
 
 #include "Define.h"
 #include "Scene.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
     class SceneUpdateEvent : public Event<SceneUpdateEvent> {
     public:
         explicit SceneUpdateEvent(Scene* scene) : scene(scene) {}
@@ -16,6 +16,6 @@ UNKNOWN_NS_BEGIN
         Scene* scene;
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_SCENEUPDATEEVENT_H
+#endif //RIDER3D_SCENEUPDATEEVENT_H

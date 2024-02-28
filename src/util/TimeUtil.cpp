@@ -4,7 +4,7 @@
 
 #include "TimeUtil.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
     UInt64 TimeUtil::MilliTime() {
         auto now = std::chrono::high_resolution_clock::now();
         return std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
@@ -20,4 +20,4 @@ UNKNOWN_NS_BEGIN
         return std::chrono::duration_cast<std::chrono::nanoseconds>(now.time_since_epoch()).count();
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

@@ -4,7 +4,7 @@
 
 #include "VertexUtil.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
     const Color VertexUtil::kDefaultRectColor = {1, 1, 1, 1};
     const Color VertexUtil::kDefaultBoxColors[6] = {
             Colors::Red, Colors::Green, Colors::Blue,
@@ -108,4 +108,4 @@ UNKNOWN_NS_BEGIN
         BuildTriangle(vertices, shape[2], shape[1], shape[3], color[1]);//left
         BuildTriangle(vertices, shape[2], shape[0], shape[3], color[2]);//right
     }
-UNKNOWN_NS_END
+NS_RIDER_END

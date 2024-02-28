@@ -4,7 +4,7 @@
 
 #include "MoveSystem.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     MoveSystem::MoveSystem() {
 
@@ -18,4 +18,4 @@ UNKNOWN_NS_BEGIN
 
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

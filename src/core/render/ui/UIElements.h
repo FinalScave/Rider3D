@@ -2,13 +2,13 @@
 // Created by Scave on 2024/2/24.
 //
 
-#ifndef UNKNOWN3D_UIELEMENTS_H
-#define UNKNOWN3D_UIELEMENTS_H
+#ifndef RIDER3D_UIELEMENTS_H
+#define RIDER3D_UIELEMENTS_H
 
 #include <functional>
 #include "Define.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     class UIElement {
     public:
@@ -26,6 +26,6 @@ UNKNOWN_NS_BEGIN
 
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_UIELEMENTS_H
+#endif //RIDER3D_UIELEMENTS_H

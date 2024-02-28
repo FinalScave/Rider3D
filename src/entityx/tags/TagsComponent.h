@@ -5,7 +5,7 @@
 #include <string>
 #include "entityx/Entity.h"
 
-namespace unknown {
+namespace rider {
 namespace tags {
 
 /**

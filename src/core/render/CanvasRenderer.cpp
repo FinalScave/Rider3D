@@ -4,7 +4,7 @@
 
 #include "CanvasRenderer.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
     CanvasRenderer::CanvasRenderer(const SMART_PTR<RenderContext>& context) : EntityRenderer(context) {
 
     }
@@ -12,4 +12,4 @@ UNKNOWN_NS_BEGIN
     void CanvasRenderer::RenderEntity(Entity& entity) {
 
     }
-UNKNOWN_NS_END
+NS_RIDER_END

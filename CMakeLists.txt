@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 # project name
-project(unknown3d)
+project(rider3d)
 
 # Compiler special
 if(MSVC)
@@ -39,8 +39,8 @@ file(GLOB_RECURSE CORE_SOURCE_FILES
         ${3DPARTY_DIR}/bgfx/include/bx/*.*
         ${3DPARTY_DIR}/bgfx/include/tinystl/*.*
         ${3DPARTY_DIR}/json-cpp/*.*
-        ${SRC_DIR}/UnknownEngine.h
-        ${SRC_DIR}/UnknownEngine.cpp
+        ${SRC_DIR}/RiderEngine.h
+        ${SRC_DIR}/RiderEngine.cpp
         ${SRC_DIR}/component/*.*
         ${SRC_DIR}/core/*.*
         ${SRC_DIR}/entityx/*.*
@@ -53,7 +53,7 @@ endif ()
 
 # Determine whether to build a demo and which platform to build demo on
 if (BUILD_PC_DEMO AND NOT ANDROID AND NOT IOS)
-    set(DEMO_NAME Unknown3DDemo)
+    set(DEMO_NAME Rider3DDemo)
 
     if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
         add_definitions(-DMACOS)

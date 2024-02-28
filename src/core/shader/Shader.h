@@ -2,8 +2,8 @@
 // Created by Scave on 2023/11/13.
 //
 
-#ifndef UNKNOWN3D_SHADER_H
-#define UNKNOWN3D_SHADER_H
+#ifndef RIDER3D_SHADER_H
+#define RIDER3D_SHADER_H
 
 #if (defined(ANDROID) || defined(HARMONY) || defined(FORCE_GLFW))
 
@@ -35,4 +35,4 @@
 
 #endif
 
-#endif //UNKNOWN3D_SHADER_H
+#endif //RIDER3D_SHADER_H

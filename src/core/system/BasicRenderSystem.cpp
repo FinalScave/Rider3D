@@ -5,7 +5,7 @@
 #include "BasicRenderSystem.h"
 #include "Scene.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     BasicRenderSystem::BasicRenderSystem(SMART_PTR<SceneRenderer>& renderer) {
         this->renderer_ = renderer;
@@ -23,5 +23,5 @@ UNKNOWN_NS_BEGIN
         renderer_->SetScene(event.scene);
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END
 

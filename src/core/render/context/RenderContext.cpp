@@ -5,7 +5,7 @@
 #include "RenderContext.h"
 #include "bgfx/BgfxUtil.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     RenderContext::RenderContext(const RenderConfig& config) : curr_view_id_(0), main_view_id_(0) {
         this->handle_manager_ = MAKE_SMART_PTR<BufferHandleManager>();
@@ -31,4 +31,4 @@ UNKNOWN_NS_BEGIN
         handle_manager_->PutBufferHandle(entity, handle);
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

@@ -2,8 +2,8 @@
 // Created by Scave on 2023/11/11.
 //
 
-#ifndef UNKNOWN3D_JREFHOLDER_H
-#define UNKNOWN3D_JREFHOLDER_H
+#ifndef RIDER3D_JREFHOLDER_H
+#define RIDER3D_JREFHOLDER_H
 
 #include "Define.h"
 
@@ -31,4 +31,4 @@ private:
     T target;
 };
 
-#endif //UNKNOWN3D_JREFHOLDER_H
+#endif //RIDER3D_JREFHOLDER_H

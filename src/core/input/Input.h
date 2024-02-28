@@ -2,13 +2,13 @@
 // Created by harvenguo on 2024/2/23.
 //
 
-#ifndef UNKNOWN3D_INPUT_H
-#define UNKNOWN3D_INPUT_H
+#ifndef RIDER3D_INPUT_H
+#define RIDER3D_INPUT_H
 
 #include "Define.h"
 #include "Supposition.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     struct KeyCode {
         enum Enum {
@@ -239,6 +239,6 @@ UNKNOWN_NS_BEGIN
         bool IsKeyUp(KeyCode::Enum& code);
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_INPUT_H
+#endif //RIDER3D_INPUT_H

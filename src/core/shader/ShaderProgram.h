@@ -2,13 +2,13 @@
 // Created by Scave on 2023/11/13.
 //
 
-#ifndef UNKNOWN3D_SHADERPROGRAM_H
-#define UNKNOWN3D_SHADERPROGRAM_H
+#ifndef RIDER3D_SHADERPROGRAM_H
+#define RIDER3D_SHADERPROGRAM_H
 
 #include "Define.h"
 #include "bgfx/bgfx.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     constexpr uint8_t MAX_UNIFORM_COUNT = 4;
 
@@ -55,6 +55,6 @@ UNKNOWN_NS_BEGIN
         CommonShaderProgram();
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_SHADERPROGRAM_H
+#endif //RIDER3D_SHADERPROGRAM_H

@@ -2,13 +2,13 @@
 // Created by Scave on 2023/11/10.
 //
 
-#ifndef UNKNOWN3D_LOGUTIL_H
-#define UNKNOWN3D_LOGUTIL_H
+#ifndef RIDER3D_LOGUTIL_H
+#define RIDER3D_LOGUTIL_H
 
 #ifdef ENABLE_LOG
 
 #include "log.h"
-#define LOG_TAG "UNKNOWN3D"
+#define LOG_TAG "RIDER3D"
 #define LOGI(fmt, ...) LogInfo("[" LOG_TAG"] " fmt, __VA_ARGS__)
 #define LOGD(fmt, ...) LogDebug("[" LOG_TAG"] " fmt, __VA_ARGS__)
 #define LOGW(fmt, ...) LogWarn("[" LOG_TAG"] " fmt, __VA_ARGS__)
@@ -23,4 +23,4 @@
 
 #endif
 
-#endif //UNKNOWN3D_LOGUTIL_H
+#endif //RIDER3D_LOGUTIL_H

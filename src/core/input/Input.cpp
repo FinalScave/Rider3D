@@ -4,7 +4,7 @@
 
 #include "Input.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     bool InputManager::IsKeyDown(KeyCode::Enum& code) {
         return false;
@@ -18,4 +18,4 @@ UNKNOWN_NS_BEGIN
         return false;
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

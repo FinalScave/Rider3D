@@ -25,7 +25,7 @@
 #include "Event.h"
 #include "entityx/help/NonCopyable.h"
 
-namespace unknown {
+namespace rider {
 
 typedef std::uint32_t uint32_t;
 typedef std::uint64_t uint64_t;
@@ -154,7 +154,7 @@ public:
    */
   void destroy();
 
-  std::bitset<unknown::MAX_COMPONENTS> component_mask() const;
+  std::bitset<rider::MAX_COMPONENTS> component_mask() const;
 
  private:
   EntityManager *manager_ = nullptr;
@@ -349,10 +349,10 @@ class SceneManager;
 /**
  * Manages Entity::Id creation and component assignment.
  */
-class EntityManager : unknown::help::NonCopyable {
+class EntityManager : rider::help::NonCopyable {
  friend class SceneManager;
  public:
-  typedef std::bitset<unknown::MAX_COMPONENTS> ComponentMask;
+  typedef std::bitset<rider::MAX_COMPONENTS> ComponentMask;
 
   explicit EntityManager(EventManager &event_manager);
   virtual ~EntityManager();
@@ -476,19 +476,19 @@ class EntityManager : unknown::help::NonCopyable {
       explicit Unpacker(ComponentHandle<Components> & ... handles) :
           handles(std::tuple<ComponentHandle<Components> & ...>(handles...)) {}
 
-      void unpack(unknown::Entity &entity) const {
+      void unpack(rider::Entity &entity) const {
         unpack_<0, Components...>(entity);
       }
 
 
     private:
       template <int N, typename C>
-      void unpack_(unknown::Entity &entity) const {
+      void unpack_(rider::Entity &entity) const {
         std::get<N>(handles) = entity.component<C>();
       }
 
       template <int N, typename C0, typename C1, typename ... Cn>
-      void unpack_(unknown::Entity &entity) const {
+      void unpack_(rider::Entity &entity) const {
         std::get<N>(handles) = entity.component<C0>();
         unpack_<N + 1, C1, Cn...>(entity);
       }
@@ -931,7 +931,7 @@ class EntityManager : unknown::help::NonCopyable {
 template <typename C>
 BaseComponent::Family Component<C>::family() {
   static Family family = family_counter_++;
-  assert(family < unknown::MAX_COMPONENTS);
+  assert(family < rider::MAX_COMPONENTS);
   return family;
 }
 
@@ -1082,14 +1082,14 @@ inline Entity ComponentHandle<C, EM>::entity() {
 
 
 namespace std {
-template <> struct hash<unknown::Entity> {
-  std::size_t operator () (const unknown::Entity &entity) const {
+template <> struct hash<rider::Entity> {
+  std::size_t operator () (const rider::Entity &entity) const {
     return static_cast<std::size_t>(entity.id().index() ^ entity.id().version());
   }
 };
 
-template <> struct hash<const unknown::Entity> {
-  std::size_t operator () (const unknown::Entity &entity) const {
+template <> struct hash<const rider::Entity> {
+  std::size_t operator () (const rider::Entity &entity) const {
     return static_cast<std::size_t>(entity.id().index() ^ entity.id().version());
   }
 };

@@ -2,13 +2,13 @@
 // Created by Scave on 2023/11/13.
 //
 
-#ifndef UNKNOWN3D_GRAPH2DRENDERER_H
-#define UNKNOWN3D_GRAPH2DRENDERER_H
+#ifndef RIDER3D_GRAPH2DRENDERER_H
+#define RIDER3D_GRAPH2DRENDERER_H
 
 #include "Define.h"
 #include "EntityRenderer.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     class Graph2DRenderer : public EntityRenderer {
     public:
@@ -22,6 +22,6 @@ UNKNOWN_NS_BEGIN
         float proj_matrix_[16] = {0};
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_GRAPH2DRENDERER_H
+#endif //RIDER3D_GRAPH2DRENDERER_H

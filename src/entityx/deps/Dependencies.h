@@ -5,7 +5,7 @@
 #include "entityx/Event.h"
 #include "entityx/Entity.h"
 
-namespace unknown {
+namespace rider {
 namespace deps {
 
 /**

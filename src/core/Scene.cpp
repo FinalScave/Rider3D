@@ -8,7 +8,7 @@
 #include "LogUtil.h"
 #include "VertexUtil.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     Scene::Scene(EntityManager *manager, Entity::Id id) : Entity(manager, id) {
     }
@@ -145,4 +145,4 @@ UNKNOWN_NS_BEGIN
         return entity;
     }
 
-UNKNOWN_NS_END
+NS_RIDER_END

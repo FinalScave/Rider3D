@@ -2,8 +2,8 @@
 // Created by Scave on 2023/11/8.
 //
 
-#ifndef UNKNOWN3D_UNKNOWNENGINE_H
-#define UNKNOWN3D_UNKNOWNENGINE_H
+#ifndef RIDER3D_RIDERENGINE_H
+#define RIDER3D_RIDERENGINE_H
 
 #include "Define.h"
 #include "render/SceneRenderer.h"
@@ -14,13 +14,13 @@
 #include "input/Input.h"
 #include "file/File.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
-    class UnknownEngine : public Receiver<SceneUpdateEvent> {
+    class RiderEngine : public Receiver<SceneUpdateEvent> {
     public:
-        explicit UnknownEngine(const RenderConfig& config);
+        explicit RiderEngine(const RenderConfig& config);
 
-        ~UnknownEngine();
+        ~RiderEngine();
 
         SceneManager& GetScenes();
 
@@ -46,6 +46,6 @@ UNKNOWN_NS_BEGIN
         help::Timer timer_;
     };
 
-UNKNOWN_NS_END // unknown
+NS_RIDER_END
 
-#endif //UNKNOWN3D_UNKNOWNENGINE_H
+#endif //RIDER3D_RIDERENGINE_H

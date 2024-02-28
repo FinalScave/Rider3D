@@ -2,12 +2,12 @@
 // Created by Scave on 2023/11/9.
 //
 
-#ifndef UNKNOWN3D_SUPPOSITION_H
-#define UNKNOWN3D_SUPPOSITION_H
+#ifndef RIDER3D_SUPPOSITION_H
+#define RIDER3D_SUPPOSITION_H
 
 #include "Define.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     /// Point of screen(such as phone screen),
     /// Starting from the top left corner, the range is from 0 to the width(x) or height(y) of the screen
@@ -93,10 +93,10 @@ UNKNOWN_NS_BEGIN
         const static Color Cyan;
     };
 
-    typedef NS_UNKNOWN::NdcPoint Number3D;
-    typedef NS_UNKNOWN::NdcPoint Vec3;
-    typedef NS_UNKNOWN::TextureUVPoint UV;
+    typedef NS_RIDER::NdcPoint Number3D;
+    typedef NS_RIDER::NdcPoint Vec3;
+    typedef NS_RIDER::TextureUVPoint UV;
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_SUPPOSITION_H
+#endif //RIDER3D_SUPPOSITION_H

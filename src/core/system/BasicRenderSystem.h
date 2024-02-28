@@ -2,15 +2,15 @@
 // Created by Scave on 2024/2/21.
 //
 
-#ifndef UNKNOWN3D_BASICRENDERSYSTEM_H
-#define UNKNOWN3D_BASICRENDERSYSTEM_H
+#ifndef RIDER3D_BASICRENDERSYSTEM_H
+#define RIDER3D_BASICRENDERSYSTEM_H
 
 #include "Define.h"
 #include "entityx/entityx.h"
 #include "render/SceneRenderer.h"
 #include "event/SceneUpdateEvent.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     class BasicRenderSystem : public System<BasicRenderSystem>, public Receiver<SceneUpdateEvent> {
     public:
@@ -26,6 +26,6 @@ UNKNOWN_NS_BEGIN
         SMART_PTR<SceneRenderer> renderer_;
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_BASICRENDERSYSTEM_H
+#endif //RIDER3D_BASICRENDERSYSTEM_H

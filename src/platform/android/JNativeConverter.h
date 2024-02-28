@@ -2,11 +2,11 @@
 // Created by Scave on 2023/11/10.
 //
 
-#ifndef UNKNOWN3D_JNATIVECONVERTER_H
-#define UNKNOWN3D_JNATIVECONVERTER_H
+#ifndef RIDER3D_JNATIVECONVERTER_H
+#define RIDER3D_JNATIVECONVERTER_H
 
 #include <jni.h>
-#include "UnknownEngine.h"
+#include "RiderEngine.h"
 
 using namespace NS_UNKNOWN;
 
@@ -29,4 +29,4 @@ inline T ToNativeObject(jlong& address) {
     return (T) address;
 }
 
-#endif //UNKNOWN3D_JNATIVECONVERTER_H
+#endif //RIDER3D_JNATIVECONVERTER_H

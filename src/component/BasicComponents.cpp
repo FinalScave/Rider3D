@@ -3,7 +3,7 @@
 //
 #include "BasicComponents.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
     Vertices::Vertices() = default;
 
@@ -72,4 +72,4 @@ UNKNOWN_NS_BEGIN
 
     VerticesManager::~VerticesManager() = default;
 
-UNKNOWN_NS_END
+NS_RIDER_END

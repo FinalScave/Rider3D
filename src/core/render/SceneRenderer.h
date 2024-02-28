@@ -2,8 +2,8 @@
 // Created by Scave on 2023/11/8.
 //
 
-#ifndef UNKNOWN3D_SCENERENDERER_H
-#define UNKNOWN3D_SCENERENDERER_H
+#ifndef RIDER3D_SCENERENDERER_H
+#define RIDER3D_SCENERENDERER_H
 
 #include "Define.h"
 #include "config/RenderConfig.h"
@@ -13,12 +13,12 @@
 #include "Graph3DRenderer.h"
 #include "Scene.h"
 
-UNKNOWN_NS_BEGIN
+NS_RIDER_BEGIN
 
-    class UnknownEngine;
+    class RiderEngine;
 
     class SceneRenderer {
-        friend UnknownEngine;
+        friend RiderEngine;
     public:
         explicit SceneRenderer(const RenderConfig& config);
 
@@ -43,6 +43,6 @@ UNKNOWN_NS_BEGIN
         void RenderEntity(Entity& entity, ENTITY_SIZE_TYPE order);
     };
 
-UNKNOWN_NS_END
+NS_RIDER_END
 
-#endif //UNKNOWN3D_SCENERENDERER_H
+#endif //RIDER3D_SCENERENDERER_H

@@ -5,7 +5,7 @@
 #include <cassert>
 #include <vector>
 
-namespace unknown {
+namespace rider {
 
 /**
  * Provides a resizable, semi-contiguous pool of memory for constructing
