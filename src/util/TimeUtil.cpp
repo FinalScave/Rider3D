@@ -2,6 +2,7 @@
 // Created by Scave on 2024/2/28.
 //
 
+#include <chrono>
 #include "TimeUtil.h"
 
 NS_RIDER_BEGIN

@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.unknown.sample'
+    namespace 'com.rider.sample'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.unknown.sample"
+        applicationId "com.rider.sample"
         minSdk 21
         targetSdk 33
         versionCode 1
@@ -44,8 +44,7 @@ android {
 
 dependencies {
 
-    implementation project(":unknown-3d")
-
+    implementation project(':rider3d')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     testImplementation 'junit:junit:4.13.2'

@@ -5,7 +5,7 @@
 #include "RiderEngine.h"
 #include "component/BasicComponents.h"
 
-using namespace unknown;
+using namespace NS_RIDER;
 
 static bool s_showStats = false;
 

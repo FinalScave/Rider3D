@@ -8,11 +8,11 @@
 #include <jni.h>
 #include "RiderEngine.h"
 
-using namespace NS_UNKNOWN;
+using namespace NS_RIDER;
 
-UnknownEngine* ToEngineNativePointer(jlong address);
+RiderEngine* ToEngineNativePointer(jlong address);
 
-jlong ToEngineJavaObject(UnknownEngine *engine);
+jlong ToEngineJavaObject(RiderEngine *engine);
 
 template<class T>
 inline jlong ToJavaObject(T* ptr) {

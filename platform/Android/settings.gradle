@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Unknown3D"
+rootProject.name = "Rider3D"
 include ':demo'
-include ':unknown-3d'
+include ':rider3d'
