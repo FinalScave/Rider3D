@@ -12,6 +12,7 @@
 #include "Graph2DRenderer.h"
 #include "Graph3DRenderer.h"
 #include "Scene.h"
+#include "TestRenderer.h"
 
 NS_RIDER_BEGIN
 
@@ -35,8 +36,9 @@ NS_RIDER_BEGIN
         RenderConfig render_config_;
         /// Context for rendering
         SMART_PTR<RenderContext> context_;
-        SMART_PTR<Graph2DRenderer> renderer_2d;
-        SMART_PTR<Graph3DRenderer> renderer_3d;
+        SMART_PTR<Graph2DRenderer> renderer_2d_;
+        SMART_PTR<Graph3DRenderer> renderer_3d_;
+        SMART_PTR<TestRenderer> renderer_test_;
 
         void RenderScene();
 

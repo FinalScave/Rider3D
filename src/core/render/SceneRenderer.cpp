@@ -47,8 +47,9 @@ NS_RIDER_BEGIN
         // initialize context
         this->context_ = MAKE_SMART_PTR<RenderContext>(config);
         // initialize render strategies
-        this->renderer_2d = MAKE_SMART_PTR<Graph2DRenderer>(context_);
-        this->renderer_3d = MAKE_SMART_PTR<Graph3DRenderer>(context_);
+        this->renderer_2d_ = MAKE_SMART_PTR<Graph2DRenderer>(context_);
+        this->renderer_3d_ = MAKE_SMART_PTR<Graph3DRenderer>(context_);
+        this->renderer_test_ = MAKE_SMART_PTR<TestRenderer>(context_);
     }
 
     SceneRenderer::~SceneRenderer() {
@@ -93,7 +94,7 @@ NS_RIDER_BEGIN
             return;
         }
         context_->curr_view_id_ = order;
-        renderer_2d->RenderEntity(entity);
+        renderer_test_->RenderEntity(entity);
     }
 
 NS_RIDER_END

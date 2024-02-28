@@ -7,35 +7,6 @@
 #include "BasicComponents.h"
 
 NS_RIDER_BEGIN
-    /*static Color red = {1.0, 0.0, 0.0, 1.0};
-    static Color green = {0.0, 1.0, 0.0, 1.0};
-    static Color blue = {0.0, 0.0, 1.0, 1.0};
-    static Vertex s_cubeVertices[] =
-            {
-                    {-0.5f, 0.5f,  0.5f,  {0, 0}, red},
-                    {0.5f,  0.5f,  0.5f,  {0, 0}, green},
-                    {-0.5f, -0.5f, 0.5f,  {0, 0}, blue},
-                    {0.5f,  -0.5f, 0.5f,  {0, 0}, red},
-                    {-0.5f, 0.5f,  -0.5f, {0, 0}, green},
-                    {0.5f,  0.5f,  -0.5f, {0, 0}, blue},
-                    {-0.5f, -0.5f, -0.5f, {0, 0}, red},
-                    {0.5f,  -0.5f, -0.5f, {0, 0}, green},
-            };
-    static const uint16_t s_cubeTriList[] =
-            {
-                    0, 1, 2, // 0
-                    1, 3, 2,
-                    4, 6, 5, // 2
-                    5, 6, 7,
-                    0, 2, 4, // 4
-                    4, 2, 6,
-                    1, 5, 3, // 6
-                    5, 7, 3,
-                    0, 4, 1, // 8
-                    4, 5, 1,
-                    2, 3, 6, // 10
-                    6, 3, 7,
-            };*/
 
     Graph3DRenderer::Graph3DRenderer(const SMART_PTR<RenderContext>& context) : EntityRenderer(context) {
         this->program_ = MAKE_SMART_PTR<CommonShaderProgram>();
@@ -59,12 +30,6 @@ NS_RIDER_BEGIN
         uint16_t height = context_->render_config_.height;
         bgfx::setViewRect(view_id, 0, 0, width, height);
         bgfx::touch(view_id);
-        /*auto m_vbh = bgfx::createVertexBuffer(
-                bgfx::makeRef(s_cubeVertices, sizeof(Vertex) * 8), program_->vertex_layout_
-        );
-        auto m_ibh = bgfx::createIndexBuffer(
-                bgfx::makeRef(s_cubeTriList, sizeof(s_cubeTriList))
-        );*/
         bgfx::setVertexBuffer(0, handle->vertex_buffer);
         bgfx::setIndexBuffer(handle->index_buffer);
         bgfx::setViewFrameBuffer(0, BGFX_INVALID_HANDLE);
