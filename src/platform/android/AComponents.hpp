@@ -39,7 +39,7 @@ public:
         holder->position = ToNativePointer<JUniqueCopier<NdcPoint>>(axis_ptr)->Get();
     }
 
-    static constexpr const char *camera_name = "com/unknown/component/Camera";
+    static constexpr const char *camera_name = "com/rider/component/Camera";
     constexpr static const JNINativeMethod camera_methods[] = {
             {"nativeDestroy", "(J)V", (void*) DestroyCamera},
             //{"nativeMakeCamera", "(JJJ)J", (void*) MakeCamera},
@@ -87,7 +87,7 @@ public:
         holder->scale = ToNativePointer<JUniqueCopier<NdcPoint>>(scale_ptr)->Get();
     }
 
-    static constexpr const char *transform_name = "com/unknown/component/Transform";
+    static constexpr const char *transform_name = "com/rider/component/Transform";
     constexpr static const JNINativeMethod transform_methods[] = {
             {"nativeDestroy",        "(J)V",   (void *) DestroyTransform},
             //{"nativeMakeTransform",  "(JJJ)J", (void *) MakeTransform},
@@ -134,7 +134,7 @@ public:
         holder->Get().color = ToNativePointer<JUniqueCopier<Color>>(color_ptr)->Get();
     }
 
-    static constexpr const char *vertex_name = "com/unknown/component/Vertex";
+    static constexpr const char *vertex_name = "com/rider/component/Vertex";
     constexpr static const JNINativeMethod vertex_methods[] = {
             {"nativeDestroy", "(J)V", (void*) DestroyVertex},
             {"nativeMakeVertex", "(JJJ)J", (void*) MakeVertex},
@@ -188,7 +188,7 @@ public:
         vertices->SetVertices(size, new_vertices);
     }
 
-    static constexpr const char *vertices_name = "com/unknown/component/Vertices";
+    static constexpr const char *vertices_name = "com/rider/component/Vertices";
     constexpr static const JNINativeMethod vertices_methods[] = {
             {"nativeDestroy", "(J)V", (void*) DestroyVertices},
             {"nativeMakeVertices", "()J", (void*) MakeVertices},
@@ -234,7 +234,7 @@ public:
         env->DeleteLocalRef(text);
     }
 
-    static constexpr const char *debuginfo_name = "com/unknown/component/DebugInfo";
+    static constexpr const char *debuginfo_name = "com/rider/component/DebugInfo";
     constexpr static const JNINativeMethod debuginfo_methods[] = {
             {"nativeSetX",        "(JI)V",   (void *) SetX},
             {"nativeSetY", "(JI)V",  (void *) SetY},

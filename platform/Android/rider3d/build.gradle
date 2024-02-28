@@ -1,17 +1,13 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
 }
 
 android {
-    namespace 'com.rider.sample'
+    namespace 'com.rider'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.rider.sample"
         minSdk 21
-        targetSdk 33
-        versionCode 1
-        versionName "1.0"
         externalNativeBuild {
             cmake {
                 arguments "-DANDROID_STL=c++_shared"
@@ -23,6 +19,7 @@ android {
         }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -37,14 +34,13 @@ android {
     }
     externalNativeBuild {
         cmake {
-            path "CMakeLists.txt"
+            path "../../../CMakeLists.txt"
         }
     }
 }
 
 dependencies {
 
-    implementation project(':rider3d')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     testImplementation 'junit:junit:4.13.2'

@@ -42,12 +42,12 @@ public:
         return ToJavaObject(holder);
     }
 
-    static constexpr const char *entity_name = "com/unknown/core/entity/Entity";
+    static constexpr const char *entity_name = "com/rider/core/entity/Entity";
     constexpr static const JNINativeMethod entity_methods[] = {
             {"nativeDestroy",      "(J)V",  (void *) DestroyEntity},
             {"nativeAddComponent", "(JI)J", (void *) AddComponent},
     };
-    static constexpr const char *entity_manager_name = "com/unknown/core/entity/EntityManager";
+    static constexpr const char *entity_manager_name = "com/rider/core/entity/EntityManager";
     constexpr static const JNINativeMethod entity_manager_methods[] = {
             {"nativeCreateEntity", "(J)J", (void *) CreateEntity},
     };

@@ -86,7 +86,7 @@ public:
         return NdcPoint::Distance(p1, p2);
     }
 
-    constexpr static const char *point_name = "com/unknown/core/supposition/NdcPoint";
+    constexpr static const char *point_name = "com/rider/core/supposition/NdcPoint";
     constexpr static const JNINativeMethod point_methods[] = {
             {"nativeDestroy", "(J)V", (void*) DestroyNdcPoint},
             {"nativeMakeNdcPoint", "(FFF)J", (void*) MakeNdcPoint},
@@ -132,7 +132,7 @@ public:
         color.a = a;
     }
 
-    static constexpr const char *color_name = "com/unknown/core/supposition/Color";
+    static constexpr const char *color_name = "com/rider/core/supposition/Color";
     constexpr static const JNINativeMethod color_methods[] = {
             {"nativeDestroy", "(J)V", (void*) DestroyColor},
             {"nativeMakeColor", "(FFFF)J", (void*) MakeColor},
@@ -169,7 +169,7 @@ public:
         holder->Get().v = v;
     }
 
-    static constexpr const char *uv_name = "com/unknown/core/supposition/UV";
+    static constexpr const char *uv_name = "com/rider/core/supposition/UV";
     constexpr static const JNINativeMethod uv_methods[] = {
             {"nativeDestroy", "(J)V", (void*) DestroyUv},
             {"nativeMakeUV", "(FF)J", (void*) MakeUv},

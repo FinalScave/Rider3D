@@ -3,7 +3,7 @@
 //
 
 #include <jni.h>
-#include "AUnknownEngine.hpp"
+#include "ARiderEngine.hpp"
 #include "ASuppositions.hpp"
 #include "AComponents.hpp"
 #include "AEntity.hpp"
@@ -16,7 +16,7 @@ jint JNI_OnLoad(JavaVM *javaVm, void *) {
         return -1;
     }
     // engine
-    UnknownEngineJni::RegisterEngineMethods(env);
+    RiderEngineJni::RegisterEngineMethods(env);
     // suppositions
     NdcPointJni::RegisterNdcPointMethods(env);
     ColorJni::RegisterColorMethods(env);

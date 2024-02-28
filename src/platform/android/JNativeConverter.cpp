@@ -4,11 +4,11 @@
 
 #include "JNativeConverter.h"
 
-UnknownEngine* ToEngineNativePointer(long address) {
-    UnknownEngine* engine = reinterpret_cast<UnknownEngine *>(address);
+RiderEngine* ToEngineNativePointer(long address) {
+    RiderEngine* engine = reinterpret_cast<RiderEngine *>(address);
     return engine;
 }
 
-jlong ToEngineJavaObject(UnknownEngine* engine) {
+jlong ToEngineJavaObject(RiderEngine* engine) {
     return reinterpret_cast<jlong>(engine);
 }
