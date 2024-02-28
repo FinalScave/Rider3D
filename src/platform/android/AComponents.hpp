@@ -228,8 +228,10 @@ public:
 
     static void SetText(JNIEnv *env, jclass klass, jlong ptr, jstring text) {
         auto *holder = ToNativePointer<DebugInfo>(ptr);
+        SAFE_DELETE_PTR(holder->text);
         const char* chars = env->GetStringUTFChars(text, JNI_FALSE);
         holder->text = chars;
+        env->DeleteLocalRef(text);
     }
 
     static constexpr const char *debuginfo_name = "com/unknown/component/DebugInfo";
