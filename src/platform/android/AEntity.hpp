@@ -10,12 +10,12 @@
 class EntityJni {
 public:
     static void DestroyEntity(jlong ptr) {
-        auto *holder = ToNativePointer<JObjectCopier<Entity>>(ptr);
+        auto *holder = ToNativePointer<JUniqueCopier<Entity>>(ptr);
         DELETE_PTR(holder);
     }
 
     static jlong AddComponent(jlong ptr, jint component_type) {
-        Entity &entity = ToNativePointer<JObjectCopier<Entity>>(ptr)->Get();
+        Entity &entity = ToNativePointer<JUniqueCopier<Entity>>(ptr)->Get();
         jlong component_address = -1;
         switch (component_type) {
             case 1:
@@ -38,7 +38,7 @@ public:
         auto &manager =
                 ToNativePointer<JRefHolder<EntityManager>>(manager_ptr)->Get();
         Entity entity = manager.create();
-        JObjectCopier<Entity> *holder = new JObjectCopier<Entity>(entity);
+        JUniqueCopier<Entity> *holder = new JUniqueCopier<Entity>(entity);
         return ToJavaObject(holder);
     }
 
@@ -52,7 +52,7 @@ public:
             {"nativeCreateEntity", "(J)J", (void *) CreateEntity},
     };
 
-    void RegisterForEntity(JNIEnv *env) {
+    static void RegisterForEntity(JNIEnv *env) {
         jclass entity_class = env->FindClass(entity_name);
         env->RegisterNatives(entity_class, entity_methods,
                              sizeof(entity_methods) / sizeof(JNINativeMethod));

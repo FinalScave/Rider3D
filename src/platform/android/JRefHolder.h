@@ -20,9 +20,9 @@ private:
 };
 
 template<typename T>
-class JObjectCopier {
+class JUniqueCopier {
 public:
-    explicit JObjectCopier(T target) : target(target) {}
+    explicit JUniqueCopier(T target) : target(target) {}
 
     T& Get() {
         return this->target;

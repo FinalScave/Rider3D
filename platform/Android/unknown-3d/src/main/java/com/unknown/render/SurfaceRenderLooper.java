@@ -70,7 +70,8 @@ public final class SurfaceRenderLooper {
                 if (callback != null) {
                     debug = callback.isDebug();
                 }
-                this.engine = new UnknownEngine(surface, width, height, debug);
+                RenderConfig config = new RenderConfig(surface, width, height, debug);
+                this.engine = new UnknownEngine(config);
                 destroyed.set(false);
                 if (callback != null) {
                     callback.onInit(engine);

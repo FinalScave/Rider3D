@@ -16,27 +16,27 @@ public:
     }
 
     /*static jlong MakeCamera(jlong pos_ptr, jlong target_ptr, jlong axis_ptr) {
-        auto *pos = ToNativePointer<JObjectCopier<NdcPoint>>(pos_ptr);
-        auto *target = ToNativePointer<JObjectCopier<NdcPoint>>(target_ptr);
-        auto *up_axis = ToNativePointer<JObjectCopier<NdcPoint>>(axis_ptr);
+        auto *pos = ToNativePointer<JUniqueCopier<NdcPoint>>(pos_ptr);
+        auto *target = ToNativePointer<JUniqueCopier<NdcPoint>>(target_ptr);
+        auto *up_axis = ToNativePointer<JUniqueCopier<NdcPoint>>(axis_ptr);
         Camera camera{pos->Get(), target->Get(), up_axis->Get()};
-        JObjectCopier<Camera>* holder = new JObjectCopier<Camera>(camera);
+        JUniqueCopier<Camera>* holder = new JUniqueCopier<Camera>(camera);
         return ToJavaObject(holder);
     }*/
 
     static void SetCameraPosition(jlong ptr, jlong position_ptr) {
         auto *holder = ToNativePointer<Camera>(ptr);
-        holder->position = ToNativePointer<JObjectCopier<NdcPoint>>(position_ptr)->Get();
+        holder->position = ToNativePointer<JUniqueCopier<NdcPoint>>(position_ptr)->Get();
     }
 
     static void SetTarget(jlong ptr, jlong target_ptr) {
         auto *holder = ToNativePointer<Camera>(ptr);
-        holder->position = ToNativePointer<JObjectCopier<NdcPoint>>(target_ptr)->Get();
+        holder->position = ToNativePointer<JUniqueCopier<NdcPoint>>(target_ptr)->Get();
     }
 
     static void SetUpAxis(jlong ptr, jlong axis_ptr) {
         auto *holder = ToNativePointer<Camera>(ptr);
-        holder->position = ToNativePointer<JObjectCopier<NdcPoint>>(axis_ptr)->Get();
+        holder->position = ToNativePointer<JUniqueCopier<NdcPoint>>(axis_ptr)->Get();
     }
 
     static constexpr const char *camera_name = "com/unknown/component/Camera";
@@ -48,7 +48,7 @@ public:
             {"nativeSetUpAxis", "(JJ)V", (void*) SetUpAxis},
     };
 
-    void RegisterCameraMethods(JNIEnv *env) {
+    static void RegisterCameraMethods(JNIEnv *env) {
         jclass camera_class = env->FindClass(camera_name);
         env->RegisterNatives(camera_class, camera_methods,
                              sizeof(camera_methods) / sizeof(JNINativeMethod));
@@ -63,28 +63,28 @@ public:
     }
 
     /*static jlong MakeTransform(jlong translation_ptr, jlong rotation_ptr, jlong scale_ptr) {
-        auto *translation = ToNativePointer<JObjectCopier<NdcPoint>>(translation_ptr);
-        auto *rotation = ToNativePointer<JObjectCopier<NdcPoint>>(rotation_ptr);
-        auto *scale = ToNativePointer<JObjectCopier<NdcPoint>>(scale_ptr);
+        auto *translation = ToNativePointer<JUniqueCopier<NdcPoint>>(translation_ptr);
+        auto *rotation = ToNativePointer<JUniqueCopier<NdcPoint>>(rotation_ptr);
+        auto *scale = ToNativePointer<JUniqueCopier<NdcPoint>>(scale_ptr);
         Transform transform{translation->Get(), rotation->Get(), scale->Get()};
-        JObjectCopier<Transform> *holder = new JObjectCopier<Transform>(transform);
+        JUniqueCopier<Transform> *holder = new JUniqueCopier<Transform>(transform);
         return ToJavaObject(holder);
     }*/
 
     static void SetTranslation(jlong ptr, jlong translation_ptr) {
         auto *holder = ToNativePointer<Transform>(ptr);
-        holder->translation = ToNativePointer<JObjectCopier<NdcPoint>>(
+        holder->translation = ToNativePointer<JUniqueCopier<NdcPoint>>(
                 translation_ptr)->Get();
     }
 
     static void SetRotation(jlong ptr, jlong rotation_ptr) {
         auto *holder = ToNativePointer<Transform>(ptr);
-        holder->rotation = ToNativePointer<JObjectCopier<NdcPoint>>(rotation_ptr)->Get();
+        holder->rotation = ToNativePointer<JUniqueCopier<NdcPoint>>(rotation_ptr)->Get();
     }
 
     static void SetScale(jlong ptr, jlong scale_ptr) {
         auto *holder = ToNativePointer<Transform>(ptr);
-        holder->scale = ToNativePointer<JObjectCopier<NdcPoint>>(scale_ptr)->Get();
+        holder->scale = ToNativePointer<JUniqueCopier<NdcPoint>>(scale_ptr)->Get();
     }
 
     static constexpr const char *transform_name = "com/unknown/component/Transform";
@@ -96,7 +96,7 @@ public:
             {"nativeSetScale",       "(JJ)V",  (void *) SetScale},
     };
 
-    void RegisterTransformMethods(JNIEnv *env) {
+    static void RegisterTransformMethods(JNIEnv *env) {
         jclass transform_class = env->FindClass(transform_name);
         env->RegisterNatives(transform_class, transform_methods,
                              sizeof(transform_methods) / sizeof(JNINativeMethod));
@@ -106,32 +106,32 @@ public:
 class VertexJni {
 public:
     static void DestroyVertex(jlong ptr) {
-        auto *holder = ToNativePointer<JObjectCopier<Vertex>>(ptr);
+        auto *holder = ToNativePointer<JUniqueCopier<Vertex>>(ptr);
         DELETE_PTR(holder);
     }
 
     static jlong MakeVertex(jlong point_ptr, jlong uv_ptr, jlong color_ptr) {
-        auto *point = ToNativePointer<JObjectCopier<NdcPoint>>(point_ptr);
-        auto *uv = ToNativePointer<JObjectCopier<UV>>(uv_ptr);
-        auto *color = ToNativePointer<JObjectCopier<Color>>(color_ptr);
+        auto *point = ToNativePointer<JUniqueCopier<NdcPoint>>(point_ptr);
+        auto *uv = ToNativePointer<JUniqueCopier<UV>>(uv_ptr);
+        auto *color = ToNativePointer<JUniqueCopier<Color>>(color_ptr);
         Vertex vertex{point->Get(), uv->Get(), color->Get()};
-        JObjectCopier<Vertex>* holder = new JObjectCopier<Vertex>(vertex);
+        JUniqueCopier<Vertex>* holder = new JUniqueCopier<Vertex>(vertex);
         return ToJavaObject(holder);
     }
 
     static void SetPosition(jlong ptr, jlong position_ptr) {
-        auto *holder = ToNativePointer<JObjectCopier<Vertex>>(ptr);
-        holder->Get().position = ToNativePointer<JObjectCopier<NdcPoint>>(position_ptr)->Get();
+        auto *holder = ToNativePointer<JUniqueCopier<Vertex>>(ptr);
+        holder->Get().position = ToNativePointer<JUniqueCopier<NdcPoint>>(position_ptr)->Get();
     }
 
     static void SetUv(jlong ptr, jlong uv_ptr) {
-        auto *holder = ToNativePointer<JObjectCopier<Vertex>>(ptr);
-        holder->Get().uv = ToNativePointer<JObjectCopier<UV>>(uv_ptr)->Get();
+        auto *holder = ToNativePointer<JUniqueCopier<Vertex>>(ptr);
+        holder->Get().uv = ToNativePointer<JUniqueCopier<UV>>(uv_ptr)->Get();
     }
 
     static void SetColor(jlong ptr, jlong color_ptr) {
-        auto *holder = ToNativePointer<JObjectCopier<Vertex>>(ptr);
-        holder->Get().color = ToNativePointer<JObjectCopier<Color>>(color_ptr)->Get();
+        auto *holder = ToNativePointer<JUniqueCopier<Vertex>>(ptr);
+        holder->Get().color = ToNativePointer<JUniqueCopier<Color>>(color_ptr)->Get();
     }
 
     static constexpr const char *vertex_name = "com/unknown/component/Vertex";
@@ -143,7 +143,7 @@ public:
             {"nativeSetColor", "(JJ)V", (void*) SetColor},
     };
 
-    void RegisterVertexMethods(JNIEnv *env) {
+    static void RegisterVertexMethods(JNIEnv *env) {
         jclass vertex_class = env->FindClass(vertex_name);
         env->RegisterNatives(vertex_class, vertex_methods,
                              sizeof(vertex_methods) / sizeof(JNINativeMethod));
@@ -159,21 +159,21 @@ public:
 
     static jlong MakeVertices() {
         Vertices vertices;
-        JObjectCopier<Vertices>* holder = new JObjectCopier<Vertices>(vertices);
+        JUniqueCopier<Vertices>* holder = new JUniqueCopier<Vertices>(vertices);
         return ToJavaObject(holder);
     }
 
     static void AddVertex(jlong ptr, jlong vertex_ptr) {
         auto *holder = ToNativePointer<Vertices>(ptr);
-        holder->AddVertex(ToNativePointer<JObjectCopier<Vertex>>(vertex_ptr)->Get());
+        holder->AddVertex(ToNativePointer<JUniqueCopier<Vertex>>(vertex_ptr)->Get());
     }
 
     static void AddFace(jlong ptr, jlong v1_ptr, jlong v2_ptr, jlong v3_ptr, jlong v4_ptr) {
         auto *holder = ToNativePointer<Vertices>(ptr);
-        auto v1 = ToNativePointer<JObjectCopier<Vertex>>(v1_ptr)->Get();
-        auto v2 = ToNativePointer<JObjectCopier<Vertex>>(v2_ptr)->Get();
-        auto v3 = ToNativePointer<JObjectCopier<Vertex>>(v3_ptr)->Get();
-        auto v4 = ToNativePointer<JObjectCopier<Vertex>>(v4_ptr)->Get();
+        auto v1 = ToNativePointer<JUniqueCopier<Vertex>>(v1_ptr)->Get();
+        auto v2 = ToNativePointer<JUniqueCopier<Vertex>>(v2_ptr)->Get();
+        auto v3 = ToNativePointer<JUniqueCopier<Vertex>>(v3_ptr)->Get();
+        auto v4 = ToNativePointer<JUniqueCopier<Vertex>>(v4_ptr)->Get();
         holder->AddFace(v1, v2, v3, v4);
     }
 
@@ -183,7 +183,7 @@ public:
         jlong* ptrs = env->GetLongArrayElements(vertex_ptrs, JNI_FALSE);
         Vertex* new_vertices = new Vertex[size];
         for (int i = 0; i < size; ++i) {
-            new_vertices[i] = ToNativePointer<JObjectCopier<Vertex>>(ptrs[i])->Get();
+            new_vertices[i] = ToNativePointer<JUniqueCopier<Vertex>>(ptrs[i])->Get();
         }
         vertices->SetVertices(size, new_vertices);
     }
@@ -197,7 +197,7 @@ public:
             {"nativeSetVertices", "(J[J)V", (void*) SetVertices},
     };
 
-    void RegisterVerticesJni(JNIEnv *env) {
+    static void RegisterVerticesJni(JNIEnv *env) {
         jclass vertices_class = env->FindClass(vertices_name);
         env->RegisterNatives(vertices_class, vertices_methods,
                              sizeof(vertices_methods) / sizeof(JNINativeMethod));
@@ -240,7 +240,7 @@ public:
             {"nativeSetText", "(JLjava/lang/String;)V",  (void *) SetText},
     };
 
-    void RegisterDebugInfoMethods(JNIEnv *env) {
+    static void RegisterDebugInfoMethods(JNIEnv *env) {
         jclass debuginfo_class = env->FindClass(debuginfo_name);
         env->RegisterNatives(debuginfo_class, debuginfo_methods,
                              sizeof(debuginfo_methods) / sizeof(JNINativeMethod));

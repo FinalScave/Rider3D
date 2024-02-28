@@ -3,6 +3,7 @@
 //
 
 #include <jni.h>
+#include "AUnknownEngine.hpp"
 #include "ASuppositions.hpp"
 #include "AComponents.hpp"
 #include "AEntity.hpp"
@@ -14,18 +15,20 @@ jint JNI_OnLoad(JavaVM *javaVm, void *) {
     if (result != JNI_OK) {
         return -1;
     }
+    // engine
+    UnknownEngineJni::RegisterEngineMethods(env);
     // suppositions
-    NdcPointJni().RegisterNdcPointMethods(env);
-    ColorJni().RegisterColorMethods(env);
-    UVJni().RegisterUvMethods(env);
+    NdcPointJni::RegisterNdcPointMethods(env);
+    ColorJni::RegisterColorMethods(env);
+    UVJni::RegisterUvMethods(env);
     // components
-    CameraJni().RegisterCameraMethods(env);
-    TransformJni().RegisterTransformMethods(env);
-    VertexJni().RegisterVertexMethods(env);
-    VerticesJni().RegisterVerticesJni(env);
-    DebugInfoJni().RegisterDebugInfoMethods(env);
+    CameraJni::RegisterCameraMethods(env);
+    TransformJni::RegisterTransformMethods(env);
+    VertexJni::RegisterVertexMethods(env);
+    VerticesJni::RegisterVerticesJni(env);
+    DebugInfoJni::RegisterDebugInfoMethods(env);
     // core ecs
-    EntityJni().RegisterForEntity(env);
-    SceneJni().RegisterForScene(env);
+    EntityJni::RegisterForEntity(env);
+    SceneJni::RegisterForScene(env);
     return JNI_VERSION_1_6;
 }

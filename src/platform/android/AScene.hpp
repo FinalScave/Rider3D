@@ -15,7 +15,7 @@ public:
 
     static void AddEntity(jlong ptr, jlong entity_ptr) {
         auto *scene = ToNativePointer<Scene>(ptr);
-        scene->AddEntity(ToNativePointer<JObjectCopier<Entity>>(entity_ptr)->Get());
+        scene->AddEntity(ToNativePointer<JUniqueCopier<Entity>>(entity_ptr)->Get());
     }
 
     static jlong CreateScene(jlong manager_ptr) {
@@ -36,7 +36,7 @@ public:
                 ToNativePointer<JRefHolder<SceneManager>>(manager_ptr)->Get();
         PrimitiveType::Enum primitiveType = (PrimitiveType::Enum) type;
         Entity entity = manager.CreatePrimitiveEntity(primitiveType);
-        JObjectCopier<Entity> *holder = new JObjectCopier<Entity>(entity);
+        JUniqueCopier<Entity> *holder = new JUniqueCopier<Entity>(entity);
         return ToJavaObject(holder);
     }
 
@@ -52,7 +52,7 @@ public:
             {"nativeCreatePrimitiveEntity", "(JI)J", (void *) CreatePrimitiveEntity},
     };
 
-    void RegisterForScene(JNIEnv *env) {
+    static void RegisterForScene(JNIEnv *env) {
         jclass scene_class = env->FindClass(scene_name);
         env->RegisterNatives(scene_class, scene_methods,
                              sizeof(scene_methods) / sizeof(JNINativeMethod));
