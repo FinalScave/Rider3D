@@ -5,15 +5,16 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 project(rider3d)
 
 # Compiler special
-if(MSVC)
+if (MSVC)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /Zc:__cplusplus")
-endif()
+endif ()
 
 # macro
-add_definitions(-DBX_CONFIG_DEBUG=ON)
-add_definitions(-DENABLE_LOG)
-option(ENABLE_LOG "Enable logging" ON)
+option(ENABLE_LOG "Build static lib not dynamic" ON)
+option(STATIC_LIB "Build static lib not dynamic" OFF)
 option(BUILD_PC_DEMO "Build demo for Windows/Mac/Linux to test" ON)
+option(WEB "Merge web platform source to project" OFF)
+add_definitions(-DBX_CONFIG_DEBUG=ON)
 
 # initial config
 set(LINK_LIB)
@@ -45,8 +46,9 @@ file(GLOB_RECURSE CORE_SOURCE_FILES
         ${SRC_DIR}/core/*.*
         ${SRC_DIR}/entityx/*.*
         ${SRC_DIR}/util/*.*
-)
+        )
 if (ENABLE_LOG)
+    message(STATUS "Log enabled")
     file(GLOB_RECURSE LOGGER_FILES ${3DPARTY_DIR}/logger/*.*)
     set(CORE_SOURCE_FILES ${CORE_SOURCE_FILES} ${LOGGER_FILES})
 endif ()
@@ -80,12 +82,21 @@ elseif (WINDOWS)
     file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/windows/*.*)
 elseif (MACOS)
     file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/macOS/*.*)
+    if (WEB)
+        include_directories(/opt/homebrew/Cellar/emscripten/3.1.54/libexec/system/include)
+        file(GLOB_RECURSE WEB_PLATFORM_FILES ${SRC_DIR}/platform/web/*.*)
+        set(PLATFORM_FILES ${PLATFORM_FILES} ${WEB_PLATFORM_FILES})
+    endif ()
 elseif (LINUX)
     file(GLOB_RECURSE PLATFORM_FILES ${SRC_DIR}/platform/linux/*.*)
 endif ()
 
-# project shared lib
-add_library(${CMAKE_PROJECT_NAME} SHARED ${CORE_SOURCE_FILES} ${PLATFORM_FILES})
+# project shared/dynamic lib
+if (STATIC_LIB)
+    add_library(${CMAKE_PROJECT_NAME} STATIC ${CORE_SOURCE_FILES} ${PLATFORM_FILES})
+else ()
+    add_library(${CMAKE_PROJECT_NAME} SHARED ${CORE_SOURCE_FILES} ${PLATFORM_FILES})
+endif ()
 
 # add library functions
 function(android_add_3dparty_static_lib dir name)
@@ -134,7 +145,7 @@ if (ANDROID)
     find_library(EGL libEGL.so)
     set(LINK_LIB ${LINK_LIB} ${ANDROID_LIB} ${LOG_LIB} ${JNI_GRAPHICS} ${GLES} ${EGL}
             bgfx bimg bimg_decode bimg_encode bx
-    )
+            )
 elseif (IOS)
     ios_add_3dparty_static_lib(bgfx bgfx)
     ios_add_3dparty_static_lib(bgfx bimg)
@@ -151,7 +162,7 @@ elseif (IOS)
             ${FOUNDATION_FRAMEWORK} ${CORE_FOUNDATION_FRAMEWORK} ${IOKIT_FRAMEWORK}
             ${METAL_FRAMEWORK} ${QUARTZ_CORE_FRAMEWORK} ${UIKIT_FRAMEWORK}
             bgfx bimg bimg_decode bimg_encode bx
-    )
+            )
 elseif (WINDOWS)
     windows_add_3dparty_static_lib(bgfx bgfx)
     windows_add_3dparty_static_lib(bgfx bimg)
@@ -176,7 +187,7 @@ elseif (MACOS)
             ${FOUNDATION_FRAMEWORK} ${CORE_FOUNDATION_FRAMEWORK} ${IOKIT_FRAMEWORK}
             ${METAL_FRAMEWORK} ${QUARTZ_CORE_FRAMEWORK} ${APPKIT_FRAMEWORK} ${SECURITY_FRAMEWORK}
             bgfx bimg bimg_decode bimg_encode bx
-    )
+            )
 elseif (LINUX)
     linux_add_3dparty_static_lib(bgfx bgfx)
     linux_add_3dparty_static_lib(bgfx bimg)
@@ -194,16 +205,16 @@ if (BUILD_DEMO_WINDOWS)
     add_executable(${DEMO_NAME} WIN32
             ${CMAKE_SOURCE_DIR}/platform/Windows/demo/main.cpp
             ${CORE_SOURCE_FILES} ${PLATFORM_FILES}
-    )
+            )
     target_link_libraries(${DEMO_NAME}
             ${LINK_LIB}
-    )
+            )
 elseif (BUILD_DEMO_MACOS)
-    message(STATUS "Build MacOS demo enabled")
+    message(STATUS "Build MacOSX demo enabled")
     add_executable(${DEMO_NAME} MACOSX_BUNDLE
             ${CMAKE_SOURCE_DIR}/platform/MacOS/demo/main.mm
             ${CORE_SOURCE_FILES} ${PLATFORM_FILES}
-    )
+            )
     find_library(COCOA_FRAMEWORK Cocoa)
     find_library(METAL_FRAMEWORK Metal)
     find_library(QUARTZ_CORE_FRAMEWORK QuartzCore)
@@ -224,16 +235,16 @@ elseif (BUILD_DEMO_MACOS)
             ${CORE_GRAPHICS_FRAMEWORK}
             ${CORE_VIDEO_FRAMEWORK}
             ${APPKIT_FRAMEWORK}
-    )
+            )
 elseif (BUILD_DEMO_LINUX)
     message(STATUS "Build Linux demo enabled")
     add_executable(${DEMO_NAME}
             ${CMAKE_SOURCE_DIR}/platform/Linux/demo/main.cpp
             ${CORE_SOURCE_FILES} ${PLATFORM_FILES}
-    )
+            )
     find_package(glfw3 REQUIRED)
     include_directories(${GLFW_INCLUDE_DIRS})
     target_link_libraries(${DEMO_NAME}
             ${LINK_LIB} glfw
-    )
+            )
 endif ()

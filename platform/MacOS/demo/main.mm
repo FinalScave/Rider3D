@@ -1,8 +1,9 @@
 #import <AppKit/AppKit.h>
-#import "bx/thread.h"
-#import "bgfx/platform.h"
+#include "bx/thread.h"
+#include "bgfx/platform.h"
 #include "RiderEngine.h"
-#import "TimeUtil.h"
+#include "TimeUtil.h"
+#import "BasicComponents.h"
 
 #define WIDTH  1024
 #define HEIGHT 728

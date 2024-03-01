@@ -1,0 +1,21 @@
+<!DOCTYPE>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Rider3D</title>
+    <script src="wasm/rider3d.js"></script>
+    <script src="js/RiderEngine.js"></script>
+</head>
+
+<body>
+<canvas id="canvas"></canvas>
+</body>
+
+<script type="text/javascript" >
+    Rider3DLib.load(function() {
+        let engine = new RiderEngine("canvas", true)
+        console.log("engine ptr: " + engine.ptr)
+    })
+</script>
+
+</html>

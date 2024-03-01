@@ -6,13 +6,13 @@
 #define RIDER3D_RIDERENGINE_H
 
 #include "Define.h"
-#include "render/SceneRenderer.h"
 #include "entityx/entityx.h"
 #include "entityx/help/Timer.h"
 #include "event/SceneUpdateEvent.h"
 #include "Scene.h"
 #include "input/Input.h"
 #include "file/File.h"
+#include "render/config/RenderConfig.h"
 
 NS_RIDER_BEGIN
 
