@@ -7,36 +7,52 @@
 #include "TestRenderer.h"
 
 NS_RIDER_BEGIN
-
-    static Color red = {1.0, 0.0, 0.0, 1.0};
-    static Color green = {0.0, 1.0, 0.0, 1.0};
-    static Color blue = {0.0, 0.0, 1.0, 1.0};
-    static Vertex s_cubeVertices[] =
-            {
-                    {-0.5f, 0.5f,  0.5f,  {0, 0}, red},
-                    {0.5f,  0.5f,  0.5f,  {0, 0}, green},
-                    {-0.5f, -0.5f, 0.5f,  {0, 0}, blue},
-                    {0.5f,  -0.5f, 0.5f,  {0, 0}, red},
-                    {-0.5f, 0.5f,  -0.5f, {0, 0}, green},
-                    {0.5f,  0.5f,  -0.5f, {0, 0}, blue},
-                    {-0.5f, -0.5f, -0.5f, {0, 0}, red},
-                    {0.5f,  -0.5f, -0.5f, {0, 0}, green},
-            };
-    static const uint16_t s_cubeTriList[] =
-            {
-                    0, 1, 2, // 0
-                    1, 3, 2,
-                    4, 6, 5, // 2
-                    5, 6, 7,
-                    0, 2, 4, // 4
-                    4, 2, 6,
-                    1, 5, 3, // 6
-                    5, 7, 3,
-                    0, 4, 1, // 8
-                    4, 5, 1,
-                    2, 3, 6, // 10
-                    6, 3, 7,
-            };
+    static Vertex s_cubeVertices[] = {
+            // front
+            {-0.9f, +0.9f, +0.5f, {0, 0}, Colors::Red},
+            {+0.5f, +0.5f, +0.5f, {0, 0}, Colors::Red},
+            {+0.5f, -0.5f, +0.5f, {0, 0}, Colors::Red},
+            {-0.5f, -0.5f, +0.5f, {0, 0}, Colors::Red},
+            // right
+            {+0.5f, +0.5f, +0.5f, {0, 0}, Colors::Green},
+            {+0.5f, +0.5f, -0.5f, {0, 0}, Colors::Green},
+            {+0.5f, -0.5f, -0.5f, {0, 0}, Colors::Green},
+            {+0.5f, -0.5f, +0.5f, {0, 0}, Colors::Green},
+            // back
+            {+0.5f, +0.5f,  -0.5f,  {0, 0}, Colors::Blue},
+            {-0.5f, +0.5f,  -0.5f,  {0, 0}, Colors::Blue},
+            {-0.5f, -0.5f,  -0.5f,  {0, 0}, Colors::Blue},
+            {+0.5f, -0.5f,  -0.5f,  {0, 0}, Colors::Blue},
+            // left
+            {-0.5f, +0.5f,  -0.5f,  {0, 0}, Colors::Orange},
+            {-0.5f, +0.5f,  +0.5f,  {0, 0}, Colors::Orange},
+            {-0.5f, -0.5f,  +0.5f,  {0, 0}, Colors::Orange},
+            {-0.5f, -0.5f,  -0.5f,  {0, 0}, Colors::Orange},
+            // top
+            {-0.5f, +0.5f,  -0.5f,  {0, 0}, Colors::Purple},
+            {+0.5f,  +0.5f,  -0.5f,  {0, 0}, Colors::Purple},
+            {+0.5f, +0.5f, +0.5f,  {0, 0}, Colors::Purple},
+            {-0.5f,  +0.5f, +0.5f,  {0, 0}, Colors::Purple},
+            // bottom
+            {-0.5f, -0.5f,  -0.5f, {0, 0}, Colors::Cyan},
+            {+0.5f,  -0.5f,  -0.5f, {0, 0}, Colors::Cyan},
+            {+0.5f, -0.5f, +0.5f, {0, 0}, Colors::Cyan},
+            {-0.5f,  -0.5f, +0.5f, {0, 0}, Colors::Cyan},
+    };
+    static const uint16_t s_cubeTriList[] = {
+            // front
+            0, 2, 1, 0, 3, 2,
+            // right
+            4, 6, 5, 4, 7, 6,
+            // back
+            8, 10, 9, 8, 11, 10,
+            // left
+            12, 14, 13, 12, 15, 14,
+            // top
+            16, 18, 17, 16, 19, 18,
+            // bottom
+            20, 22, 21, 20, 23, 22
+    };
 
     TestRenderer::TestRenderer(const SMART_PTR<RenderContext>& context) : EntityRenderer(context) {
         this->program_ = MAKE_SMART_PTR<SimpleShaderProgram>();
@@ -93,14 +109,20 @@ NS_RIDER_BEGIN
         bx::mtxMul(model_matrix_, mtx_scale_rotate, mtx_trans);
         bgfx::setTransform(model_matrix_);
 
-        auto m_vbh = bgfx::createVertexBuffer(
-                bgfx::makeRef(s_cubeVertices, sizeof(Vertex) * 8), program_->vertex_layout_
+        if (bgfx::isValid(vertex_buffer_)) {
+            bgfx::destroy(vertex_buffer_);
+        }
+        if (bgfx::isValid(index_buffer_)) {
+            bgfx::destroy(index_buffer_);
+        }
+        vertex_buffer_ = bgfx::createVertexBuffer(
+                bgfx::makeRef(s_cubeVertices, sizeof(s_cubeVertices)), program_->vertex_layout_
         );
-        auto m_ibh = bgfx::createIndexBuffer(
+        index_buffer_ = bgfx::createIndexBuffer(
                 bgfx::makeRef(s_cubeTriList, sizeof(s_cubeTriList))
         );
-        bgfx::setVertexBuffer(0, m_vbh);
-        bgfx::setIndexBuffer(m_ibh);
+        bgfx::setVertexBuffer(0, vertex_buffer_);
+        bgfx::setIndexBuffer(index_buffer_);
         bgfx::setViewFrameBuffer(view_id, BGFX_INVALID_HANDLE);
         bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_BLEND_ALPHA);
         bgfx::submit(view_id, program_->program_handle_);

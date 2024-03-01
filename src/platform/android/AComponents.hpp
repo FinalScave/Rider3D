@@ -168,13 +168,21 @@ public:
         holder->AddVertex(ToNativePointer<JUniqueCopier<Vertex>>(vertex_ptr)->Get());
     }
 
-    static void AddFace(jlong ptr, jlong v1_ptr, jlong v2_ptr, jlong v3_ptr, jlong v4_ptr) {
+    static void AddFace(jlong ptr, jlong v1_ptr, jlong v2_ptr, jlong v3_ptr) {
+        auto *holder = ToNativePointer<Vertices>(ptr);
+        auto v1 = ToNativePointer<JUniqueCopier<Vertex>>(v1_ptr)->Get();
+        auto v2 = ToNativePointer<JUniqueCopier<Vertex>>(v2_ptr)->Get();
+        auto v3 = ToNativePointer<JUniqueCopier<Vertex>>(v3_ptr)->Get();
+        holder->AddFace(v1, v2, v3);
+    }
+
+    static void AddQuad(jlong ptr, jlong v1_ptr, jlong v2_ptr, jlong v3_ptr, jlong v4_ptr) {
         auto *holder = ToNativePointer<Vertices>(ptr);
         auto v1 = ToNativePointer<JUniqueCopier<Vertex>>(v1_ptr)->Get();
         auto v2 = ToNativePointer<JUniqueCopier<Vertex>>(v2_ptr)->Get();
         auto v3 = ToNativePointer<JUniqueCopier<Vertex>>(v3_ptr)->Get();
         auto v4 = ToNativePointer<JUniqueCopier<Vertex>>(v4_ptr)->Get();
-        holder->AddFace(v1, v2, v3, v4);
+        holder->AddQuad(v1, v2, v3, v4);
     }
 
     static void SetVertices(JNIEnv* env, jlong ptr, jlongArray vertex_ptrs) {
@@ -193,7 +201,8 @@ public:
             {"nativeDestroy", "(J)V", (void*) DestroyVertices},
             {"nativeMakeVertices", "()J", (void*) MakeVertices},
             {"nativeAddVertex", "(JJ)V", (void*) AddVertex},
-            {"nativeAddFace", "(JJJJJ)V", (void*) AddFace},
+            {"nativeAddFace", "(JJJJ)V", (void*) AddFace},
+            {"nativeAddQuad", "(JJJJJ)V", (void*) AddQuad},
             {"nativeSetVertices", "(J[J)V", (void*) SetVertices},
     };
 
@@ -228,7 +237,7 @@ public:
 
     static void SetText(JNIEnv *env, jclass klass, jlong ptr, jstring text) {
         auto *holder = ToNativePointer<DebugInfo>(ptr);
-        SAFE_DELETE_PTR(holder->text);
+        DELETE_PTR(holder->text);
         const char* chars = env->GetStringUTFChars(text, JNI_FALSE);
         holder->text = chars;
         env->DeleteLocalRef(text);

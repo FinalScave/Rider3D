@@ -224,12 +224,6 @@ int windowLoop(int argc, const char* const* argv) {
 
     EntityManager& entities = engine->GetEntities();
     // add entity
-    Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::TriangularPyramid);
-    box1.assign<Transform>(Transform{{-0.8, 0.3f}, {0, 0.5, 0}});
-    mainScene->AddEntity(box1);
-    /*Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-    box2.assign<Transform>(Transform{{1, 0.5f}});
-    mainScene->AddEntity(box2);*/
     Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
     box3.assign<Transform>(Transform{{-0.5, -0.5}});
     mainScene->AddEntity(box3);

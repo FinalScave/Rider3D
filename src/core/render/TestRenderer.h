@@ -17,6 +17,8 @@ NS_RIDER_BEGIN
         void RenderEntity(Entity& entity) override;
 
     private:
+        bgfx::VertexBufferHandle vertex_buffer_ = BGFX_INVALID_HANDLE;
+        bgfx::IndexBufferHandle index_buffer_ = BGFX_INVALID_HANDLE;
         float model_matrix_[16] = {0};
         float view_matrix_[16] = {0};
         float proj_matrix_[16] = {0};

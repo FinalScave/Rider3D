@@ -27,8 +27,12 @@ public class Vertices extends Component {
         vertexList.add(vertex);
     }
 
-    public void addFace(Vertex v1, Vertex v2, Vertex v3, Vertex v4) {
-        nativeAddFace(nativePtr, v1.nativePtr, v2.nativePtr, v3.nativePtr, v4.nativePtr);
+    public void addFace(Vertex v1, Vertex v2, Vertex v3) {
+        nativeAddFace(nativePtr, v1.nativePtr, v2.nativePtr, v3.nativePtr);
+    }
+
+    public void addQuad(Vertex v1, Vertex v2, Vertex v3, Vertex v4) {
+        nativeAddQuad(nativePtr, v1.nativePtr, v2.nativePtr, v3.nativePtr, v4.nativePtr);
     }
 
     public void setVertices(List<Vertex> vertices) {
@@ -51,7 +55,9 @@ public class Vertices extends Component {
     @CriticalNative
     private static native void nativeAddVertex(long ptr, long vertexPtr);
     @CriticalNative
-    private static native void nativeAddFace(long ptr, long v1Ptr, long v2Ptr, long v3Ptr, long v4Ptr);
+    private static native void nativeAddFace(long ptr, long v1Ptr, long v2Ptr, long v3Ptr);
+    @CriticalNative
+    private static native void nativeAddQuad(long ptr, long v1Ptr, long v2Ptr, long v3Ptr, long v4Ptr);
     @FastNative
     private static native void nativeSetVertices(long ptr, long[] vertexPtr);
     @CriticalNative
