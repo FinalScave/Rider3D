@@ -219,14 +219,14 @@ int windowLoop(int argc, const char* const* argv) {
     RiderEngine* engine = new RiderEngine(config);
     SceneManager& scenes = engine->GetScenes();
     Scene* mainScene = scenes.CreateScene();
-    mainScene->assign<Camera>(Camera{-0.3f,0.5f,3.f});
+    mainScene->assign<Camera>(Camera{1.f, 2.f, 3.f});
     auto debugInfo = mainScene->assign<DebugInfo>(DebugInfo{1, 1});
     scenes.LoadScene(mainScene);
 
     EntityManager& entities = engine->GetEntities();
     // add entity
-    Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-    box3.assign<Transform>(Transform{{-0.5, -0.5}});
+    Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::TriangularPyramid);
+    box3.assign<Transform>(Transform{{0, 0, 0}, {0, -1, 0}});
     mainScene->AddEntity(box3);
 
     UInt64 start = 0;

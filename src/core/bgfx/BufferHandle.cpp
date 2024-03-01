@@ -19,14 +19,14 @@ NS_RIDER_BEGIN
                                                       std::vector<Vertex>& vertex_list,
                                                       std::vector<uint32_t>& index_list) {
         if (name_buffer_handle_map_.find(entity) == name_buffer_handle_map_.end()) {
-            Vertex* vertices = vertex_list.data();
-            uint32_t* indices = index_list.data();
-            /*for (int i = 0; i < vertex_list.size(); ++i) {
+            Vertex* vertices = new Vertex[vertex_list.size()];
+            uint32_t* indices = new uint32_t[index_list.size()];
+            for (int i = 0; i < vertex_list.size(); ++i) {
                 vertices[i] = vertex_list[i];
             }
             for (int i = 0; i < index_list.size(); ++i) {
                 indices[i] = index_list[i];
-            }*/
+            }
             auto vertex_ref = bgfx::makeRef(
                     vertices,
                     sizeof(Vertex) * vertex_list.size()

@@ -40,12 +40,12 @@ NS_RIDER_BEGIN
         uint32_t index4 = index1 + 3;
         // first triangle
         vertex_index_list.push_back(index1);
-        vertex_index_list.push_back(index3);
-        vertex_index_list.push_back(index2);
-        // second triangle
-        vertex_index_list.push_back(index1);
         vertex_index_list.push_back(index4);
         vertex_index_list.push_back(index3);
+        // second triangle
+        vertex_index_list.push_back(index1);
+        vertex_index_list.push_back(index3);
+        vertex_index_list.push_back(index2);
         // add vertex data
         vertex_data_list.push_back(upper_left);
         vertex_data_list.push_back(upper_right);

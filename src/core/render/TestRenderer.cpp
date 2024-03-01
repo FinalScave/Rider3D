@@ -9,35 +9,35 @@
 NS_RIDER_BEGIN
     static Vertex s_cubeVertices[] = {
             // front
-            {-0.9f, +0.9f, +0.5f, {0, 0}, Colors::Red},
             {+0.5f, +0.5f, +0.5f, {0, 0}, Colors::Red},
-            {+0.5f, -0.5f, +0.5f, {0, 0}, Colors::Red},
+            {-0.5f, +0.5f, +0.5f, {0, 0}, Colors::Red},
             {-0.5f, -0.5f, +0.5f, {0, 0}, Colors::Red},
+            {+0.5f, -0.5f, +0.5f, {0, 0}, Colors::Red},
             // right
-            {+0.5f, +0.5f, +0.5f, {0, 0}, Colors::Green},
-            {+0.5f, +0.5f, -0.5f, {0, 0}, Colors::Green},
-            {+0.5f, -0.5f, -0.5f, {0, 0}, Colors::Green},
-            {+0.5f, -0.5f, +0.5f, {0, 0}, Colors::Green},
+            {-0.5f, +0.5f, +0.5f, {0, 0}, Colors::Green},
+            {-0.5f, +0.5f, -0.5f, {0, 0}, Colors::Green},
+            {-0.5f, -0.5f, -0.5f, {0, 0}, Colors::Green},
+            {-0.5f, -0.5f, +0.5f, {0, 0}, Colors::Green},
             // back
-            {+0.5f, +0.5f,  -0.5f,  {0, 0}, Colors::Blue},
-            {-0.5f, +0.5f,  -0.5f,  {0, 0}, Colors::Blue},
-            {-0.5f, -0.5f,  -0.5f,  {0, 0}, Colors::Blue},
-            {+0.5f, -0.5f,  -0.5f,  {0, 0}, Colors::Blue},
+            {+0.5f, -0.5f, -0.5f, {0, 0}, Colors::Blue},
+            {-0.5f, -0.5f, -0.5f, {0, 0}, Colors::Blue},
+            {-0.5f, +0.5f, -0.5f, {0, 0}, Colors::Blue},
+            {+0.5f, +0.5f, -0.5f, {0, 0}, Colors::Blue},
             // left
-            {-0.5f, +0.5f,  -0.5f,  {0, 0}, Colors::Orange},
-            {-0.5f, +0.5f,  +0.5f,  {0, 0}, Colors::Orange},
-            {-0.5f, -0.5f,  +0.5f,  {0, 0}, Colors::Orange},
-            {-0.5f, -0.5f,  -0.5f,  {0, 0}, Colors::Orange},
+            {+0.5f, -0.5f, -0.5f, {0, 0}, Colors::Orange},
+            {+0.5f, -0.5f, +0.5f, {0, 0}, Colors::Orange},
+            {+0.5f, +0.5f, +0.5f, {0, 0}, Colors::Orange},
+            {+0.5f, +0.5f, -0.5f, {0, 0}, Colors::Orange},
             // top
-            {-0.5f, +0.5f,  -0.5f,  {0, 0}, Colors::Purple},
-            {+0.5f,  +0.5f,  -0.5f,  {0, 0}, Colors::Purple},
-            {+0.5f, +0.5f, +0.5f,  {0, 0}, Colors::Purple},
-            {-0.5f,  +0.5f, +0.5f,  {0, 0}, Colors::Purple},
+            {+0.5f, +0.5f, -0.5f, {0, 0}, Colors::Purple},
+            {-0.5f, +0.5f, -0.5f, {0, 0}, Colors::Purple},
+            {-0.5f, +0.5f, +0.5f, {0, 0}, Colors::Purple},
+            {+0.5f, +0.5f, +0.5f, {0, 0}, Colors::Purple},
             // bottom
-            {-0.5f, -0.5f,  -0.5f, {0, 0}, Colors::Cyan},
-            {+0.5f,  -0.5f,  -0.5f, {0, 0}, Colors::Cyan},
             {+0.5f, -0.5f, +0.5f, {0, 0}, Colors::Cyan},
-            {-0.5f,  -0.5f, +0.5f, {0, 0}, Colors::Cyan},
+            {-0.5f, -0.5f, +0.5f, {0, 0}, Colors::Cyan},
+            {-0.5f, -0.5f, -0.5f, {0, 0}, Colors::Cyan},
+            {+0.5f, -0.5f, -0.5f, {0, 0}, Colors::Cyan},
     };
     static const uint16_t s_cubeTriList[] = {
             // front
@@ -66,7 +66,7 @@ NS_RIDER_BEGIN
         uint16_t width = context_->render_config_.width;
         uint16_t height = context_->render_config_.height;
         bgfx::setViewRect(view_id, 0, 0, width, height);
-        //bgfx::setViewClear(view_id, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x666666ff);
+        bgfx::setViewClear(view_id, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0);
         bgfx::touch(view_id);
         if (context_->scene_->has_component<Camera>()) {
             bx::mtxIdentity(view_matrix_);
@@ -77,7 +77,7 @@ NS_RIDER_BEGIN
             bx::Vec3 up_axis = {camera->up_axis.x, camera->up_axis.y, camera->up_axis.z};
             bx::mtxLookAt(view_matrix_, eye, at, up_axis);
             bx::mtxProj(proj_matrix_,
-                        60.f,
+                        45.0f,
                         context_->render_config_.width * 1.f / context_->render_config_.height,
                         0.1f, 100.f,
                         bgfx::getCaps()->homogeneousDepth
@@ -124,7 +124,8 @@ NS_RIDER_BEGIN
         bgfx::setVertexBuffer(0, vertex_buffer_);
         bgfx::setIndexBuffer(index_buffer_);
         bgfx::setViewFrameBuffer(view_id, BGFX_INVALID_HANDLE);
-        bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_BLEND_ALPHA);
+        bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_WRITE_Z
+                       | BGFX_STATE_DEPTH_TEST_LESS | BGFX_STATE_CULL_CW | BGFX_STATE_MSAA | BGFX_STATE_PT_TRISTRIP);
         bgfx::submit(view_id, program_->program_handle_);
     }
 

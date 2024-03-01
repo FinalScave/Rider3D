@@ -107,13 +107,13 @@ NS_RIDER_BEGIN
         Vertices& vertices = *entity.assign<Vertices>();
         switch (type) {
             case PrimitiveType::Rectangle:
-                VertexUtil::BuildRectangle(vertices, 0.5, 0.5);
+                VertexUtil::BuildRectangle(vertices, 1, 1);
                 break;
             case PrimitiveType::Triangle:
-                VertexUtil::BuildTriangle(vertices, 0.5, 0.5);
+                VertexUtil::BuildTriangle(vertices, 1, 1);
                 break;
             case PrimitiveType::Box:
-                VertexUtil::BuildBox(vertices, 0.5, 0.5, 0.5);
+                VertexUtil::BuildBox(vertices, 1, 1, 1);
                 break;
             case PrimitiveType::Sphere:
                 VertexUtil::BuildSphere(vertices, 100, 100, 0.5);
@@ -133,7 +133,7 @@ NS_RIDER_BEGIN
                                        0.5, 0.4, 100, 100);
                 break;
             case PrimitiveType::TriangularPyramid:
-                VertexUtil::BuildTriangularPyramid(vertices, 0.5, 0.5, 0.5);
+                VertexUtil::BuildTriangularPyramid(vertices, 1, 1, 1);
                 break;
         }
         return entity;

@@ -94,7 +94,7 @@ NS_RIDER_BEGIN
             return;
         }
         context_->curr_view_id_ = order;
-        renderer_test_->RenderEntity(entity);
+        renderer_2d_->RenderEntity(entity);
     }
 
 NS_RIDER_END
