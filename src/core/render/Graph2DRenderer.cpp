@@ -20,7 +20,7 @@ NS_RIDER_BEGIN
         uint16_t width = context_->render_config_.width;
         uint16_t height = context_->render_config_.height;
         bgfx::setViewRect(view_id, 0, 0, width, height);
-        //bgfx::setViewClear(view_id, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0x666666ff);
+        bgfx::setViewClear(view_id, BGFX_CLEAR_DEPTH | BGFX_CLEAR_COLOR, 0);
         bgfx::touch(view_id);
         if (context_->scene_->has_component<Camera>()) {
             bx::mtxIdentity(view_matrix_);
@@ -73,7 +73,8 @@ NS_RIDER_BEGIN
         bgfx::setVertexBuffer(0, handle->vertex_buffer);
         bgfx::setIndexBuffer(handle->index_buffer);
         bgfx::setViewFrameBuffer(view_id, BGFX_INVALID_HANDLE);
-        bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_BLEND_ALPHA);
+        bgfx::setState(BGFX_STATE_WRITE_MASK
+                       | BGFX_STATE_DEPTH_TEST_LESS | BGFX_STATE_MSAA | BGFX_STATE_FRONT_CCW);
         bgfx::submit(view_id, program_->program_handle_);
     }
 

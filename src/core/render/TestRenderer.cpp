@@ -19,15 +19,15 @@ NS_RIDER_BEGIN
             {-0.5f, -0.5f, -0.5f, {0, 0}, Colors::Green},
             {-0.5f, -0.5f, +0.5f, {0, 0}, Colors::Green},
             // back
-            {+0.5f, -0.5f, -0.5f, {0, 0}, Colors::Blue},
-            {-0.5f, -0.5f, -0.5f, {0, 0}, Colors::Blue},
             {-0.5f, +0.5f, -0.5f, {0, 0}, Colors::Blue},
             {+0.5f, +0.5f, -0.5f, {0, 0}, Colors::Blue},
+            {+0.5f, -0.5f, -0.5f, {0, 0}, Colors::Blue},
+            {-0.5f, -0.5f, -0.5f, {0, 0}, Colors::Blue},
             // left
-            {+0.5f, -0.5f, -0.5f, {0, 0}, Colors::Orange},
-            {+0.5f, -0.5f, +0.5f, {0, 0}, Colors::Orange},
-            {+0.5f, +0.5f, +0.5f, {0, 0}, Colors::Orange},
             {+0.5f, +0.5f, -0.5f, {0, 0}, Colors::Orange},
+            {+0.5f, +0.5f, +0.5f, {0, 0}, Colors::Orange},
+            {+0.5f, -0.5f, +0.5f, {0, 0}, Colors::Orange},
+            {+0.5f, -0.5f, -0.5f, {0, 0}, Colors::Orange},
             // top
             {+0.5f, +0.5f, -0.5f, {0, 0}, Colors::Purple},
             {-0.5f, +0.5f, -0.5f, {0, 0}, Colors::Purple},
@@ -124,8 +124,8 @@ NS_RIDER_BEGIN
         bgfx::setVertexBuffer(0, vertex_buffer_);
         bgfx::setIndexBuffer(index_buffer_);
         bgfx::setViewFrameBuffer(view_id, BGFX_INVALID_HANDLE);
-        bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_WRITE_Z
-                       | BGFX_STATE_DEPTH_TEST_LESS | BGFX_STATE_CULL_CW | BGFX_STATE_MSAA | BGFX_STATE_PT_TRISTRIP);
+        bgfx::setState(BGFX_STATE_WRITE_MASK
+                       | BGFX_STATE_DEPTH_TEST_LESS | BGFX_STATE_MSAA | BGFX_STATE_FRONT_CCW);
         bgfx::submit(view_id, program_->program_handle_);
     }
 

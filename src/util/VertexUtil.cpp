@@ -41,46 +41,46 @@ NS_RIDER_BEGIN
 
         // front
         Color color = colors[0];
-        Vertex front_v1 = {{+w, +h, +d}, {0, 1}, color};
-        Vertex front_v2 = {{-w, +h, +d}, {1, 1}, color};
-        Vertex front_v3 = {{-w, -h, +d}, {1, 0}, color};
-        Vertex front_v4 = {{+w, -h, +d}, {0, 0}, color};
+        Vertex front_v1 = {{-w, +h, 0}, {0, 1}, color};
+        Vertex front_v2 = {{+w, +h, 0}, {1, 1}, color};
+        Vertex front_v3 = {{+w, -h, 0}, {1, 0}, color};
+        Vertex front_v4 = {{-w, -h, 0}, {0, 0}, color};
         vertices.AddQuad(front_v1, front_v2, front_v3, front_v4);
-        // right
+        /*// right
         color = colors[1];
-        Vertex right_v1 = {{-w, +h, +d}, {0, 1}, color};
-        Vertex right_v2 = {{-w, +h, -d}, {1, 1}, color};
-        Vertex right_v3 = {{-w, -h, -d}, {1, 0}, color};
-        Vertex right_v4 = {{-w, -h, +d}, {0, 0}, color};
+        Vertex right_v1 = {{+w, +h, -d}, {0, 1}, color};
+        Vertex right_v2 = {{+w, +h, +d}, {1, 1}, color};
+        Vertex right_v3 = {{+w, -h, +d}, {1, 0}, color};
+        Vertex right_v4 = {{+w, -h, -d}, {0, 0}, color};
         vertices.AddQuad(right_v1, right_v2, right_v3, right_v4);
         // back
         color = colors[2];
-        Vertex back_v1 = {{+w, +h, -d}, {0, 1}, color};
-        Vertex back_v2 = {{-w, +h, -d}, {1, 1}, color};
-        Vertex back_v3 = {{-w, -h, -d}, {1, 0}, color};
-        Vertex back_v4 = {{+w, -h, -d}, {0, 0}, color};
+        Vertex back_v1 = {{+w, +h, +d}, {0, 1}, color};
+        Vertex back_v2 = {{-w, +h, +d}, {1, 1}, color};
+        Vertex back_v3 = {{-w, -h, +d}, {1, 0}, color};
+        Vertex back_v4 = {{+w, -h, +d}, {0, 0}, color};
         vertices.AddQuad(back_v1, back_v2, back_v3, back_v4);
         // left
         color = colors[3];
-        Vertex left_v1 = {{+w, +h, -d}, {0, 1}, color};
-        Vertex left_v2 = {{+w, +h, +d}, {1, 0}, color};
-        Vertex left_v3 = {{+w, -h, +d}, {1, 1}, color};
-        Vertex left_v4 = {{+w, -h, -d}, {0, 0}, color};
+        Vertex left_v1 = {{-w, +h, +d}, {0, 1}, color};
+        Vertex left_v2 = {{-w, +h, -d}, {1, 0}, color};
+        Vertex left_v3 = {{-w, -h, -d}, {1, 1}, color};
+        Vertex left_v4 = {{-w, -h, +d}, {0, 0}, color};
         vertices.AddQuad(left_v1, left_v2, left_v3, left_v4);
         // top
         color = colors[4];
-        Vertex top_v1 = {{+w, +h, -d}, {0, 1}, color};
-        Vertex top_v2 = {{-w, +h, -d}, {1, 0}, color};
-        Vertex top_v3 = {{-w, +h, +d}, {1, 1}, color};
-        Vertex top_v4 = {{+w, +h, +d}, {0, 0}, color};
+        Vertex top_v1 = {{-w, +h, +d}, {0, 1}, color};
+        Vertex top_v2 = {{+w, +h, +d}, {1, 0}, color};
+        Vertex top_v3 = {{+w, +h, -d}, {1, 1}, color};
+        Vertex top_v4 = {{-w, +h, -d}, {0, 0}, color};
         vertices.AddQuad(top_v1, top_v2, top_v3, top_v4);
         // bottom
         color = colors[5];
-        Vertex bottom_v1 = {{+w, -h, -d}, {0, 1}, color};
-        Vertex bottom_v2 = {{-w, -h, -d}, {1, 0}, color};
-        Vertex bottom_v3 = {{-w, -h, +d}, {1, 1}, color};
-        Vertex bottom_v4 = {{+w, -h, +d}, {0, 0}, color};
-        vertices.AddQuad(bottom_v1, bottom_v2, bottom_v3, bottom_v4);
+        Vertex bottom_v1 = {{-w, -h, -d}, {0, 1}, color};
+        Vertex bottom_v2 = {{+w, -h, -d}, {1, 0}, color};
+        Vertex bottom_v3 = {{+w, -h, +d}, {1, 1}, color};
+        Vertex bottom_v4 = {{-w, -h, +d}, {0, 0}, color};
+        vertices.AddQuad(bottom_v1, bottom_v2, bottom_v3, bottom_v4);*/
     }
 
     void VertexUtil::BuildSphere(Vertices& vertices, uint16_t row_count, uint16_t row_height, float radius) {
@@ -109,13 +109,21 @@ NS_RIDER_BEGIN
         float w = width / 2.f;
         float h = height / 2.f;
         float d = depth / 2.f;
-        Vertex bottom_left = {{+w, -h, -d}, {0, 0}, color[0]};
-        Vertex bottom_right = {{-w, -h, -d}, {0, 0}, color[1]};
-        Vertex bottom_front = {{0, -h, +d}, {0, 0}, color[2]};
-        Vertex top = {{0, +h, 0}, {0, 0}, color[3]};
-        vertices.AddFace(bottom_left, bottom_front, bottom_right);//bottom
-        vertices.AddFace(bottom_left, bottom_right, top);//back
-        vertices.AddFace(top, bottom_front, bottom_left);//left
-        vertices.AddFace(top, bottom_front, bottom_right);//right
+        Vertex left_v1 = {{+w, -h, -d}, {0, 0}, color[0]};
+        Vertex left_v2 = {{0, +h, 0}, {0, 0}, color[0]};
+        Vertex left_v3 = {{0, -h, +d}, {0, 0}, color[0]};
+        Vertex right_v1 = {{-w, -h, -d}, {0, 0}, color[1]};
+        Vertex right_v2 = {{0, -h, +d}, {0, 0}, color[1]};
+        Vertex right_v3 = {{0, +h, 0}, {0, 0}, color[1]};
+        Vertex back_v1 = {{0, +h, 0}, {0, 0}, color[2]};
+        Vertex back_v2 = {{+w, -h, -d}, {0, 0}, color[2]};
+        Vertex back_v3 = {{-w, -h, -d}, {0, 0}, color[2]};
+        Vertex bottom_v1 = {{0, -h, +d}, {0, 0}, color[3]};
+        Vertex bottom_v2 = {{+w, -h, -d}, {0, 0}, color[3]};
+        Vertex bottom_v3 = {{-w, -h, -d}, {0, 0}, color[3]};
+        vertices.AddFace(left_v1, left_v2, left_v3);//bottom
+        vertices.AddFace(right_v1, right_v2, right_v3);//back
+        vertices.AddFace(back_v1, back_v2, back_v3);//left
+        vertices.AddFace(bottom_v1, bottom_v2, bottom_v3);//right
     }
 NS_RIDER_END

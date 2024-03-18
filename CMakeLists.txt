@@ -10,7 +10,7 @@ if (MSVC)
 endif ()
 
 # macro
-option(ENABLE_LOG "Build static lib not dynamic" ON)
+option(ENABLE_LOG "Enable logging" ON)
 option(STATIC_LIB "Build static lib not dynamic" OFF)
 option(BUILD_PC_DEMO "Build demo for Windows/Mac/Linux to test" ON)
 option(WEB "Merge web platform source to project" OFF)

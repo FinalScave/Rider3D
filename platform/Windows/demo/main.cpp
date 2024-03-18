@@ -5,6 +5,7 @@
 #include "bx/thread.h"
 #include "bgfx/platform.h"
 #include "TimeUtil.h"
+#include "LogUtil.h"
 
 #define WIDTH 1024
 #define HEIGHT 720
@@ -20,19 +21,13 @@ struct RenderThreadEntry {
         RiderEngine* engine = new RiderEngine(config);
         SceneManager& scenes = engine->GetScenes();
         Scene* mainScene = scenes.CreateScene();
-        mainScene->assign<Camera>(Camera{0.1f,0.1f,2.f});
+        mainScene->assign<Camera>(Camera{0.f,0.f,5.f});
         auto debugInfo = mainScene->assign<DebugInfo>(DebugInfo{1, 1});
         scenes.LoadScene(mainScene);
 
         // add entity
-        Entity box1 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Rectangle);
-        box1.assign<Transform>(Transform{{-1, 0.5f}});
-        mainScene->AddEntity(box1);
-        Entity box2 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-        box2.assign<Transform>(Transform{{1, 0.5f}});
-        mainScene->AddEntity(box2);
         Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
-        box3.assign<Transform>(Transform{{-0.5, -0.5}});
+        //box3.assign<Transform>(Transform{{0.5, -0.5}});
         mainScene->AddEntity(box3);
 
         UInt64 start = 0;

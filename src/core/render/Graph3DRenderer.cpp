@@ -33,7 +33,8 @@ NS_RIDER_BEGIN
         bgfx::setVertexBuffer(0, handle->vertex_buffer);
         bgfx::setIndexBuffer(handle->index_buffer);
         bgfx::setViewFrameBuffer(0, BGFX_INVALID_HANDLE);
-        bgfx::setState(BGFX_STATE_WRITE_RGB | BGFX_STATE_BLEND_ALPHA);
+        bgfx::setState(BGFX_STATE_WRITE_MASK
+                       | BGFX_STATE_DEPTH_TEST_LESS | BGFX_STATE_MSAA | BGFX_STATE_FRONT_CCW);
 
         if (context_->scene_->has_component<Camera>()) {
             bx::mtxIdentity(view_matrix_);

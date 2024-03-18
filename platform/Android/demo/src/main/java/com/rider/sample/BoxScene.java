@@ -18,15 +18,13 @@ public class BoxScene implements IScene {
     public void doInit(RiderEngine engine) {
         SceneManager scenes = engine.getScenes();
         Scene mainScene = scenes.createScene();
+        Camera camera = mainScene.addComponent(Camera.class);
+        camera.setPosition(new Vec3(1.0f, 1.0f, 4.0f));
         scenes.loadScene(mainScene);
 
         Entity box1 = scenes.createPrimitiveEntity(PrimitiveType.BOX);
-        Transform t1 = box1.addComponent(Transform.class);
-        t1.setRotation(new Vec3(0.5f, 0.5f, 0.3f));
-
         mainScene.addEntity(box1);
-        Camera camera = mainScene.addComponent(Camera.class);
-        camera.setPosition(new Vec3(0.1f, 0.5f, 5f));
+
         this.debugInfo = mainScene.addComponent(DebugInfo.class);
         debugInfo.setX(10);
         debugInfo.setY(10);

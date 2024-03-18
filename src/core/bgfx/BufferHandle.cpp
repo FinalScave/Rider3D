@@ -19,14 +19,16 @@ NS_RIDER_BEGIN
                                                       std::vector<Vertex>& vertex_list,
                                                       std::vector<uint32_t>& index_list) {
         if (name_buffer_handle_map_.find(entity) == name_buffer_handle_map_.end()) {
-            Vertex* vertices = new Vertex[vertex_list.size()];
+            /*Vertex* vertices = new Vertex[vertex_list.size()];
             uint32_t* indices = new uint32_t[index_list.size()];
             for (int i = 0; i < vertex_list.size(); ++i) {
                 vertices[i] = vertex_list[i];
             }
             for (int i = 0; i < index_list.size(); ++i) {
                 indices[i] = index_list[i];
-            }
+            }*/
+            Vertex* vertices = vertex_list.data();
+            uint32_t* indices = index_list.data();
             auto vertex_ref = bgfx::makeRef(
                     vertices,
                     sizeof(Vertex) * vertex_list.size()
@@ -40,7 +42,7 @@ NS_RIDER_BEGIN
             bgfx::DynamicIndexBufferHandle index_buffer = bgfx::createDynamicIndexBuffer(index_ref);
             BufferHandle* handle = new BufferHandle{vertices, indices, vertex_buffer, index_buffer};
             PutBufferHandle(entity, handle);
-            return name_buffer_handle_map_[entity];
+            return handle;
         } else {
             //暂时不做顶点更新
             BufferHandle* exists = name_buffer_handle_map_[entity];

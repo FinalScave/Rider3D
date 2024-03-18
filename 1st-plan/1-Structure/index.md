@@ -26,6 +26,16 @@
 - 系统（System）是处理实体和组件的逻辑的模块。系统负责根据组件的状态和属性来执行特定的操作或行为。
 例如，一个渲染系统可以根据实体的渲染组件来绘制图形，一个碰撞系统可以根据实体的碰撞组件来检测碰撞等等。
 系统可以独立地操作组件，而不需要直接访问实体。
+### ECS优势
+本项目中引入了原型(Archetype)的概念，引入原型的目的是为了更高效的利用内存，
+具有相同原型的Entity的实例被连续存储在同一个内存chunk中，当一个内存chunk满了后，就会创建一个新的chunk。
+一个chunk中只会存储一种原型。
+当我们动态的添加或删除Entity的Component，会导致其Archetype变化，因此ECS也会改变其Chunk，放到与之对应Chunk中。
+
+![chunk.png](ecs-chunk.png)
+
+这样的设计理念使Archetypes and Chunks是一对多的关系，同时若给定一个Component组合，我们要找到所有对应的Entity，只需要搜索现有的archetype即可，而不需要遍历所有的Entity。
+ECS不支持使用特殊的排序来将Entity存储进Chunk中，若有一个Entity被创建或者被改变，使其隶属于一个新的Archetype时，ECS会将其存储在该Archetype下第一个还有空间的Chunk中。若有一个Entity被从Chunk中移除，ECS则会把该Chunk中最后一个Entity与其对应的Component移到这个空缺的位置中。这保证了当大量同一原型的entity被更新时，能够快速的被访问到，提高了CPU缓存命中率。
 ## 2 架构方向
 以引擎使用者的角度来看，3D物体(Object)是引擎的核心，一个场景中会包含若干个3D物体，
 结合ECS框架，可以作出如下决策：
