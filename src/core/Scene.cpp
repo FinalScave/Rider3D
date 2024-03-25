@@ -10,7 +10,10 @@
 
 NS_RIDER_BEGIN
 
+    Entity Scene::kInvalidEntity;
+
     Scene::Scene(EntityManager *manager, Entity::Id id) : Entity(manager, id) {
+        kInvalidEntity = Entity(manager, Entity::INVALID);
     }
 
     Scene::~Scene() {
@@ -67,6 +70,15 @@ NS_RIDER_BEGIN
 
     Entity &Scene::GetEntityAt(ENTITY_SIZE_TYPE index) {
         return entity_list_[index];
+    }
+
+    Entity& Scene::FindEntity(const Name& name) {
+        for(auto& entity : entity_list_) {
+            if (entity.has_component<EntityIdentifier>() && entity.component<EntityIdentifier>()->name == name) {
+                return entity;
+            }
+        }
+        return kInvalidEntity;
     }
 
     ENTITY_SIZE_TYPE Scene::Size() {
@@ -136,6 +148,12 @@ NS_RIDER_BEGIN
                 VertexUtil::BuildTriangularPyramid(vertices, 1, 1, 1);
                 break;
         }
+        return entity;
+    }
+
+    Entity SceneManager::CreatePrimitiveEntity(PrimitiveType::Enum type, const Name& name) {
+        Entity entity = CreatePrimitiveEntity(type);
+        entity.assign_from_copy(EntityIdentifier{name});
         return entity;
     }
 

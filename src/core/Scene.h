@@ -54,8 +54,11 @@ NS_RIDER_BEGIN
 
         Entity& GetEntityAt(ENTITY_SIZE_TYPE index);
 
-        ENTITY_SIZE_TYPE Size();
+        Entity& FindEntity(const Name& name);
 
+        ENTITY_SIZE_TYPE Size();
+    public:
+        static Entity kInvalidEntity;
     private:
         std::vector<Entity> entity_list_;
     };
@@ -71,6 +74,8 @@ NS_RIDER_BEGIN
         void LoadScene(Scene* scene);
 
         Entity CreatePrimitiveEntity(PrimitiveType::Enum type);
+
+        Entity CreatePrimitiveEntity(PrimitiveType::Enum type, const Name& name);
 
     private:
         EntityManager& entities_;

@@ -26,9 +26,12 @@ struct RenderThreadEntry {
         scenes.LoadScene(mainScene);
 
         // add entity
-        Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box);
+        Entity box3 = engine->GetScenes().CreatePrimitiveEntity(PrimitiveType::Box, "box3");
         //box3.assign<Transform>(Transform{{0.5, -0.5}});
         mainScene->AddEntity(box3);
+
+        Entity& found = mainScene->FindEntity("box3");
+        found.component<EntityIdentifier>();
 
         UInt64 start = 0;
         while (!m_render_finished) {

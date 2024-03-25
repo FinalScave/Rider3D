@@ -11,6 +11,10 @@
 
 NS_RIDER_BEGIN
 
+    struct EntityIdentifier {
+        Name name;
+    };
+
     struct Position {
         Vec3 value;
     };
