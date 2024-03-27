@@ -56,6 +56,10 @@ NS_RIDER_BEGIN
 
         Entity& FindEntity(const Name& name);
 
+        Entity& operator[](ENTITY_SIZE_TYPE index);
+
+        Entity& operator[](const Name& name);
+
         ENTITY_SIZE_TYPE Size();
     public:
         static Entity kInvalidEntity;
@@ -67,11 +71,21 @@ NS_RIDER_BEGIN
     public:
         explicit SceneManager(EntityManager& entities, EventManager& events);
 
+        ~SceneManager();
+
         Scene* CreateScene();
+
+        Scene* CreateScene(const Name& name);
 
         Scene* GetCurrentScene();
 
+        Scene* FindScene(const Name& name);
+
+        Scene* operator[](const Name& name);
+
         void LoadScene(Scene* scene);
+
+        void LoadScene(const Name& name);
 
         Entity CreatePrimitiveEntity(PrimitiveType::Enum type);
 
@@ -81,6 +95,7 @@ NS_RIDER_BEGIN
         EntityManager& entities_;
         EventManager& events_;
         Scene* current_scene_ = nullptr;
+        std::vector<Scene*> scene_list_;
     };
 
 NS_RIDER_END

@@ -18,6 +18,10 @@ NS_RIDER_BEGIN
 
     Scene::~Scene() {
         destroy();
+        for(auto& entity : entity_list_) {
+            entity.destroy();
+        }
+        entity_list_.clear();
     }
 
     void Scene::AddEntity(Entity &entity) {
@@ -81,12 +85,28 @@ NS_RIDER_BEGIN
         return kInvalidEntity;
     }
 
+    Entity& Scene::operator[](ENTITY_SIZE_TYPE index) {
+        return GetEntityAt(index);
+    }
+
+    Entity& Scene::operator[](const Name& name) {
+        return FindEntity(name);
+    }
+
     ENTITY_SIZE_TYPE Scene::Size() {
         return entity_list_.size();
     }
 
     SceneManager::SceneManager(EntityManager &entities, EventManager &events)
             : entities_(entities), events_(events) {
+    }
+
+    SceneManager::~SceneManager() {
+        SAFE_DELETE_PTR(current_scene_);
+        for(auto* scene : scene_list_) {
+            SAFE_DELETE_PTR(scene);
+        }
+        scene_list_.clear();
     }
 
     Scene *SceneManager::CreateScene() {
@@ -102,6 +122,13 @@ NS_RIDER_BEGIN
         }
         Scene *scene = new Scene(&entities_, Entity::Id(index, version));
         events_.emit<EntityCreatedEvent>(*scene);
+        scene_list_.push_back(scene);
+        return scene;
+    }
+
+    Scene* SceneManager::CreateScene(const Name& name) {
+        Scene* scene = CreateScene();
+        scene->assign_from_copy(EntityIdentifier{name});
         return scene;
     }
 
@@ -109,9 +136,29 @@ NS_RIDER_BEGIN
         return current_scene_;
     }
 
+    Scene* SceneManager::FindScene(const Name& name) {
+        for(auto* scene : scene_list_) {
+            if (scene->has_component<EntityIdentifier>() && scene->component<EntityIdentifier>()->name == name) {
+                return scene;
+            }
+        }
+        return nullptr;
+    }
+
+    Scene* SceneManager::operator[](const Name& name) {
+        return FindScene(name);
+    }
+
     void SceneManager::LoadScene(Scene *scene) {
         current_scene_ = scene;
         events_.emit<SceneUpdateEvent>(scene);
+    }
+
+    void SceneManager::LoadScene(const Name& name) {
+        auto* scene = FindScene(name);
+        if (scene != nullptr) {
+            LoadScene(scene);
+        }
     }
 
     Entity SceneManager::CreatePrimitiveEntity(PrimitiveType::Enum type) {
