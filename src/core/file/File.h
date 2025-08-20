@@ -11,7 +11,7 @@ NS_RIDER_BEGIN
 
     struct ByteArray {
         UInt64 length;
-        Byte* data;
+        char* data;
     };
 
     struct CharArray {

@@ -4,6 +4,7 @@
 #include "GLFW/glfw3native.h"
 #include "RiderEngine.h"
 #include "bx/math.h"
+#include "BasicComponents.h"
 
 using namespace NS_RIDER;
 
